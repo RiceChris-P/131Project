@@ -1,18 +1,27 @@
+/* Color Theme Swatches in Hex */
+.Arbostar®-1-hex { color: #403BBF; }
+.Arbostar®-2-hex { color: #06BF69; }
+.Arbostar®-3-hex { color: #ACF2D1; }
+.Arbostar®-4-hex { color: #04BF55; }
+.Arbostar®-5-hex { color: #F2F2F2; }
+
 li {
 float:right;
 }
-body {
-  background-image: url(unknown.png);
+.homeBody {
+  /*background-image: url(unknown.png);*/
+  margin: 0px;
 }
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #1E1E1E;
+  background-color: #403BBF;
 }
 li a {
   display: block;
+  font-size: 20px;
   color: white;
   text-align: center;
   padding: 14px 16px;
@@ -21,7 +30,7 @@ li a {
 }
 h2{
     text-align: center;
-    color:#300306;
+    color:black;
     font-size: 40px;
     font-family: 'Inter';
 }
@@ -38,19 +47,31 @@ input{
 }
 button{
     color:white;
-    background:rgb(48, 5, 6);
+    background:#04BF55;
     font-size: 20px;
     font-family: 'Inter';
+    border-style: none;
     border-radius: 15px;
     width: 322px;
     height: 43px;
+    margin-top: 10px;
+}
+
+.logo{
+  width: 5%; 
+  padding-left: 10px;
+}
+
+.shopBody{
+  background-color: rgba(0,0,0,.1);
+  margin: 0px;
 }
 
 #suggestedItemsTitle{
   font-family: 'Inter';
   padding-top: 20px;
   padding-left: 15px;
-  color: #1E1E1E;
+  color: black;
 }
 
 #suggestedItemContainer{
@@ -66,14 +87,17 @@ button{
 }
 
 .suggestedItem{
-  background-color: rgb(210,202,197);
+  background-color: white;
   min-width: 175px;
-  height: 200px;
+  height: 250px;
   text-align: center;
-  border-radius: 25px;
+  border-radius: 5px;
   box-shadow: 4px 4px 2px 0 rgba(0,0,0,0.2) !important;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.suggestedItem:hover{
+  border: 1px solid black;
 }
 
 .productImage{
@@ -83,8 +107,18 @@ button{
 }
 
 .cartButton{
-  font-size: small;
-  margin-top: 10px;
-  width: 115px;
+  font-size: 17px;
+  border-radius: 5px;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  background-color: #04BF55;
+  border-style:none;
+  margin-top: 16px;
+  width: 175px;
   height: 40px;
+}
+
+.itemName {
+  color: black;
+  margin-top: 25px;
 }
