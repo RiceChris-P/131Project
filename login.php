@@ -30,7 +30,7 @@
         <li><a href="login.php">Sign In</a></li>
         <li><a href="navbar.html">Sign Up</a></li>
         <li><a href="">Shop</a></li>
-        <li><a href="">About Us</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
         <li><a href="homepage.html">Home</a></li>
     </ul>
     <form action="/login.php" method="post">
