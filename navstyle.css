@@ -108,9 +108,9 @@ button{
 }
 
 .productImage{
-  width: 115px;
-  height: 115px;
-  padding-top: 20px;
+  width: 100px;
+  height: 100px;
+  padding-top: 15px;
 }
 
 .cartButton{
@@ -120,12 +120,19 @@ button{
   border-top-left-radius: 0px;
   background-color: #04BF55;
   border-style:none;
-  margin-top: 16px;
+  margin-top: 2px;
   width: 175px;
   height: 40px;
 }
 
 .itemName {
   color: black;
+  font-size: 20px;
   margin-top: 25px;
+}
+
+.itemPrice{
+  color: black;
+  margin-top: -5px;
+  font-size: 12px;
 }
