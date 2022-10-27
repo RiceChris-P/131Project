@@ -136,3 +136,30 @@ button{
   margin-top: -5px;
   font-size: 12px;
 }
+
+.cartPreview{
+  text-align: right;
+  margin-top: -55px;
+}
+
+.cartPreviewButton {
+  width: 125px;
+  height: 40px;
+  margin-right: 10px;
+  display:inline-flex !important;
+}
+
+.cartImage{
+  margin-top: 5px;
+  margin-left: 10px;
+  width: 30px;
+  height: 30px;
+}
+
+.cartPreviewText{
+  color: black;
+  font-size: 20px;
+  text-align: center;
+  line-height: 2px;
+  margin-left: 12px;
+}

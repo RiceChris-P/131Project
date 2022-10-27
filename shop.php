@@ -15,21 +15,26 @@ $conn->close();
 <!DOCTYPE html>
 <html>
 	<link rel="stylesheet" href="navstyle.css">
+	<!--Site Header-->
 	<div class="header">
-        <!--Site Header-->
 		<ul>
-			<img class="logo" src="logo-transparent.png" alt="">
+			<img class="logo" src="assets/logo-transparent.png" alt="">
 			<li><a href="login.php">Sign In</a></li>
 			<li><a href="navbar.html">Sign Up</a></li>
 			<li><a href="shop.php">Shop</a></li>
 			<li><a href="aboutus.html">About Us</a></li>
 			<li><a href="index.html">Home</a></li>
 		</ul>
+		<div class="cartPreview">
+			<button class="cartPreviewButton">
+				<img class="cartImage" src="assets/cart.png" alt=""> 
+				<p class="cartPreviewText">$0.00</p>
+			</button>
+		</div>
 	</div>
-
-    <!--Body for suggested items-->
+	<!--Body for suggested items-->
 	<body class="shopBody">
-		<h1 id="suggestedItemsTitle">Suggested Items:</h1>
+		<h1 id="suggestedItemsTitle">Fresh This Season</h1>
 		<div id="suggestedItemContainer">
 			<?php
 				//Loop through sql data to display
@@ -50,5 +55,13 @@ $conn->close();
 			?>
 		</div>
 	</body>
+
+	<!--Body for shop more items-->
+	<body class="shopBody">
+		<h1 id="suggestedItemsTitle">Shop More</h1>
+		<div id="suggestedItemContainer">
+		</div>
+	</body>
+
 </html>
 
