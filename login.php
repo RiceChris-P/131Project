@@ -4,7 +4,7 @@
         if($_POST["email"]!=null && $_POST["password"]!=null){
             $email= $_POST["email"];
             $password= $_POST["password"];
-            $conn = mysqli_connect("localhost","root", "","cmpe131");
+            $conn = mysqli_connect("localhost","root", "","homebuy");
             if (!$conn) {
                 die("Connection failed: " . mysqli_connect_error());
             }
