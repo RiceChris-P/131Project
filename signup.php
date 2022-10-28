@@ -66,11 +66,16 @@
     <div id="nav-placeholder">
 
     </div>
-    <script>
-        $(function(){
-            $("#nav-placeholder").load("nav.html");
-        });
-    </script>
+    <nav>
+        <ul>
+            <img class="logo" src="logo-transparent.png" alt="">
+            <li><a href="login.php">Sign In</a></li>
+            <li><a href="signup.php">Sign Up</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="aboutus.html">About Us</a></li>
+            <li><a href="index.html">Home</a></li>
+        </ul>
+    </nav>
     <form action="/signup.php" method="post">
         <h2>Sign Up</h2>
         <input type="text" name="fname" placeholder="Full Name..."><br>
