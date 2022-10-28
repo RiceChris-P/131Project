@@ -10,7 +10,7 @@
         null!=$_POST['retypepass'])
         {
             if($_POST['password']==$_POST['retypepass']){
-                $conn = mysqli_connect("localhost","root", "","cmpe131");
+                $conn = mysqli_connect("localhost","root", "","homebuy");
                 if (!$conn) {
                     die("Connection failed: " . mysqli_connect_error());
                     echo "no connection";
@@ -61,30 +61,19 @@
         }
 
     ?>
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <link rel="stylesheet" href="navstyle.css">
-    <div id="nav-placeholder">
-
-    </div>
-    <nav>
-        <ul>
-            <img class="logo" src="logo-transparent.png" alt="">
-            <li><a href="login.php">Sign In</a></li>
-            <li><a href="signup.php">Sign Up</a></li>
-            <li><a href="shop.php">Shop</a></li>
-            <li><a href="aboutus.html">About Us</a></li>
-            <li><a href="index.html">Home</a></li>
-        </ul>
-    </nav>
-    <form action="/signup.php" method="post">
-        <h2>Sign Up</h2>
-        <input type="text" name="fname" placeholder="Full Name..."><br>
-        <input type="text" name="email" placeholder="Email Address..."><br>
-        <input type="password" name="password" placeholder="Password..."><br>
-        <input type="password" name="retypepass" placeholder="Retype Password..."><br>
-        <button type="submit">Sign Up</button>
-    </form>
-    <body class="homeBody">
-
+    <header>
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="form.css">
+    </header>
+    <body>
+        <img class="logo" src="assets/logo-transparent.png" alt="">
+        <h1 class="headerOne">Create your HomeBuy account</h1>
+        <form action="signup.php" method="post" class="formBox">
+            <input type="text" name="fname" class="loginFill" placeholder="Full Name"><br>
+            <input type="text" name="email" class="loginFill" placeholder="Email"><br>
+            <input type="password" name="password" class="loginFill" placeholder="Password"><br>
+            <input type="password" name="retypepass" class="loginFill" placeholder="Confirm Password"><br>
+            <button type="submit" class="submitButton">Create Account</button>
+        </form>
     </body>
 </html>

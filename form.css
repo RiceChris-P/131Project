@@ -1,0 +1,66 @@
+/* The body's style */
+body {
+    margin: 0; 
+    padding: 0;
+}
+
+/* The logo's style */
+.logo {
+    display: block; /* Puts the image in a block and separated from the other elements in the body */
+    margin-left: auto; /* First styling to fit the image to the center of the page */
+    margin-right: auto; /* Second styling to fit the image to the center of the page */
+    width: 6%;
+}
+
+/* The first header's style */
+.headerOne {
+    font-family: Helvetica, sans-serif;
+    font-size: x-large;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* */
+.formBox {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 40%;
+}
+
+/* */
+.loginFill {
+    box-sizing: border-box;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    height: 44px;
+    width: 100%;
+    font-family: Helvetica, sans-serif;
+}
+
+/* */
+::placeholder {
+    text-size-adjust: 100%;
+    text-align: start;
+    font-size: large;
+    font-family: Helvetica, sans-serif;
+    font-weight: lighter;
+    color: #343434;
+}   
+
+/* */
+.submitButton {
+    background-color: #900C3F;
+    display: block;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 56px;
+    width: 90%;
+    font-family: Helvetica, sans-serif;
+    font-size: 23px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}

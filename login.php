@@ -1,46 +1,16 @@
-<?php
-    $logged_in=false;
-    if(isset($_POST["username"]) && isset($_POST["password"])){
-        if($_POST["username"]&&$_POST["password"]){
-            $username= $_POST["username"];
-            $password= $_POST["password"];
-        }
-        $conn = mysqli_connect("localhost","root", "","cmpe131");
-        if (!$conn) {
-            die("Connection failed: " . mysqli_connect_error());
-        }
-        $sql="SELECT password FROM students WHERE username='$username'";
-        $results= mysqli_query($conn,$sql);
-        if($results){
-            $row= mysqli_fetch_assoc($results);
-            if($row["password"]===$password){
-                echo "<h2>Login Suceessful</h2>";
-            }
-            else{
-                echo "password incorrect";
-            }
-        }
-    }
-    else{
-    }
-?>
+<!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="navstyle.css">
-    <ul>
-        <li><a href="login.php">Sign In</a></li>
-        <li><a href="navbar.html">Sign Up</a></li>
-        <li><a href="">Shop</a></li>
-        <li><a href="aboutus.html">About Us</a></li>
-        <li><a href="homepage.html">Home</a></li>
-    </ul>
-    <form action="/login.php" method="post">
-        <input type="text" name="loginemail" placeholder="Email"><br>
-        <input type="password" name="loginpword" placeholder="Password"><br>
-        <button type="submit">Login</button>
+    <header>
+        <title>Sign In</title>
+        <link rel="stylesheet" href="form.css">
+    </header>
+    <body>
+        <img class="logo" src="assets/logo-transparent.png" alt="">
+        <h1 class="headerOne">Sign into your HomeBuy account</h1>
+        <form action="/login.php" method="post" class="formBox">
+            <input type="text" class="loginFill" placeholder="Email"><br>
+            <input type="password" class="loginFill" placeholder="Password"><br>
+            <button type="submit" class="submitButton">Sign In</button>
         </form>
-    <?php
-        if($logged_in){
-            echo "<h2>Success</h2>";
-        }
-    ?>
+    </body>
 </html>
