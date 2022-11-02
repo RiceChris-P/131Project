@@ -163,3 +163,13 @@ button{
   line-height: 2px;
   margin-left: 12px;
 }
+
+.cart{
+  background-color: white;
+  position: absolute;
+  top: 12.75%;
+  right: 0;
+  width: 25%;
+  height: 100%;
+  display: hidden;
+}

@@ -26,9 +26,9 @@ $conn->close();
 			<li><a href="index.html">Home</a></li>
 		</ul>
 		<div class="cartPreview">
-			<button class="cartPreviewButton">
+			<button class="cartPreviewButton" onclick="showCart()">
 				<img class="cartImage" src="assets/cart.png" alt=""> 
-				<p class="cartPreviewText">$0.00</p>
+				<p class="cartPreviewText" id="cartPreviewText" >$0.00</p>
 			</button>
 		</div>
 	</div>
@@ -47,7 +47,7 @@ $conn->close();
 				<img src="itemImages/<?php echo $rows['Image'];?>" alt="banana" class="productImage"> 
 				<p class="itemName"><?php echo $rows['Name'];?></p> 
 				<p class="itemPrice">Price: $<?php echo $rows['Price'];?> / ea</p>
-				<button class="cartButton">Add to cart</button>
+				<button class="cartButton" onclick="addToCart(<?php echo $rows['Price'];?>)">Add to cart</button>
 			</div>
 			
 			<?php
@@ -62,6 +62,29 @@ $conn->close();
 		<div id="suggestedItemContainer">
 		</div>
 	</body>
+
+	<div class="cart" id="cart">
+		<p>Test</p>
+		<p>Test</p>
+	</div>
+
+
+	<script>
+		let total = 0.00;
+		function addToCart(price) {
+			total += price;
+			document.getElementById("cartPreviewText").innerHTML = "$"+total.toFixed(2);
+		}
+		function showCart() {
+			var cart = document.getElementById("cart");
+			if (cart.style.display === "none") {
+				cart.style.display = "block";
+			} else {
+				cart.style.display = "none";
+			}
+		}
+
+	</script> 
 
 </html>
 
