@@ -27,7 +27,7 @@ $conn->close();
 		</ul>
 		<div class="cartPreview">
 			<button class="cartPreviewButton" onclick="showCart()">
-				<img class="cartImage" src="assets/cart.png" alt=""> 
+				<img class="cartPreviewImage" src="assets/cart.png" alt=""> 
 				<p class="cartPreviewText" id="cartPreviewText" >$0.00</p>
 			</button>
 		</div>
@@ -44,9 +44,9 @@ $conn->close();
 
 			<div class="suggestedItem"> 
 				<!--Displays each item from database-->
-				<img src="itemImages/<?php echo $rows['Image'];?>" alt="banana" class="productImage"> 
+				<img src="itemImages/<?php echo $rows['Image'];?>" class="productImage">
 				<p class="itemName"><?php echo $rows['Name'];?></p> 
-				<p class="itemPrice">Price: $<?php echo $rows['Price'];?> / ea</p>
+				<p class="itemPrice">Price: $<?php echo number_format($rows['Price'], 2, ".", ",");?> / ea</p>
 				<button class="cartButton" onclick="addToCart(<?php echo $rows['Price'];?>)">Add to cart</button>
 			</div>
 			
@@ -63,9 +63,28 @@ $conn->close();
 		</div>
 	</body>
 
-	<div class="cart" id="cart">
-		<p>Test</p>
-		<p>Test</p>
+	<div class="cart" id="cart" style="visibility: hidden">
+		<div id="cartHeader">
+			<div id="cartHeaderProduct">Product</div>
+			<div id="cartHeaderTotal">Total</div>
+		</div>
+		<div class="cartItemContainer">
+			<img src="itemImages/avocado.png" class="cartImage">
+			<div class="cartProduct">
+				<p style="margin-bottom:0; margin-top: 40%;">Avocado</p> 
+				<p style="margin-top:0; font-size:14px;">$2.50 / ea</p>
+			</div>
+			<div class="rightCartContainer">
+				<p class="cartPrice" style="margin-bottom: 0">$2.50</p>
+				<div class="addsubButton">
+					<button class="addButton">-</button>
+					<input class="amountField" id="test" type="text" min="1" max="99" value="1">
+					<button class="subButton" onclick="increment()">+</button>
+				</div>
+				<button class="removeCart" onclick="removeFromCart()">Remove</button>
+			</div>			
+		</div>
+		
 	</div>
 
 
@@ -74,14 +93,26 @@ $conn->close();
 		function addToCart(price) {
 			total += price;
 			document.getElementById("cartPreviewText").innerHTML = "$"+total.toFixed(2);
+			if (cart.style.visibility === "hidden") {
+				cart.style.visibility = "visible";
+			} 
 		}
 		function showCart() {
 			var cart = document.getElementById("cart");
-			if (cart.style.display === "none") {
-				cart.style.display = "block";
+			if (cart.style.visibility === "hidden") {
+				cart.style.visibility = "visible";
 			} else {
-				cart.style.display = "none";
+				cart.style.visibility = "hidden";
 			}
+		}
+		function removeFromCart(){
+			
+		}
+		function increment(){
+			
+		}
+		function decrement(){
+
 		}
 
 	</script> 
