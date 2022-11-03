@@ -27,7 +27,7 @@ $conn->close();
 		</ul>
 		<div class="cartPreview">
 			<button class="cartPreviewButton" onclick="showCart()">
-				<img class="cartPreviewImage" src="assets/cart.png" alt=""> 
+				<img class="cartImage" src="assets/cart.png" alt=""> 
 				<p class="cartPreviewText" id="cartPreviewText" >$0.00</p>
 			</button>
 		</div>
