@@ -14,7 +14,7 @@ $conn->close();
 
 <!DOCTYPE html>
 <html>
-	<link rel="stylesheet" href="navstyle.css">
+	<link rel="stylesheet" href="shopstyle.css">
 	<!--Site Header-->
 	<div class="header">
 		<ul>
@@ -27,7 +27,7 @@ $conn->close();
 		</ul>
 		<div class="cartPreview">
 			<button class="cartPreviewButton" onclick="showCart()">
-				<img class="cartImage" src="assets/cart.png" alt=""> 
+				<img class="cartPreviewImage" src="assets/cart.png" alt=""> 
 				<p class="cartPreviewText" id="cartPreviewText" >$0.00</p>
 			</button>
 		</div>
@@ -118,4 +118,3 @@ $conn->close();
 	</script> 
 
 </html>
-
