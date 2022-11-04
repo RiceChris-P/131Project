@@ -3,7 +3,7 @@
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
-    $sql="SELECT FROM accounts WHERE loginStatus=true";
+	$sql="SELECT * FROM accounts WHERE loginStatus=true";
     $results= mysqli_query($conn,$sql);
     if($results){
         $row= mysqli_fetch_assoc($results);
