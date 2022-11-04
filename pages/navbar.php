@@ -7,12 +7,12 @@
 	$results= mysqli_query($conn,$sql);
 	$temp= mysqli_fetch_assoc($results);
 	$fname= $temp["fname"];
+	$num = mysqli_num_rows($results); 
 ?>
 
 <html>
 	<head>
 		<link rel="stylesheet" href="../style/navbar.css">
-		<link rel="stylesheet" href="..style/loginForNavBar.css">
 	</head>
 	<nav class="navBar">
 		<ul>
@@ -23,16 +23,19 @@
 					<p class="cartPreviewText" id="cartPreviewText" >$0.00</p>
 				</button>
 			</li>
-
-			<!-- <div class="dropdown">
-				<button class="dropdownbtn"><?php echo $fname;?></button>
-				<div class="dropdownmenu">
-					<a href="account.php">account</a>
-					<a href="orders.php">orders</a>
-					<a href="signout.php">signout</a>
+			<?php if($num==1){?>
+				<div class="dropdown">
+					<button class="dropdownbtn"><?php echo $fname;?></button>
+						<div class="dropdownmenu">
+							<a href="account.php">account</a>
+							<a href="orders.php">orders</a>
+							<a href="signout.php">signout</a>
+						</div>
 				</div>
-			</div> -->
-
+			<?php }else{?>
+				<li><a href="login.php">Sign In</a></li>
+				<li><a href="signup.php">Sign Up</a></li>
+			<?php }?>
 			<li><a href="shop.php">Shop</a></li>
 			<li><a href="aboutus.php">About Us</a></li>
 			<li><a href="index.php">Home</a></li>
