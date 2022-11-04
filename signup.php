@@ -22,7 +22,7 @@
                 $result = mysqli_query($conn, $sql);
                 $num = mysqli_num_rows($result); 
                 if($num==0){
-                    $sql= "INSERT INTO accounts VALUES('$email','$password','$fullName')";
+                    $sql= "INSERT INTO accounts VALUES ('$email','$password','$fname',false);";
                     $result = mysqli_query($conn,$sql);
                     if($result){
                         $success=true;

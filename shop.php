@@ -1,4 +1,26 @@
 <?php
+//checks if user is logged in 
+	$conn = mysqli_connect("localhost","root", "","cmpe131");
+	$userLoggedIn=false;
+	if (!$conn) {
+		die("Connection failed: " . mysqli_connect_error());
+	}
+	$sql="SELECT * FROM accounts WHERE loginStatus=true";
+	$results= mysqli_query($conn,$sql);
+	$num = mysqli_num_rows($results); 
+	if($num==1){
+		include("loggedInNavBar.php");
+	}
+	else if($num>1){
+		$sql="UPDATE accounts SET loginStatus=false";
+		header('Location: login.php');
+		echo '<script>alert("login error, please login again");</script>';
+	}
+	else{
+		include("navBarNoLogin.php");
+	}
+?>
+<?php
 //Connect to local database
 $conn = mysqli_connect("localhost","root", "","stock");
 // Checking for connections
@@ -17,14 +39,6 @@ $conn->close();
 	<link rel="stylesheet" href="shopstyle.css">
 	<!--Site Header-->
 	<div class="header">
-		<ul>
-			<img class="logo" src="assets/logo-transparent.png" alt="">
-			<li><a href="login.php">Sign In</a></li>
-			<li><a href="signup.php">Sign Up</a></li>
-			<li><a href="shop.php">Shop</a></li>
-			<li><a href="aboutus.html">About Us</a></li>
-			<li><a href="index.html">Home</a></li>
-		</ul>
 		<div class="cartPreview">
 			<button class="cartPreviewButton" onclick="showCart()">
 				<img class="cartPreviewImage" src="assets/cart.png" alt=""> 
