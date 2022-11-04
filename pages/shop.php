@@ -23,6 +23,7 @@
 <?php
 //Connect to local database
 $conn = mysqli_connect("localhost","root", "","cmpe131");
+
 // Checking for connections
 if (!$conn) {
 	die("Connection failed: " . mysqli_connect_error());
@@ -36,16 +37,13 @@ $conn->close();
 
 <!DOCTYPE html>
 <html>
-	<link rel="stylesheet" href="shopstyle.css">
-	<!--Site Header-->
-	<div class="header">
-		<div class="cartPreview">
-			<button class="cartPreviewButton" onclick="showCart()">
-				<img class="cartPreviewImage" src="assets/cart.png" alt=""> 
-				<p class="cartPreviewText" id="cartPreviewText" >$0.00</p>
-			</button>
-		</div>
-	</div>
+	<head>
+		<title>Shop</title>
+		<link rel="stylesheet" href="../style/shopstyle.css">
+		<link rel="stylesheet" href="../style/navbar.css">
+		<link rel="stylesheet" href="../style/cart.css">
+	</head>
+
 	<!--Body for suggested items-->
 	<body class="shopBody">
 		<h1 id="suggestedItemsTitle">Fresh This Season</h1>
@@ -58,7 +56,7 @@ $conn->close();
 
 			<div class="suggestedItem"> 
 				<!--Displays each item from database-->
-				<img src="itemImages/<?php echo $rows['Image'];?>" class="productImage">
+				<img src="../itemImages/<?php echo $rows['Image'];?>" class="productImage">
 				<p class="itemName"><?php echo $rows['Name'];?></p> 
 				<p class="itemPrice">Price: $<?php echo number_format($rows['Price'], 2, ".", ",");?> / ea</p>
 				<button class="cartButton" onclick="addToCart(<?php echo $rows['Price'];?>)">Add to cart</button>
@@ -83,7 +81,7 @@ $conn->close();
 			<div id="cartHeaderTotal">Total</div>
 		</div>
 		<div class="cartItemContainer">
-			<img src="itemImages/avocado.png" class="cartImage">
+			<img src="../itemImages/avocado.png" class="cartImage">
 			<div class="cartProduct">
 				<p style="margin-bottom:0; margin-top: 40%;">Avocado</p> 
 				<p style="margin-top:0; font-size:14px;">$2.50 / ea</p>

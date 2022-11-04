@@ -1,0 +1,42 @@
+.navBar ul {
+    background-color: #403BBF;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    list-style-type: none;
+}
+
+.navBar li {
+    display: block;
+    float: right;
+    padding: 1.5%;
+    margin: 0;
+}
+
+.navBar li a {
+    display: block;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.navLogo {
+    height: auto;
+    width: auto;
+    max-height: 72px;
+    max-width: 250px;
+    padding-left: 1%;
+}
+
+
+
+
+
+
+
+
+
+

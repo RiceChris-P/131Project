@@ -22,7 +22,7 @@
                 $result = mysqli_query($conn, $sql);
                 $num = mysqli_num_rows($result); 
                 if($num==0){
-                    $sql= "INSERT INTO accounts VALUES ('$email','$password','$fname',false);";
+                    $sql= "INSERT INTO accounts VALUES ('$email','$password','$fullName',false);";
                     $result = mysqli_query($conn,$sql);
                     if($result){
                         $success=true;
@@ -43,7 +43,9 @@
         }
     }
 ?>
+
 <html>
+
     <?php
         if($usernameTaken){
             echo '<script>alert("You already have an account, please log in")</script>';
@@ -61,12 +63,14 @@
         }
 
     ?>
+
     <header>
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="form.css">
+        <title>Sign Up</title>
+        <link rel="stylesheet" href="../style/form.css">
     </header>
+
     <body>
-        <img class="logo" src="assets/logo-transparent.png" alt="">
+        <img class="logo" src="../assets/logo-transparent.png" alt="">
         <h1 class="headerOne">Create your HomeBuy account</h1>
         <form action="signup.php" method="post" class="formBox">
             <input type="text" name="fname" class="loginFill" placeholder="Full Name"><br>
@@ -76,4 +80,5 @@
             <button type="submit" class="submitButton">Create Account</button>
         </form>
     </body>
+
 </html>
