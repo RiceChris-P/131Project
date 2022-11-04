@@ -1,28 +1,6 @@
 <?php
-//checks if user is logged in 
-	$conn = mysqli_connect("localhost","root", "","cmpe131");
-	$userLoggedIn=false;
-	if (!$conn) {
-		die("Connection failed: " . mysqli_connect_error());
-	}
-	$sql="SELECT * FROM accounts WHERE loginStatus=true";
-	$results= mysqli_query($conn,$sql);
-	$num = mysqli_num_rows($results); 
-	if($num==1){
-		include("loggedInNavBar.php");
-	}
-	else if($num>1){
-		$sql="UPDATE accounts SET loginStatus=false";
-		header('Location: login.php');
-		echo '<script>alert("login error, please login again");</script>';
-	}
-	else{
-		include("navBarNoLogin.php");
-	}
-?>
-<?php
 //Connect to local database
-$conn = mysqli_connect("localhost","root", "","cmpe131");
+$conn = mysqli_connect("localhost","root", "","stock");
 // Checking for connections
 if (!$conn) {
 	die("Connection failed: " . mysqli_connect_error());
@@ -39,9 +17,19 @@ $conn->close();
 	<link rel="stylesheet" href="shopstyle.css">
 	<!--Site Header-->
 	<div class="header">
+		<ul>
+			<img class="logo" src="assets/logo-transparent.png" alt="">
+			  <li><a href="cart.php">Cart</a></li>
+			<li><a href="login.php">Sign In</a></li>
+			<li><a href="signup.php">Sign Up</a></li>
+			<li><a href="shop.php">Shop</a></li>
+			<li><a href="aboutus.html">About Us</a></li>
+			<li><a href="index.html">Home</a></li>
+		
+		</ul>
 		<div class="cartPreview">
 			<button class="cartPreviewButton" onclick="showCart()">
-				<img class="cartPreviewImage" src="assets/cart.png" alt=""> 
+				<img class="cartPreviewImage" src="assets/cart.png" alt="">
 				<p class="cartPreviewText" id="cartPreviewText" >$0.00</p>
 			</button>
 		</div>
@@ -56,14 +44,14 @@ $conn->close();
 				{
 			?>
 
-			<div class="suggestedItem"> 
+			<div class="suggestedItem">
 				<!--Displays each item from database-->
 				<img src="itemImages/<?php echo $rows['Image'];?>" class="productImage">
-				<p class="itemName"><?php echo $rows['Name'];?></p> 
+				<p class="itemName"><?php echo $rows['Name'];?></p>
 				<p class="itemPrice">Price: $<?php echo number_format($rows['Price'], 2, ".", ",");?> / ea</p>
 				<button class="cartButton" onclick="addToCart(<?php echo $rows['Price'];?>)">Add to cart</button>
 			</div>
-			
+
 			<?php
 				}
 			?>
@@ -85,7 +73,7 @@ $conn->close();
 		<div class="cartItemContainer">
 			<img src="itemImages/avocado.png" class="cartImage">
 			<div class="cartProduct">
-				<p style="margin-bottom:0; margin-top: 40%;">Avocado</p> 
+				<p style="margin-bottom:0; margin-top: 40%;">Avocado</p>
 				<p style="margin-top:0; font-size:14px;">$2.50 / ea</p>
 			</div>
 			<div class="rightCartContainer">
@@ -96,9 +84,9 @@ $conn->close();
 					<button class="subButton" onclick="increment()">+</button>
 				</div>
 				<button class="removeCart" onclick="removeFromCart()">Remove</button>
-			</div>			
+			</div>
 		</div>
-		
+
 	</div>
 
 
@@ -109,7 +97,7 @@ $conn->close();
 			document.getElementById("cartPreviewText").innerHTML = "$"+total.toFixed(2);
 			if (cart.style.visibility === "hidden") {
 				cart.style.visibility = "visible";
-			} 
+			}
 		}
 		function showCart() {
 			var cart = document.getElementById("cart");
@@ -120,15 +108,15 @@ $conn->close();
 			}
 		}
 		function removeFromCart(){
-			
+
 		}
 		function increment(){
-			
+
 		}
 		function decrement(){
 
 		}
 
-	</script> 
+	</script>
 
 </html>

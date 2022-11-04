@@ -4,13 +4,13 @@
     $usernameTaken=false;
     $missingField=false;
     if($_SERVER["REQUEST_METHOD"] == "POST") {
-        if($_POST['fname']!=null && 
+        if($_POST['fname']!=null &&
         $_POST['email']!=null&&
         (null!=$_POST['password'])&&
         null!=$_POST['retypepass'])
         {
             if($_POST['password']==$_POST['retypepass']){
-                $conn = mysqli_connect("localhost","root", "","cmpe131");
+                $conn = mysqli_connect("localhost","root", "","homebuy");
                 if (!$conn) {
                     die("Connection failed: " . mysqli_connect_error());
                     echo "no connection";
@@ -20,9 +20,9 @@
                 $password=$_POST["password"];
                 $sql = "SELECT * FROM accounts where email='$email'";
                 $result = mysqli_query($conn, $sql);
-                $num = mysqli_num_rows($result); 
+                $num = mysqli_num_rows($result);
                 if($num==0){
-                    $sql= "INSERT INTO accounts VALUES ('$email','$password','$fname',false);";
+                    $sql= "INSERT INTO accounts VALUES('$email','$password','$fullName')";
                     $result = mysqli_query($conn,$sql);
                     if($result){
                         $success=true;
@@ -63,7 +63,22 @@
     ?>
     <header>
     <title>Sign Up</title>
-    <link rel="stylesheet" href="form.css">
+
+    <link rel="stylesheet" href="navstyle.css">
+
+    <!--purple border on top-->
+    <div class="header">
+        <ul>
+            <li><a href="cart.php">Cart</a></li>
+            <li><a href="login.php">Sign In</a></li>
+            <li><a href="signup.php">Sign Up</a></li>
+            <li><a href="shop.php">Shop</a></li>
+            <li><a href="aboutus.html">About Us</a></li>
+            <li><a href="index.html">Home</a></li>
+
+        </ul>
+    </div>
+      <link rel="stylesheet" href="form.css">
     </header>
     <body>
         <img class="logo" src="assets/logo-transparent.png" alt="">

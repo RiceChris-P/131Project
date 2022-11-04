@@ -2,9 +2,9 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 04, 2022 at 01:37 AM
--- Server version: 10.4.21-MariaDB
+-- Host: 127.0.0.1
+-- Generation Time: Oct 28, 2022 at 03:25 AM
+-- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `cmpe131`
+-- Database: `homebuy`
 --
 
 -- --------------------------------------------------------
@@ -30,16 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `accounts` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `fname` varchar(255) NOT NULL,
-  `loginStatus` tinyint(1) DEFAULT NULL
+  `fname` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `accounts`
---
-
-INSERT INTO `accounts` (`email`, `password`, `fname`, `loginStatus`) VALUES
-('test@', 'password', 'test', 0);
 
 --
 -- Indexes for dumped tables
