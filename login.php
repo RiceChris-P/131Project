@@ -4,7 +4,7 @@
         if($_POST["email"]!=null && $_POST["password"]!=null){
             $email= $_POST["email"];
             $password= $_POST["password"];
-            $conn = mysqli_connect("localhost","root", "","homebuy");
+            $conn = mysqli_connect("localhost","root", "","cmpe131");
             if (!$conn) {
                 die("Connection failed: " . mysqli_connect_error());
             }
@@ -13,7 +13,9 @@
             if($results){
                 $row= mysqli_fetch_assoc($results);
                 if($row["password"]===$password){
-                    echo '<script>alert("logged in, start shopping!")</script>';
+                    $sql="UPDATE accounts SET loginStatus=true WHERE email='$email'";
+                    mysqli_query($conn,$sql);
+                    header('Location: shop.php');
                 }
                 else{
                     echo '<script>alert("Passwords incorrect or email does not exist")</script>';
