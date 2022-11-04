@@ -14,5 +14,5 @@
 ?>
 <html>
     <p>Signed Out</p>
-    <a href="index.html">Back to home page</a>
+    <a href="index.php">Back to home page</a>
 </html>
