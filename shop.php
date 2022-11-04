@@ -22,7 +22,7 @@
 ?>
 <?php
 //Connect to local database
-$conn = mysqli_connect("localhost","root", "","stock");
+$conn = mysqli_connect("localhost","root", "","cmpe131");
 // Checking for connections
 if (!$conn) {
 	die("Connection failed: " . mysqli_connect_error());
