@@ -10,7 +10,7 @@
         null!=$_POST['retypepass'])
         {
             if($_POST['password']==$_POST['retypepass']){
-                $conn = mysqli_connect("localhost","root", "","homebuy");
+                $conn = mysqli_connect("localhost","root", "","cmpe131");
                 if (!$conn) {
                     die("Connection failed: " . mysqli_connect_error());
                     echo "no connection";
