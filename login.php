@@ -4,7 +4,7 @@
         if($_POST["email"]!=null && $_POST["password"]!=null){
             $email= $_POST["email"];
             $password= $_POST["password"];
-            $conn = mysqli_connect("localhost","root", "","homebuy");
+            $conn = mysqli_connect("localhost","root", "","cmpe131");
             if (!$conn) {
                 die("Connection failed: " . mysqli_connect_error());
             }
@@ -13,7 +13,9 @@
             if($results){
                 $row= mysqli_fetch_assoc($results);
                 if($row["password"]===$password){
-                    echo '<script>alert("logged in, start shopping!")</script>';
+                    $sql="UPDATE accounts SET loginStatus=true WHERE email='$email'";
+                    mysqli_query($conn,$sql);
+                    header('Location: shop.php');
                 }
                 else{
                     echo '<script>alert("Passwords incorrect or email does not exist")</script>';
@@ -24,26 +26,9 @@
 ?>
 <html>
     <header>
-
         <title>Sign In</title>
-        <link rel="stylesheet" href="navstyle.css">
-    <!--purple border on top-->
-    <div class="header">
-        <ul>
-            <li><a href="cart.php">Cart</a></li>
-            <li><a href="login.php">Sign In</a></li>
-            <li><a href="signup.php">Sign Up</a></li>
-            <li><a href="shop.php">Shop</a></li>
-            <li><a href="aboutus.html">About Us</a></li>
-            <li><a href="index.html">Home</a></li>
-
-        </ul>
-    </div>
         <link rel="stylesheet" href="form.css">
-
     </header>
-
-
     <body>
         <img class="logo" src="assets/logo-transparent.png" alt="">
         <h1 class="headerOne">Sign into your HomeBuy account</h1>
