@@ -6,7 +6,6 @@
 	$sql="SELECT fname FROM accounts WHERE loginStatus=true;";
 	$results= mysqli_query($conn,$sql);
 	$temp= mysqli_fetch_assoc($results);
-	$fname= $temp["fname"];
 	$num = mysqli_num_rows($results); 
 ?>
 
@@ -23,7 +22,8 @@
 					<p class="cartPreviewText" id="cartPreviewText" >$0.00</p>
 				</button>
 			</li>
-			<?php if($num==1){?>
+
+			<?php if($num==1){$fname = $temp["fname"];	?>
 				<div class="dropdown">
 					<button class="dropdownbtn"><?php echo $fname;?></button>
 						<div class="dropdownmenu">
@@ -36,6 +36,7 @@
 				<li><a href="login.php">Sign In</a></li>
 				<li><a href="signup.php">Sign Up</a></li>
 			<?php }?>
+
 			<li><a href="shop.php">Shop</a></li>
 			<li><a href="aboutus.php">About Us</a></li>
 			<li><a href="index.php">Home</a></li>
