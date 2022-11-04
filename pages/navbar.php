@@ -16,7 +16,7 @@
 	</head>
 	<nav class="navBar">
 		<ul>
-			<a href="index.html"><img class="navLogo" src="../assets/logo-transparent.png" alt=""></a>
+			<a href="index.php"><img class="navLogo" src="../assets/logo-transparent.png" alt=""></a>
 			<li class="cartPreview">	
 				<button class="cartPreviewButton" onclick="showCart()">
 					<img class="cartPreviewImage" src="../assets/cart.png" alt=""> 
