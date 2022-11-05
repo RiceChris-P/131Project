@@ -1,6 +1,17 @@
 <!DOCTYPE html>
-
 <?php
+//if user is already logged in it redirects user to home page
+    $conn=mysqli_connect("localhost","root","","cmpe131");
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+    $sql="SELECT * FROM accounts WHERE loginstatus=true";
+    $result=mysqli_query($conn,$sql);
+    $num=mysqli_num_rows($result);
+    if($num>0){
+        header('Location: index.php');
+    }
+    //form action
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         if($_POST["email"]!=null && $_POST["password"]!=null){
             $email= $_POST["email"];
@@ -24,6 +35,7 @@
             }
         }
     }
+    $conn->close();
 ?>
 
 <html>
