@@ -6,8 +6,6 @@ include("navbar.php");
     <head>
         <title>Home Page</title>
         <link rel="stylesheet" href="../style/index.css">
-        <link rel="stylesheet" href="../style/navbar.css">
-        <link rel="stylesheet" href="../style/cart.css">
     </head>
 
    <div class="cart" id="cart" style="visibility: hidden">

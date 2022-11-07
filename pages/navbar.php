@@ -12,6 +12,7 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="../style/navbar.css">
+		<link rel="stylesheet" href="../style/cart.css">
 	</head>
 	<nav class="navBar">
 		<ul>

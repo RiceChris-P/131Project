@@ -20,8 +20,6 @@ $conn->close();
 	<head>
 		<title>Shop</title>
 		<link rel="stylesheet" href="../style/shopstyle.css">
-		<link rel="stylesheet" href="../style/navbar.css">
-		<link rel="stylesheet" href="../style/cart.css">
 	</head>
 
 	<!--Body for suggested items-->
