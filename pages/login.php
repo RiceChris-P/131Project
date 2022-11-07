@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php
+    session_start();
 //if user is already logged in it redirects user to home page
     $conn=mysqli_connect("localhost","root","","cmpe131");
     if (!$conn) {
@@ -26,6 +27,7 @@
                 $row= mysqli_fetch_assoc($results);
                 if($row["password"]===$password){
                     $sql="UPDATE accounts SET loginStatus=true WHERE email='$email'";
+                    $_SESSION['login'] = true;
                     mysqli_query($conn,$sql);
                     header('Location: shop.php');
                 }

@@ -1,4 +1,6 @@
 <?php
+    session_start();
+    $_SESSION["login"] = false;
     $conn = mysqli_connect("localhost","root", "","cmpe131");
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
@@ -11,6 +13,7 @@
         mysqli_query($conn,$sql);
     }
     $conn->close();
+    session_destroy();
 ?>
 <html>
     <p>Signed Out</p>
