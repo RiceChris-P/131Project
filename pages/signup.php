@@ -1,3 +1,5 @@
+
+
 <?php
     session_start();
 //if user is already logged in it redirects user to home page
