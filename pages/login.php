@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
     session_start();
-//if user is already logged in it redirects user to home page
+    //if user is already logged in it redirects user to home page
     $conn=mysqli_connect("localhost","root","","cmpe131");
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());

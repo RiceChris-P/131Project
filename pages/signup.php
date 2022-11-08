@@ -1,4 +1,5 @@
 <?php
+    session_start();
 //if user is already logged in it redirects user to home page
     $conn=mysqli_connect("localhost","root","","cmpe131");
     if (!$conn) {
@@ -38,6 +39,7 @@
                     $result = mysqli_query($conn,$sql);
                     if($result){
                         $success=true;
+                        $_SESSION['login'] = true;
                     }
                 }
                 else{
