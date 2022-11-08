@@ -2,3 +2,13 @@ body {
     margin: 0;
     padding: 0;
 }
+
+.checkOutInfo {
+    display: block;
+    float: left;
+}
+
+.cartInCheckOut {
+    display: block;
+    float: right;
+}
