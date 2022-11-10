@@ -1,12 +1,18 @@
 <?php
+    session_start();
 	$conn = mysqli_connect("localhost","root", "","cmpe131");
 	if(!$conn){
 		die("Connection failed: " . mysqli_connect_error());
 	}
-	$sql="SELECT fname FROM accounts WHERE loginStatus=true;";
-	$results= mysqli_query($conn,$sql);
-	$temp= mysqli_fetch_assoc($results);
-	$num = mysqli_num_rows($results); 
+	$num=false;
+	$temp=null;
+	if(isSet($_SESSION['login'])){
+		$email=$_SESSION['login'];
+		$num = true;
+		$sql="SELECT fname FROM accounts WHERE email='$email';";
+		$results= mysqli_query($conn,$sql);
+		$temp= mysqli_fetch_assoc($results);
+	}
 ?>
 
 <html>
@@ -24,7 +30,7 @@
 				</button>
 			</li>
 
-			<?php if($num==1){$fname = $temp["fname"];	?>
+			<?php if($num==true){$fname = $temp["fname"];	?>
 				<div class="dropdown">
 					<button class="dropdownbtn"><?php echo $fname;?></button>
 						<div class="dropdownmenu">

@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-
-<?php
-    session_start();
-    include("navbar.php");
-    $conn = mysqli_connect("localhost", "root", "", "cmpe131");
-?>
-
+<?php include("navbar.php");?>
 <html>
 
     <head>

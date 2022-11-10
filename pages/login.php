@@ -1,17 +1,15 @@
-<!DOCTYPE html>
 <?php
     session_start();
-    //if user is already logged in it redirects user to home page
-    $conn=mysqli_connect("localhost","root","","cmpe131");
-    if (!$conn) {
+    $conn = mysqli_connect("localhost","root", "","cmpe131");
+    if(!$conn){
         die("Connection failed: " . mysqli_connect_error());
     }
-    $sql="SELECT * FROM accounts WHERE loginstatus=true";
-    $result=mysqli_query($conn,$sql);
-    $num=mysqli_num_rows($result);
-    if($num>0){
+    //if user is already logged in it redirects user to home page
+    if(isSet($_SESSION['login'])){
         header('Location: index.php');
     }
+?>
+<?php
     //form action
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         if($_POST["email"]!=null && $_POST["password"]!=null){
@@ -25,10 +23,8 @@
             $results= mysqli_query($conn,$sql);
             if($results){
                 $row= mysqli_fetch_assoc($results);
-                if($row["password"]===$password){
-                    $sql="UPDATE accounts SET loginStatus=true WHERE email='$email'";
-                    $_SESSION['login'] = true;
-                    mysqli_query($conn,$sql);
+                if($row["password"]==$password){
+                    $_SESSION['login'] = $email;
                     header('Location: shop.php');
                 }
                 else{
