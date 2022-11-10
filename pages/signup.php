@@ -2,17 +2,17 @@
 
 <?php
     session_start();
-//if user is already logged in it redirects user to home page
-    $conn=mysqli_connect("localhost","root","","cmpe131");
-    if (!$conn) {
+    $conn = mysqli_connect("localhost","root", "","cmpe131");
+    if(!$conn){
         die("Connection failed: " . mysqli_connect_error());
     }
-    $sql="SELECT * FROM accounts WHERE loginstatus=true";
-    $result=mysqli_query($conn,$sql);
-    $num=mysqli_num_rows($result);
-    if($num>0){
+    //if user is already logged in it redirects user to home page
+    if(isSet($_SESSION['login'])){
         header('Location: index.php');
     }
+    $conn->close();
+?>
+<?php
     //form action
     $success=false;
     $passwordNoMatch=false;
@@ -41,7 +41,7 @@
                     $result = mysqli_query($conn,$sql);
                     if($result){
                         $success=true;
-                        $_SESSION['login'] = true;
+                        $_SESSION['login'] = $email;
                     }
                 }
                 else{
