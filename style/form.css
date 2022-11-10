@@ -1,6 +1,6 @@
 /* The body's style */
 body {
-    margin: 0; 
+    margin: 0;
     padding: 0;
 }
 
@@ -26,6 +26,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     max-width: 40%;
+
 }
 
 /* */
@@ -36,7 +37,11 @@ body {
     height: 44px;
     width: 100%;
     font-family: Helvetica, sans-serif;
+    border-radius: 15px;
+
+
 }
+
 
 /* */
 ::placeholder {
@@ -46,7 +51,8 @@ body {
     font-family: Helvetica, sans-serif;
     font-weight: lighter;
     color: #343434;
-}   
+    text-indent: 4%;
+}
 
 /* */
 .submitButton {
@@ -61,6 +67,5 @@ body {
     font-size: 23px;
     font-weight: bold;
     color: white;
-    border: none;
-    border-radius: 4px;
+    border-radius: 15px;
 }

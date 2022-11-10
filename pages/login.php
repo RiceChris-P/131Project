@@ -41,10 +41,16 @@
     <header>
         <title>Sign In</title>
         <link rel="stylesheet" href="../style/form.css">
+        <link rel="stylesheet" href="../style/navbar.css">
     </header>
 
     <body>
-        <img class="logo" src="../assets/logo-transparent.png" alt="">
+      <nav class="navBar">
+        <ul>
+            <img class="logo" src="../assets/logo-transparent.png" alt="">
+        </ul>
+      </nav>
+
         <h1 class="headerOne">Sign into your HomeBuy account</h1>
         <form action="login.php" method="post" class="formBox">
             <input type="text" name="email" class="loginFill" placeholder="Email"><br>
@@ -52,5 +58,5 @@
             <button type="submit" class="submitButton">Sign In</button>
         </form>
     </body>
-    
+
 </html>

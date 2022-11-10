@@ -10,7 +10,7 @@
     if(isSet($_SESSION['login'])){
         header('Location: index.php');
     }
-    $conn->close();
+    //$conn->close();
 ?>
 <?php
     //form action
@@ -19,7 +19,7 @@
     $usernameTaken=false;
     $missingField=false;
     if($_SERVER["REQUEST_METHOD"] == "POST") {
-        if($_POST['fname']!=null && 
+        if($_POST['fname']!=null &&
         $_POST['email']!=null&&
         (null!=$_POST['password'])&&
         null!=$_POST['retypepass'])
@@ -35,7 +35,7 @@
                 $password=$_POST["password"];
                 $sql = "SELECT * FROM accounts where email='$email'";
                 $result = mysqli_query($conn, $sql);
-                $num = mysqli_num_rows($result); 
+                $num = mysqli_num_rows($result);
                 if($num==0){
                     $sql= "INSERT INTO accounts VALUES ('$email','$password','$fullName');";
                     $result = mysqli_query($conn,$sql);
@@ -84,10 +84,16 @@
     <header>
         <title>Sign Up</title>
         <link rel="stylesheet" href="../style/form.css">
+        <link rel="stylesheet" href="../style/navbar.css">
     </header>
 
     <body>
-        <img class="logo" src="../assets/logo-transparent.png" alt="">
+      <nav class="navBar">
+        <ul>
+            <img class="logo" src="../assets/logo-transparent.png" alt="">
+        </ul>
+      </nav>
+      
         <h1 class="headerOne">Create your HomeBuy account</h1>
         <form action="signup.php" method="post" class="formBox">
             <input type="text" name="fname" class="loginFill" placeholder="Full Name"><br>
