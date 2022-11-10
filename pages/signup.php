@@ -41,7 +41,6 @@
                     $result = mysqli_query($conn,$sql);
                     if($result){
                         $success=true;
-                        $_SESSION['login'] = $email;
                     }
                 }
                 else{
