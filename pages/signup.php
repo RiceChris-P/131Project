@@ -37,7 +37,7 @@
                 $result = mysqli_query($conn, $sql);
                 $num = mysqli_num_rows($result); 
                 if($num==0){
-                    $sql= "INSERT INTO accounts VALUES ('$email','$password','$fullName',false);";
+                    $sql= "INSERT INTO accounts VALUES ('$email','$password','$fullName');";
                     $result = mysqli_query($conn,$sql);
                     if($result){
                         $success=true;

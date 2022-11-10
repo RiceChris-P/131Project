@@ -30,16 +30,15 @@ SET time_zone = "+00:00";
 CREATE TABLE `accounts` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `fname` varchar(255) NOT NULL,
-  `loginStatus` tinyint(1) DEFAULT NULL
+  `fname` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `accounts`
 --
 
-INSERT INTO `accounts` (`email`, `password`, `fname`, `loginStatus`) VALUES
-('test@', 'password', 'test', 0);
+INSERT INTO `accounts` (`email`, `password`, `fname`) VALUES
+('test@', 'password', 'test');
 
 -- --------------------------------------------------------
 
