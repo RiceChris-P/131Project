@@ -5,15 +5,28 @@
         die("Connection failed: " . mysqli_connect_error());
     }
     session_start();
-    // $phoneNumber=returnValFromSql("phoneNumber");
-    // $streetAddress=returnValFromSql("streetAddress");
-    // $aptNum=returnValFromSql("aptNum");
-    // $city=returnValFromSql("city");
-    // $zip=returnValFromSql("zip");
-    // $nameOnCard=returnValFromSql("nameOnCard");
-    // $cardNum=returnValFromSql("cardNum");
-    // $cardExp=returnValFromSql("cardExp");
-    // $cardCCV=returnValFromSql("cardCCV");
+    $email=$_SESSION['login'];
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+        if($_POST['email']!=$email&&$_POST['email']!=null){
+            $newEmail=$_POST['email'];
+            $sql="UPDATE accounts SET email=$newEmail WHERE email='$userEmail'";
+            $results=mysqli_query($conn,$sql);
+        }
+        //updateSqlValue(name of variable inside sql, new value from form)
+        updateSqlValue("fname",$_POST['firstName']);
+        updateSqlValue("lastName",$_POST['lastName']);
+        updateSqlValue("phone ",$_POST['phone']);
+        updateSqlValue("address",$_POST['address']);
+        updateSqlValue("aptOrSuite",$_POST['aptsuiteunit']);
+        updateSqlValue("state",$_POST['state']);
+        updateSqlValue("city",$_POST['city']);
+        updateSqlValue("zipCode",$_POST['zip']);
+        updateSqlValue("nameOnCard",$_POST['cardname']);
+        updateSqlValue("cardNum",$_POST['cardnumber']);
+        updateSqlValue("cardExp",$_POST['cardexpiration']);
+        updateSqlValue("cardCVV",$_POST['cardcvv']);
+    }
+    //input sql variable, returns the sql variables value
     function returnValFromSql($value){
         $userEmail=$_SESSION['login'];
         $conn = mysqli_connect("localhost", "root", "", "cmpe131");
@@ -27,44 +40,57 @@
             return $temp[$value];
         }
         $conn->close();
-   }
-    function updateSqlValue($variable, $newValue){
-        $sql="UPDATE accounts SET $variable='$newValue' WHERE email='$email'";
-        $results=mysqli_query($conn,$sql);
+    }
+    //input name of sql variable and the new value you want to set the variable to
+    //updateSqlValue("variable name in sql datatbse", "new value for said variable)
+    function updateSqlValue($variable,$newValue){
+        if($newValue==null){
+            $sql="UPDATE accounts SET $variable='' WHERE email='$userEmail'";
+            return;
+        }
+        else{
+            $conn = mysqli_connect("localhost", "root", "", "cmpe131");
+            if(!$conn){
+                die("Connection failed: " . mysqli_connect_error());
+            }
+            $userEmail=$_SESSION['login'];
+            $sql="UPDATE accounts SET $variable='$newValue' WHERE email='$userEmail'";
+            mysqli_query($conn,$sql);
+            return;
+        }
     }
 ?>
 <html>
 
     <head>
-        <title>Check Out</title>
+        <title>Account</title>
         <link rel="stylesheet" href="../style/checkout.css">
     </head>
 
     <body>
         <div>
             <div class="checkOutInfo">
-                    <form action="">
-                        <p>Dev Note: Logged Out</p>
+                    <form  action="account.php" method="post">
                         <h2>Contact Information</h2>
 
-                        <input type="text" name="firstName" class="" placeholder="First Name">
-                        <input type="text" name="lastName" class="" placeholder="Last Name"><br>
-                        <input type="text" name="email" class="" placeholder="Email Address"><br>
-                        <input type="text" name="phone" class="" placeholder="Phone Number">
+                        <input type="text" name="firstName" class="" id="firstName" placeholder="First Name">
+                        <input type="text" name="lastName" class="" id="lastName" placeholder="Last Name"><br>
+                        <input type="text" name="email" class="" id="email"placeholder="Email Address"><br>
+                        <input type="text" name="phone" class="" id="phone" placeholder="Phone Number">
 
                         <h2>Delivery Information</h2>
-                        <input type="text" name="address" class="" id="address" placeholder="Street Address"><br>
-                        <input type="text" name="aptsuiteunit" class="" placeholder="Apt, suite, etc. (optional)"><br>
-                        <input type="text" name="state" class="" placeholder="State">
-                        <input type="text" name="city" class="" placeholder="City">
-                        <input type="text" name="zip" class="" placeholder="ZIP"><br>
+                        <input type="text" name="address" class="" id="stAddress" placeholder="Street Address"><br>
+                        <input type="text" name="aptsuiteunit" id="apt" class="" placeholder="Apt, suite, etc. (optional)"><br>
+                        <input type="text" name="state" id="state" class="" placeholder="State">
+                        <input type="text" name="city" id="city" class="" placeholder="City">
+                        <input type="text" name="zip" id="zipCode" class="" placeholder="ZIP"><br>
                         
                         <h2>Payment Information</h2>
-                        <input type="text" name="cardname" placeholder="Name On Card"><br>
-                        <input type="text" name="cardnumber" placeholder="Card Number">
-                        <input type="text" name="cardexpiration" placeholder="Exp MM/YY">
-                        <input type="text" name="cardcvv" placeholder="Enter CVV"><br>
-                        <button type="submit" name="checkoutsubmit">Submit Payment</button>
+                        <input type="text" name="cardname" id="cardName" placeholder="Name On Card"><br>
+                        <input type="text" name="cardnumber" id="cardNum" placeholder="Card Number">
+                        <input type="text" name="cardexpiration" id="cardExp" placeholder="Exp MM/YY">
+                        <input type="text" name="cardcvv" id="cardCVV"placeholder="Enter CVV"><br>
+                        <button type="submit" name="checkoutsubmit">Update Information</button>
                     </form>
             </div>
 
@@ -73,8 +99,22 @@
             </div>
         </div>
         <script>
-            document.getElementById("address").value='<?php echo returnValFromSql("state",$email)?>';
-            console.log("<?php echo returnValFromSql("state",$email)?>");
+            //fills form with current account info
+            document.getElementById("firstName").value='<?php echo returnValFromSql("fname");?>';
+            document.getElementById("lastName").value='<?php echo returnValFromSql('lastName');?>';
+            document.getElementById("stAddress").value='<?php echo returnValFromSql("address");?>';
+            document.getElementById("email").value='<?php echo $_SESSION['login']?>';
+            document.getElementById("phone").value='<?php echo returnValFromSql("phone");?>';
+
+            document.getElementById("apt").value='<?php echo returnValFromSql("aptOrSuite");?>';
+            document.getElementById("state").value='<?php echo returnValFromSql("state");?>';
+            document.getElementById("city").value='<?php echo returnValFromSql("city");?>';
+            document.getElementById("zipCode").value='<?php echo returnValFromSql("zipCode");?>';
+
+            document.getElementById("cardName").value='<?php echo returnValFromSql("nameOnCard");?>';
+            document.getElementById("cardNum").value='<?php echo returnValFromSql("cardNum");?>';
+            document.getElementById("cardExp").value='<?php echo returnValFromSql("cardExp");?>';
+            document.getElementById("cardCVV").value='<?php echo returnValFromSql("cardCVV");?>';
         </script>
     </body>
 </html>
