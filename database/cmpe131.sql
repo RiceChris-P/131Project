@@ -28,17 +28,29 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `accounts` (
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `fname` varchar(255) NOT NULL
+  `email` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `fname` varchar(255) DEFAULT NULL,
+  `lastName` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `aptOrSuite` varchar(255) DEFAULT NULL,
+  `state` varchar(255) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `zipCode` varchar(255) DEFAULT NULL,
+  `nameOnCard` varchar(255) DEFAULT NULL,
+  `cardNum` varchar(255) DEFAULT NULL,
+  `cardExp` varchar(255) DEFAULT NULL,
+  `cardCVV` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `accounts`
 --
 
-INSERT INTO `accounts` (`email`, `password`, `fname`) VALUES
-('test@', 'password', 'test');
+INSERT INTO `accounts` (`email`, `password`, `fname`, `lastName`, `phone`, `address`, `aptOrSuite`, `state`, `city`, `zipCode`, `nameOnCard`, `cardNum`, `cardExp`, `cardCCV`) VALUES
+('ab', 'ab', 'a', 'b', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('test@', 'password', 'test', 'asd', '', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 

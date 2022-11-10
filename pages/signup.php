@@ -20,7 +20,8 @@
     $missingField=false;
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         if($_POST['fname']!=null &&
-        $_POST['email']!=null&&
+        $_POST['email']!=null&& 
+        $_POST['lname']!=null&&
         (null!=$_POST['password'])&&
         null!=$_POST['retypepass'])
         {
@@ -30,14 +31,15 @@
                     die("Connection failed: " . mysqli_connect_error());
                     echo "no connection";
                 }
-                $fullName=$_POST["fname"];
+                $fname=$_POST["fname"];
+                $lname=$_POST['lname'];
                 $email=$_POST['email'];
                 $password=$_POST["password"];
                 $sql = "SELECT * FROM accounts where email='$email'";
                 $result = mysqli_query($conn, $sql);
                 $num = mysqli_num_rows($result);
                 if($num==0){
-                    $sql= "INSERT INTO accounts VALUES ('$email','$password','$fullName');";
+                    $sql= "INSERT INTO accounts (email,password,firstName,lastName) VALUES ('$email','$password','$fname','$lname');";
                     $result = mysqli_query($conn,$sql);
                     if($result){
                         $success=true;
@@ -95,7 +97,8 @@
       
         <h1 class="headerOne">Create your HomeBuy account</h1>
         <form action="signup.php" method="post" class="formBox">
-            <input type="text" name="fname" class="loginFill" placeholder="Full Name"><br>
+            <input type="text" name="fname" class="loginFill" placeholder="First Name"><br>
+            <input type="text" name="lname" class="loginFill" placeholder="Last Name"><br>
             <input type="text" name="email" class="loginFill" placeholder="Email"><br>
             <input type="password" name="password" class="loginFill" placeholder="Password"><br>
             <input type="password" name="retypepass" class="loginFill" placeholder="Confirm Password"><br>
