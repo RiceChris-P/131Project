@@ -1,10 +1,11 @@
-<?php include("navbar.php");?>
+<?php 
+include("navbar.php");
+?>
 <?php 
     $conn = mysqli_connect("localhost", "root", "", "cmpe131");
     if(!$conn){
         die("Connection failed: " . mysqli_connect_error());
     }
-    session_start();
     $email=$_SESSION['login'];
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         if($_POST['email']!=$email&&$_POST['email']!=null){
@@ -44,6 +45,7 @@
     //input name of sql variable and the new value you want to set the variable to
     //updateSqlValue("variable name in sql datatbse", "new value for said variable)
     function updateSqlValue($variable,$newValue){
+        $userEmail=$_SESSION['login'];
         if($newValue==null){
             $sql="UPDATE accounts SET $variable='' WHERE email='$userEmail'";
             return;
