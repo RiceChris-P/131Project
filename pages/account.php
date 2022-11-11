@@ -46,20 +46,13 @@ include("navbar.php");
     //updateSqlValue("variable name in sql datatbse", "new value for said variable)
     function updateSqlValue($variable,$newValue){
         $userEmail=$_SESSION['login'];
-        if($newValue==null){
-            $sql="UPDATE accounts SET $variable='' WHERE email='$userEmail'";
-            return;
+        $conn = mysqli_connect("localhost", "root", "", "cmpe131");
+        if(!$conn){
+            die("Connection failed: " . mysqli_connect_error());
         }
-        else{
-            $conn = mysqli_connect("localhost", "root", "", "cmpe131");
-            if(!$conn){
-                die("Connection failed: " . mysqli_connect_error());
-            }
-            $userEmail=$_SESSION['login'];
-            $sql="UPDATE accounts SET $variable='$newValue' WHERE email='$userEmail'";
-            mysqli_query($conn,$sql);
-            return;
-        }
+        $sql="UPDATE accounts SET $variable='$newValue' WHERE email='$userEmail'";
+        mysqli_query($conn,$sql);
+        $conn->close();
     }
 ?>
 <html>
