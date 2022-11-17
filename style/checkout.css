@@ -12,3 +12,7 @@ body {
     display: block;
     float: right;
 }
+
+.passCreation {
+    visibility: hidden;
+}

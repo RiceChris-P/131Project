@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2022 at 12:28 AM
+-- Generation Time: Nov 18, 2022 at 12:49 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -91,7 +91,11 @@ CREATE TABLE `orders` (
   `costofitems` int(11) DEFAULT NULL,
   `totalweight` int(11) DEFAULT NULL,
   `weightfee` int(11) DEFAULT NULL,
-  `totalcost` int(11) DEFAULT NULL
+  `totalcost` int(11) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `contactinfo` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`contactinfo`)),
+  `deliveryinfo` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`deliveryinfo`)),
+  `paymentinfo` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`paymentinfo`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
