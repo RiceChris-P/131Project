@@ -30,6 +30,10 @@
             $cardcvv = $_POST['cardcvv'];
 
             if($fname != null && $lname != null && $email != null) {
+
+                if($pass != null) {
+
+                }
                 $contactinfo = json_encode(array(
                     'firstName' => $fname,
                     'lastName' => $lname,
@@ -86,8 +90,8 @@
                     $missingField = true;
                 }
             }
-            else if($fname != null && $lname != null && $email != null && $pass != null) {
-                
+            else {
+                $missingField = true;
             }
         }
     }
@@ -95,13 +99,31 @@
 
 <html>
 
+<?php
+        if($usernameTaken){
+            echo '<script>alert("You already have an account, please log in")</script>';
+        }
+        if($success){
+            echo '<script>alert("Account created, please log in")</script>';
+        }
+        if($passwordNoMatch){
+            echo '<script>alert("Passwords do not match")</script>';
+
+        }
+        if($missingField){
+            echo '<script>alert("Missing Field")</script>';
+
+        }
+
+    ?>
+    
     <head>
         <title>Check Out</title>
         <link rel="stylesheet" href="../style/checkout.css">
     </head>
 
     <body>
-        <div>
+        <div class="checkoutContainer">
             <div class="checkOutInfo">
                 <?php if(isset($_SESSION['login'])) { ?>
                     <script>"User is logged in."</script>
@@ -116,17 +138,20 @@
 
                     </form>
                 <?php } else { ?>
-                    <form action="checkout.php" method="post">
+                    <form action="checkout.php" method="post" class="guestForm">
                         <script>console.log("User is logged out.")</script>
-                        <h2>Contact Information</h2>
+                        <div class="contact">
+                            <h2>Contact Information</h2>
 
-                        <input type="text" name="firstName" class="" placeholder="First Name">
-                        <input type="text" name="lastName" class="" placeholder="Last Name"><br>
-                        <input type="text" name="email" class="" placeholder="Email Address"><br>
-                        <input type="text" name="phone" class="" placeholder="Phone Number"><br>
-                        <label class=""><input type="checkbox" id="check" name="createaccount" class="" onclick="validate()">Create Account?</label><br>
-                        <input type="password" id="password" name="password" class="passCreation" placeholder="Password"><br>
-                        <input type="password" id="retypepass" name="retypepass" class="passCreation" placeholder="Confirm Password"><br>
+                            <input type="text" name="firstName" class="" placeholder="First Name">
+                            <input type="text" name="lastName" class="" placeholder="Last Name"><br>
+                            <input type="text" name="email" class="" placeholder="Email Address"><br>
+                            <input type="text" name="phone" class="" placeholder="Phone Number"><br>
+                            <label class=""><input type="checkbox" id="check" name="createaccount" class="" onclick="validate()">Create Account?</label><br>
+                            <input type="password" id="password" name="password" class="passCreation" placeholder="Password"><br>
+                            <input type="password" id="retypepass" name="retypepass" class="passCreation" placeholder="Confirm Password"><br>
+
+                        </div>
 
                         <script>
                             function validate() {
@@ -142,26 +167,31 @@
                             }
                         </script>
                         
-
-                        <h2>Delivery Information</h2>
-                        <input type="text" name="address" class="" placeholder="Street Address"><br>
-                        <input type="text" name="aptsuiteunit" class="" placeholder="Apt, suite, etc. (optional)"><br>
-                        <input type="text" name="state" class="" placeholder="State">
-                        <input type="text" name="city" class="" placeholder="City">
-                        <input type="text" name="zip" class="" placeholder="ZIP"><br>
+                        <div class="delivery">
+                            <h2>Delivery Information</h2>
+                            <input type="text" name="address" class="" placeholder="Street Address"><br>
+                            <input type="text" name="aptsuiteunit" class="" placeholder="Apt, suite, etc. (optional)"><br>
+                            <input type="text" name="state" class="" placeholder="State">
+                            <input type="text" name="city" class="" placeholder="City">
+                            <input type="text" name="zip" class="" placeholder="ZIP"><br>
+                        </div>
                         
-                        <h2>Payment Information</h2>
-                        <input type="text" name="cardname" placeholder="Name On Card"><br>
-                        <input type="text" name="cardnumber" placeholder="Card Number">
-                        <input type="text" name="cardexpiration" placeholder="Exp MM/YY">
-                        <input type="text" name="cardcvv" placeholder="Enter CVV"><br>
-                        <button type="submit" name="checkoutsubmit">Submit Payment</button>
+                        <div class="payment">
+                            <h2>Payment Information</h2>
+                            <input type="text" name="cardname" placeholder="Name On Card"><br>
+                            <input type="text" name="cardnumber" placeholder="Card Number">
+                            <input type="text" name="cardexpiration" placeholder="Exp MM/YY">
+                            <input type="text" name="cardcvv" placeholder="Enter CVV"><br>
+                            <button type="submit" name="checkoutsubmit">Submit Payment</button>
+                        </div>
                     </form>
                 <?php } ?> 
             </div>
 
             <div class="cartInCheckOut">
-                <h2>Cart</h2>
+                <div class="cart">
+                    <h2>Cart</h2>
+                </div>
             </div>
         </div>
     </body>
