@@ -1,101 +1,18 @@
 body {
     margin: 0;
     padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-}
-
-.checkoutContainer {
-    display: flex;
-    flex-direction: row;
-    margin: 5%;
-    width: auto;
-    height: auto;
-    overflow: hidden;
 }
 
 .checkOutInfo {
-    position: static;
-    margin-right: 2.5%;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-.contact {
-    border-style: solid;
-    border-color: whitesmoke;
-    border-width: 3px;
-    border-top-width: 0;
-    padding-bottom: 3%;
-    overflow: hidden;
-}
-
-.delivery{
-    border-style: solid;
-    border-color: whitesmoke;
-    border-width: 3px;
-    border-top-width: 0;
-    margin-top: 3%;
-    padding-bottom: 3%;
-    overflow: hidden;
-}
-
-.payment {
-    border-style: solid;
-    border-color: whitesmoke;
-    border-width: 3px;
-    border-top-width: 0;
-    margin-top: 3%;
-    padding-bottom: 3%;
-    overflow: hidden;
-}
-
-.payment button {
-    float: right;
-    background-color: #403BBF;
-    width: fit-content;
-    border-radius: 1.5rem;
-    overflow: hidden;
-    padding: 1%;
-}
-
-.checkOutInfo h2 {
-    margin: 0;
-    padding: 2%;
-    color: whitesmoke;
-    background-color: #403BBF;
-    overflow: hidden;
+    display: block;
+    float: left;
 }
 
 .cartInCheckOut {
-    position: static;
-    margin-left: 2.5%;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-
-    border-style: solid;
-    border-color: whitesmoke;
-    border-width: 3px;
-    border-top-width: 0;
-}
-
-.cart {
-    position: relative;
-    overflow: hidden;
-}
-
-.cartInCheckOut h2 {
-    margin: 0;
-    padding: 2%;
-    color: whitesmoke;
-    background-color: #403BBF;
-    overflow: hidden;
+    display: block;
+    float: right;
 }
 
 .passCreation {
     visibility: hidden;
 }
-
