@@ -221,13 +221,14 @@
                         echo '<script>console.log("Account created!")</script>';
                         $_SESSION['login'] = true;
                     }
-                    else {
-                        echo 'failed account';
-                    }
 
                     if($resultFour) {
                         echo '<script>console.log("Order sent!")</script>';
-                        header('Location: orderconf.php');
+                        $_SESSION['ordernum'] = $orderNum;
+                        $_SESSION['ordertotal'] = (double) 100.00; //Implement later
+                        $_SESSION['email'] = $email;
+                        $_SESSION['orderdate'] = date('m/d/Y');
+                        header('Location: order.php');
                     }
                 }
                 else {
@@ -264,6 +265,7 @@
 
                    if($rowsTwo == 0) {
                        $orderNumTaken = false;
+                       $_SESSION['ordernum'] = $orderNum;
                        echo '<script>console.log("Order number generated")</script>';
                    }
                    else {
@@ -277,7 +279,7 @@
 
                if($resultThree) {
                    echo '<script>console.log("Order sent!")</script>';
-                   header('Location: orderconf.php');
+                   header('Location: order.php');
                }
            }
            else {
@@ -293,7 +295,7 @@
 <html>
     
     <head>
-        <title>Check Out</title>
+        <title>Checkout</title>
         <link rel="stylesheet" href="../style/checkout.css">
     </head>
 
