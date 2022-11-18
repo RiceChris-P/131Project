@@ -119,7 +119,7 @@ include("navbar.php");
 			transform: translateY(-7px);
 		}
 
-		a:link {color: white; text-decoration: none;}
+		a:link {color: black; text-decoration: none; font-family: Arial, Helvetica, sans-serif; text-align: center;}
 
 
 		a:visited { text-decoration: none; }

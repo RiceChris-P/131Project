@@ -112,4 +112,8 @@ include("navbar.php");
             document.getElementById("cardCVV").value='<?php echo returnValFromSql("cardCVV");?>';
         </script>
     </body>
+
+    <style>
+        a:link {color: black; text-align: center; font-family: Arial, Helvetica, sans-serif;}
+    </style>
 </html>

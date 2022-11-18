@@ -79,6 +79,7 @@
 			font-size: 150%;
 			text-align: center;
 		}
+		a:link {color: black; text-align: center; font-family: Arial, Helvetica, sans-serif;}
 	</style>
      <body>
 	 	<h1 class="abth"><b>Developers</b></h1>

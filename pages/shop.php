@@ -87,7 +87,6 @@ $conn->close();
 		</div>	
 	</div>
 
-
 	<script>
 		var myArr;
 		var oReq = new XMLHttpRequest(); // New request object
@@ -257,4 +256,7 @@ $conn->close();
 
 	</script> 
 
+	<style>
+		a:link {color: black; text-align: center; font-family: Arial, Helvetica, sans-serif;}
+	</style>
 </html>

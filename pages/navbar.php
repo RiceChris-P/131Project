@@ -34,9 +34,9 @@
 				<div class="dropdown">
 					<button class="dropdownbtn"><?php echo $fname;?></button>
 						<div class="dropdownmenu">
-							<a href="account.php">account</a>
-							<a href="orders.php">orders</a>
-							<a href="signout.php">signout</a>
+							<a href="account.php">Account</a>
+							<a href="orders.php">Orders</a>
+							<a href="signout.php">Signout</a>
 						</div>
 				</div>
 			<?php }else{?>
