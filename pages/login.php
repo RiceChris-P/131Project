@@ -23,7 +23,7 @@
             $results= mysqli_query($conn,$sql);
             if($results){
                 $row= mysqli_fetch_assoc($results);
-                if($row["password"]==$password){
+                if(@$row["password"]==$password){
                     $_SESSION['login'] = $email;
                     header('Location: shop.php');
                 }

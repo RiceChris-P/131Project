@@ -34,9 +34,9 @@
 				<div class="dropdown">
 					<button class="dropdownbtn"><?php echo $fname;?></button>
 						<div class="dropdownmenu">
-							<a href="account.php">account</a>
-							<a href="orders.php">orders</a>
-							<a href="signout.php">signout</a>
+							<a href="account.php">Account Information</a>
+							<a href="orders.php">Orders</a>
+							<a href="signout.php">Signout</a>
 						</div>
 				</div>
 			<?php }else{?>
@@ -50,3 +50,22 @@
 		</ul>
 	</nav>
 </html>
+
+<style>
+	a:link{color: black; font-family: Arial, Helvetica, sans-serif; text-align: center;}
+	.dropdown{
+		padding: 14px 16px;
+		font-size: 20px;
+		display: block;
+		float: right;
+		text-align: center;
+	}
+	.dropdownbtn{
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 20px;
+		text-align: center;
+	}
+	.dropdownmenu a{
+		font-size: 18px;
+	}
+</style>

@@ -1,0 +1,95 @@
+body {
+    margin: 0;
+    display: 0;
+}
+
+.container {
+    display: block;
+    margin: 5%;
+    padding: 3%;
+    text-align: center;
+    width: auto;
+    background-color: #E5E4E2;
+    border-style: solid;
+    border-color: #818589;
+    border-width: 1%;
+    
+}
+
+.container h1 {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    padding-bottom: 1%  ;
+}
+
+.orderInfo {
+    margin: 1%;
+}
+
+.container table {
+    display: inline-table;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    border-collapse: collapse;
+}
+
+.container table th {
+    width: 80%;
+    height: 80%;
+    padding-bottom: 3%;
+    border-style: solid;
+    border-color: whitesmoke;
+    border-top-width: 0;
+    border-bottom-width: 1%;
+    border-left-width: 0;
+    border-right-width: 0;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.container table tbody {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    border-style: solid;
+    border-color: #F0EAD6;
+    border-top-width: 0;
+    border-bottom-width: 1%;
+    border-left-width: 1%;
+    border-right-width: 1%;
+    border-right-color: whitesmoke;
+}
+
+.container table tbody tr {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container table tbody tr td {
+    display: block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container table h4 {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.container button {
+    background-color: #403BBF;
+}
+
+.container button a:link {
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
+    color: whitesmoke;
+}
