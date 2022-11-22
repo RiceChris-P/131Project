@@ -77,24 +77,37 @@ CREATE TABLE `items` (
 --
 
 <<<<<<< HEAD
-INSERT INTO `items` (`Name`, `Price`, `Weight`, `Image`) VALUES
-('Raspberry', 4.99, 0.375, 'raspberry.png'),
-('Blueberry', 4.99, 0.375, 'blueberry.png'),
-('Avocado', 2.5, 0.375, 'avocado.png'),
-('Corn', 0.89, 0.375, 'corn.png'),
-('Zucchini', 1, 0.5, 'zucchini.png'),
-('Banana', 0.49, 0.5, 'banana.png'),
-('Watermelon', 5.79, 20, 'watermelon.png'),
-=======
-INSERT INTO `items` (`Name`, `Price`, `Weight`, `Image`, `Type`) VALUES
-('Raspberry', 4.99, 0.375, 'raspberry.png', 'fruit'),
-('Blueberry', 4.99, 0.375, 'blueberry.png', 'fruit'),
-('Avocado', 2.5, 0.375, 'avocado.png', 'fruit'),
-('Corn', 0.89, 0.375, 'corn.png', 'fruit'),
-('Zucchini', 1, 0.5, 'zucchini.png', 'fruit'),
-('Banana', 0.49, 0.5, 'banana.png', 'fruit'),
-('Watermelon', 5.79, 20, 'watermelon.png', 'fruit');
 
+INSERT INTO `items` (`Name`, `Price`, `Weight`, `Image`, `Type`) VALUES
+('Raspberry', 9.28, 1, 'raspberry.png', 'fruit'),
+('Blueberry', 6.24, 1, 'blueberry.png', 'fruit'),
+('Avocado', 2, 1, 'avocado.png', 'fruit'),
+('Corn', 0.89, 0.375, 'corn.png', 'vegetable'),
+('Zucchini', 1, 0.5, 'zucchini.png', 'vegetable'),
+('Banana', 0.89, 1, 'banana.png', 'fruit'),
+('Watermelon', 5.79, 20, 'watermelon.png', 'fruit'),
+('Apple', 1.50, 1, 'apple.png', 'fruit'),
+('Strawberries', 4.99, 1, 'strawberry.png', 'fruit'),
+('Grapes', 3.99, 1, 'grapes.png', 'fruit'),
+('Pineapple', 2.99, 1, 'pineapple.png', 'fruit'),
+('Broccoli', 2.99, 1, 'broccoli.png', 'vegetable'),
+('Asparagus', 2.99, 1, 'asparagus.png', 'vegetable'),
+('Cucumber', 1, 1, 'cucumber.png', 'vegetable'),
+('Potatoes', 1.20, 1, 'potato.png', 'vegetable'),
+('Onions', 1.33, 1, 'onion.png', 'vegetable'),
+('Lettuce', 2.69, 1, 'lettuce.png', 'vegetable'),
+('Tomato', 3.49, 1, 'tomato.png', 'vegetable'),
+('Bell Pepper', 2.00, .5, 'bellpepper.png', 'vegetable'),
+('Carrots', 1.29, 1, 'carrots.png', 'vegetable'),
+('Whole Turkey', 39.38, 23, 'turkey.png', 'Meat'),
+('Hot Dog', .34, .0625, 'hotdog.png', 'Meat'),
+('New York Steak', 45.47, 3.5, 'steak.png', 'Meat'),
+('Ground Beef', 20.97, 3.5, 'groundbeef.png', 'Meat'),
+('Chicken Breast', 17.97, 3, 'chicken.png', 'Meat'),
+('Milk', 5.99, 8.34, 'milk.png', 'Dairy'),
+('Cheese', 13.99, 2, 'cheese.png', 'Dairy'),
+('Eggs', 15.99, 1.5, 'eggs.png', 'Dairy'),
+('Butter', 5.99, 1, 'butter.png', 'Dairy');
 -- --------------------------------------------------------
 
 --
@@ -115,11 +128,7 @@ CREATE TABLE `orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 >>>>>>> 2b6b34cf2ee65306d959ccffce581eff694cff5e
 
-('Apple', , , ''),
-('Potato', , , ''),
-('Bread', , , ''),
-('Beef Ribeye', , , ''),
-;
+
 --
 -- Indexes for dumped tables
 --

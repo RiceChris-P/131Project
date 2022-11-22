@@ -34,14 +34,14 @@ $conn->close();
 					$name = $rows['Name']
 			?>
 
-			<div class="suggestedItem"> 
+			<div class="suggestedItem">
 				<!--Displays each item from database-->
 				<img src="../itemImages/<?php echo $rows['Image'];?>" class="productImage">
-				<p class="itemName"><?php echo $rows['Name'];?></p> 
+				<p class="itemName"><?php echo $rows['Name'];?></p>
 				<p class="itemPrice">Price: $<?php echo number_format($rows['Price'], 2, ".", ",");?> / ea</p>
 				<button class="cartButton" onclick='addToCart("<?php echo $name;?>")'>Add to cart</button>
 			</div>
-			
+
 			<?php
 				}
 			?>
@@ -52,22 +52,22 @@ $conn->close();
 	<body class="shopBody">
 		<h1 id="shopMoreTitle">Shop More</h1>
 		<div id="shopMoreContainer">
-			<div class="shopMore"> 
+			<div class="shopMore">
 				<img src="../aisleImages/produce.png" class="aisleImage">
 				<br>
-				<button class="aisleButton">Vegitables</button>
+				<button class="aisleButton">Vegetables</button>
 			</div>
-			<div class="shopMore"> 
+			<div class="shopMore">
 				<img src="../aisleImages/fruit.png" class="aisleImage">
 				<br>
 				<button class="aisleButton">Fruit</button>
 			</div>
-			<div class="shopMore"> 
+			<div class="shopMore">
 				<img src="../aisleImages/meat.png" class="aisleImage">
 				<br>
 				<button class="aisleButton">Meat</button>
 			</div>
-			<div class="shopMore"> 
+			<div class="shopMore">
 				<img src="../aisleImages/dairy.png" class="aisleImage">
 				<br>
 				<button class="aisleButton">Dairy</button>
@@ -85,7 +85,7 @@ $conn->close();
 		<div id="items">
 			<div class="cartItemContainer" id="cartItemContainer">
 			</div>
-		</div>	
+		</div>
 	</div>
 
 	<script>
@@ -145,18 +145,18 @@ $conn->close();
 			cart = JSON.parse(obj);
 			renderCart(cart);
 		}
-		
+
 		function postCart(cart) {
 			var req = new XMLHttpRequest(); //new request
 			req.open("POST", "handler/postCart.php", true); //sending as POST
-			req.send(JSON.stringify(cart)); //send cart 
+			req.send(JSON.stringify(cart)); //send cart
 		}
 
 		function getCart() {
 			var req = new XMLHttpRequest(); //new request
 			req.onload = function() {
 				setCart(this.responseText); //set cart to saved cart
-			};			
+			};
 			req.open("get", "handler/getCart.php", true); //send as GET
 			req.send(); //send req
 		}
@@ -246,7 +246,7 @@ $conn->close();
 			//render
 			renderCart(cart);
 		}
-		
+
 		function decrement(name){
 			try{
 				nameID = name.item(0).id;
@@ -275,7 +275,7 @@ $conn->close();
 			//render
 			renderCart(cart);
 		}
-	</script> 
+	</script>
 
 	<style>
 		a:link {color: black; text-align: center; font-family: Arial, Helvetica, sans-serif;}
