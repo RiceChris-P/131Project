@@ -2,8 +2,13 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
+<<<<<<< HEAD
 -- Host: 127.0.0.1
 -- Generation Time: Nov 18, 2022 at 07:58 AM
+=======
+-- Host: localhost
+-- Generation Time: Nov 22, 2022 at 03:18 AM
+>>>>>>> 677084c (BIG cart update, hopefully complete)
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -41,16 +46,17 @@ CREATE TABLE `accounts` (
   `nameOnCard` varchar(255) DEFAULT NULL,
   `cardNum` bigint(16) DEFAULT NULL,
   `cardExp` varchar(5) DEFAULT NULL,
-  `cardCVV` smallint(4) DEFAULT NULL
+  `cardCVV` smallint(4) DEFAULT NULL,
+  `cart` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '[]'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `accounts`
 --
 
-INSERT INTO `accounts` (`fname`, `lastName`, `email`, `password`, `phonenumber`, `address`, `aptOrSuite`, `state`, `city`, `zipCode`, `nameOnCard`, `cardNum`, `cardExp`, `cardCVV`) VALUES
-('John', 'Doe', 'JohnDoe@gmail.com', 'Doe123', 1111111111, '200 California St.', 0, 'CA', 'San Francisco', 94134, 'John Doe', 1234567891234567, '11/22', 1111),
-('Jane', 'Doe', 'JaneDoe@gmail.com', 'JaneDoe123', 9999999999, '10 7th St.', 2, 'CA', 'San Jose', 99999, 'Jane Doe', 9999999999999999, '99/99', 9999);
+INSERT INTO `accounts` (`fname`, `lastName`, `email`, `password`, `phonenumber`, `address`, `aptOrSuite`, `state`, `city`, `zipCode`, `nameOnCard`, `cardNum`, `cardExp`, `cardCVV`, `cart`) VALUES
+('John', 'Doe', 'JohnDoe@gmail.com', 'Doe123', 1111111111, '200 California St.', 0, 'CA', 'San Francisco', 94134, 'John Doe', 1234567891234567, '11/22', 1111, '[]'),
+('Jane', 'Doe', 'JaneDoe@gmail.com', 'JaneDoe123', 9999999999, '10 7th St.', 2, 'CA', 'San Jose', 99999, 'Jane Doe', 9999999999999999, '99/99', 9999, '[]');
 
 -- --------------------------------------------------------
 

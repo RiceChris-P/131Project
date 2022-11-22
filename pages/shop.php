@@ -1,6 +1,7 @@
 <?php
 //include navbar
 include("navbar.php");
+
 //Connect to local database
 $conn = mysqli_connect("localhost","root", "","cmpe131");
 
@@ -88,13 +89,14 @@ $conn->close();
 	</div>
 
 	<script>
+		//get stock from db
 		var myArr;
-		var oReq = new XMLHttpRequest(); // New request object
-		oReq.onload = function() {
+		var req = new XMLHttpRequest(); //new request
+		req.onload = function() {
 			myArr = JSON.parse(this.responseText);
 		};
-		oReq.open("get", "db.php", true);
-		oReq.send();
+		req.open("get", "handler/getStock.php", true);
+		req.send();
 
 		//global vars
 		let total = 0.00;
@@ -110,78 +112,78 @@ $conn->close();
 				}
 			})
 
-			//check if product is in cart
-			let object = cart.find(x => x.prod === product)
-			if(object) {
-				//product in cart, incremenet count and rerender total for item
-				let index = cart.indexOf(object);
-				cart.fill(object.count=object.count + 1, index, index++);
-				modifyProd(product, object.count);
-			} else {
-				//product not in cart, add to cart and render
+			//find product in cart
+			var exists = false;
+			cart.forEach(item => {
+				//if in cart, increment
+				if(item.prod.Name == product.Name) {
+					item.count++;
+					exists = true;
+				}
+			})
+			//if not in cart, create new obj and add to cart
+			if(!exists) {
 				let temp = {prod: product, count: 1};
 				cart.push(temp);
-				renderNewProd(product);
 			}
-			console.log(cart);
+			//render
+			renderCart(cart);
 		}
 
-		function renderNewProd(product) {
-			total += parseFloat(product.Price);
-			document.getElementById("cartPreviewText").innerHTML = "$"+total.toFixed(2);
+		//save cart on window exit
+		window.onbeforeunload = function(){
+			postCart(cart);
+		}
 
+		//restore cart on page load
+		window.onload = function() {
+			getCart();
+		}
+
+		//set cart to saved cart
+		function setCart(obj) {
+			cart = JSON.parse(obj);
+			renderCart(cart);
+		}
+		
+		function postCart(cart) {
+			var req = new XMLHttpRequest(); //new request
+			req.open("POST", "handler/postCart.php", true); //sending as POST
+			req.send(JSON.stringify(cart)); //send cart 
+		}
+
+		function getCart() {
+			var req = new XMLHttpRequest(); //new request
+			req.onload = function() {
+				setCart(this.responseText); //set cart to saved cart
+			};			
+			req.open("get", "handler/getCart.php", true); //send as GET
+			req.send(); //send req
+		}
+
+		function renderCart(cart) {
+			total = 0;
+			document.getElementById("items").innerHTML = null;
+			cart.forEach(item => {
+				total += item.count * item.prod.Price;
+				renderObject(item.prod, item.count);
+			})
+			document.getElementById("cartPreviewText").innerHTML = "$"+total.toFixed(2);
+		}
+
+		function renderObject(product, count) {
+			var productTotal = product.Price * count;
+			productTotal = productTotal.toFixed(2)
 			var image = '<img src="../itemImages/'+product.Image+'" class="cartImage">'
 			var description = '<div class="cartProduct"> <p style="margin-bottom:0; margin-top: 40%;">'+product.Name+'</p> <p style="margin-top:0; font-size:14px;">$'+product.Price+' / ea</p></div>'
-			var rightSide = '<div class="rightCartContainer"><p class="cartPrice" style="margin-bottom: 0">$'+product.Price+'</p><div class="addsubButton"><button class="addButton" onclick="decrement('+product.Name+')">-</button><input class="amountField" id="test" type="text" min="1" max="99" value="1"><button class="subButton" onclick="increment('+product.Name+')">+</button></div><button class="removeCart" onclick="removeFromCart('+product.Name+')">Remove</button></div>'
+			var rightSide = '<div class="rightCartContainer"><p class="cartPrice" style="margin-bottom: 0">$'+productTotal+'</p><div class="addsubButton"><button class="addButton" onclick="decrement('+product.Name+')">-</button><input class="amountField" id="test" type="text" min="1" max="99" value="1"><button class="subButton" onclick="increment('+product.Name+')">+</button></div><button class="removeCart" onclick="removeFromCart('+product.Name+')">Remove</button></div>'
 			var element = '<div class="cartItemContainer" id='+product.Name+'>'+image + description + rightSide+'</div>';
 			document.getElementById("items").innerHTML = document.getElementById("items").innerHTML +  element;
 			var cart = document.getElementById("cart");
 			if (cart.style.visibility === "hidden") {
 				cart.style.visibility = "visible";
 			}
-
 		}
-
-		function modifyProd(product, count) {
-			total += parseFloat(product.Price);
-			document.getElementById("cartPreviewText").innerHTML = "$"+total.toFixed(2);
-
-			let productTotal = product.Price * count;
-			var image = '<img src="../itemImages/'+product.Image+'" class="cartImage">'
-			var description = '<div class="cartProduct"> <p style="margin-bottom:0; margin-top: 40%;">'+product.Name+'</p> <p style="margin-top:0; font-size:14px;">$'+product.Price+' / ea</p></div>'
-			var rightSide = '<div class="rightCartContainer"><p class="cartPrice" style="margin-bottom: 0">$'+productTotal.toFixed(2)+'</p><div class="addsubButton"><button class="addButton" onclick="decrement('+product.Name+')">-</button><input class="amountField" id="test" type="text" min="1" max="99" value="1"><button class="subButton" onclick="increment('+product.Name+')">+</button></div><button class="removeCart" onclick="removeFromCart('+product.Name+')">Remove</button></div>'
-			var element = '<div class="cartItemContainer" id='+product.Name+'>'+image + description + rightSide+'</div>';
-			document.getElementById(product.Name).innerHTML = element;
-			var cart = document.getElementById("cart");
-			if (cart.style.visibility === "hidden") {
-				cart.style.visibility = "visible";
-			} 
-		}
-
-		function decrementProd(product, count) {
-			total -= parseFloat(product.Price);
-			document.getElementById("cartPreviewText").innerHTML = "$"+total.toFixed(2);
-
-			let productTotal = product.Price * count;
-			var image = '<img src="../itemImages/'+product.Image+'" class="cartImage">'
-			var description = '<div class="cartProduct"> <p style="margin-bottom:0; margin-top: 40%;">'+product.Name+'</p> <p style="margin-top:0; font-size:14px;">$'+product.Price+' / ea</p></div>'
-			var rightSide = '<div class="rightCartContainer"><p class="cartPrice" style="margin-bottom: 0">$'+productTotal.toFixed(2)+'</p><div class="addsubButton"><button class="addButton" onclick="decrement('+product.Name+')">-</button><input class="amountField" id="test" type="text" min="1" max="99" value="1"><button class="subButton" onclick="increment('+product.Name+')">+</button></div><button class="removeCart" onclick="removeFromCart('+product.Name+')">Remove</button></div>'
-			var element = '<div class="cartItemContainer" id='+product.Name+'>'+image + description + rightSide+'</div>';
-			document.getElementById(product.Name).innerHTML = element;
-			var cart = document.getElementById("cart");
-			if (cart.style.visibility === "hidden") {
-				cart.style.visibility = "visible";
-			} 
-		}
-
-		function removeProd(product, count) {
-			total -= parseFloat(product.Price * count);
-			document.getElementById("cartPreviewText").innerHTML = "$"+total.toFixed(2);
-			
-			document.getElementById(product.Name).innerHTML = null;
-			
-		}
-
 
 		function showCart() {
 			var cart = document.getElementById("cart");
@@ -193,6 +195,7 @@ $conn->close();
 		}
 
 		function removeFromCart(name){
+			//get item name from html
 			try{
 				name = name.item(0).id;
 			} catch {
@@ -206,16 +209,20 @@ $conn->close();
 					product = item;
 				}
 			})
-			//find product in cart
-			let object = cart.find(x => x.prod === product)
-			if(object) {
-				cart.pop(object);
-				removeProd(product, object.count);
-			}
-			//console.log(cart);
+
+			//find in cart
+			cart.forEach(item => {
+				if(item.prod.Name == product.Name) {
+					//remove
+					cart.pop(item);
+				}
+			})
+			//render
+			renderCart(cart);
 		}
 
 		function increment(name){
+			//get name from html
 			try{
 				name = name.item(0).id;
 			} catch {
@@ -228,9 +235,16 @@ $conn->close();
 					product = item;
 				}
 			})
-			let object = cart.find(x => x.prod === product)
-			object.count++;
-			modifyProd(product, object.count);
+
+			//find in cart
+			cart.forEach(item => {
+				if(item.prod.Name == product.Name) {
+					//increment
+					item.count++;
+				}
+			})
+			//render
+			renderCart(cart);
 		}
 		
 		function decrement(name){
@@ -246,14 +260,21 @@ $conn->close();
 					product = item;
 				}
 			})
-			let object = cart.find(x => x.prod === product)
-			object.count--;
-			if(object.count == 0) {
-				removeFromCart(name);
-			}
-			decrementProd(product, object.count);
-		}
 
+			//find in cart
+			cart.forEach(item => {
+				if(item.prod.Name == product.Name) {
+					//decrement
+					item.count--;
+					//if count is now 0, remove
+					if(item.count == 0) {
+						cart.pop(item);
+					}
+				}
+			})
+			//render
+			renderCart(cart);
+		}
 	</script> 
 
 	<style>
