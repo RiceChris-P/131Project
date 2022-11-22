@@ -64,8 +64,13 @@ INSERT INTO `items` (`Name`, `Price`, `Weight`, `Image`) VALUES
 ('Corn', 0.89, 0.375, 'corn.png'),
 ('Zucchini', 1, 0.5, 'zucchini.png'),
 ('Banana', 0.49, 0.5, 'banana.png'),
-('Watermelon', 5.79, 20, 'watermelon.png');
+('Watermelon', 5.79, 20, 'watermelon.png'),
 
+('Apple', , , ''),
+('Potato', , , ''),
+('Bread', , , ''),
+('Beef Ribeye', , , ''),
+;
 --
 -- Indexes for dumped tables
 --
