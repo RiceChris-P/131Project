@@ -2,13 +2,8 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
-<<<<<<< HEAD
--- Host: 127.0.0.1
--- Generation Time: Nov 18, 2022 at 07:58 AM
-=======
 -- Host: localhost
 -- Generation Time: Nov 22, 2022 at 03:18 AM
->>>>>>> 677084c (BIG cart update, hopefully complete)
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -76,8 +71,6 @@ CREATE TABLE `items` (
 -- Dumping data for table `items`
 --
 
-<<<<<<< HEAD
-
 INSERT INTO `items` (`Name`, `Price`, `Weight`, `Image`, `Type`) VALUES
 ('Raspberry', 9.28, 1, 'raspberry.png', 'fruit'),
 ('Blueberry', 6.24, 1, 'blueberry.png', 'fruit'),
@@ -126,7 +119,6 @@ CREATE TABLE `orders` (
   `deliveryinfo` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`deliveryinfo`)),
   `paymentinfo` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`paymentinfo`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
->>>>>>> 2b6b34cf2ee65306d959ccffce581eff694cff5e
 
 
 --

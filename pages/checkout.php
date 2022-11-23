@@ -2,7 +2,107 @@
 
 <?php
     include("navbar.php");
-    
+
+    if(!isset($_SESSION['cart'])) {
+        header('Location: shop.php');
+    }
+
+    $cart = $_SESSION['cart'];
+    $_SESSION['totalitemcost'] = (double) 0;
+    $_SESSION['totalweight'] = (double) 0;
+    $_SESSION['totalcost'] = (double) 0;
+    $_SESSION['weightfee'] =  (double) 0;
+
+    function cartDis() {
+        echo '<script>console.log("Cart Displaying...!")</script>';
+
+        function itemDis($name, $price, $weight, $image, $quantity) {
+            echo '<script>console.log("Item Displaying...!")</script>';
+
+            echo <<<HTML
+                <div class="cartCheckOutItem">
+                    <div class="cartCheckoutItemIMGContainer">
+                        <img src="../itemImages/$image" alt="" class="cartCheckOutItemIMG">
+                    </div>
+                    <div class="cartCheckOutItemDesc">
+                        <h3>$name</h3>
+                        <p>
+                            Quantity: $quantity <br>
+                            Price: $$price <br>
+                            Weight: $weight lbs<br>
+                        </p>
+                    </div>
+                </div>
+            HTML;
+        }
+
+        function costCalc($tic, $tw, $wf, $tc) {
+            echo '<script>console.log("Calculating costs...!")</script>';
+
+            echo <<<HTML
+                <div class="cartCheckOutCosts">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h3>Total Weight</h3>
+                                    <p>$tw lbs</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>Subtotal</h3>
+                                    <p>$$tic</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>Weight Fee</h3>
+                                    <p>$$wf</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>Total</h3>
+                                    <p>$$tc</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            HTML;
+        }
+
+        $cartarr = json_decode($_SESSION['cart'], true);
+
+        for($x = 0; $x < count($cartarr); $x ++) {
+            $n = $cartarr[$x]["prod"]["Name"];
+            $p = $cartarr[$x]["prod"]["Price"];
+            $w = $cartarr[$x]["prod"]["Weight"];
+            $i = $cartarr[$x]["prod"]["Image"];
+            $t = $cartarr[$x]["prod"]["Type"];
+            $q = $cartarr[$x]["count"];
+
+            $_SESSION['totalitemcost'] += (((double) $p) * ((double) $q));
+            $_SESSION['totalweight'] += (((double) $w) * ((double) $q));
+
+            itemDis($n, $p, $w, $i, $q);
+
+            echo '<script>console.log("Item Displayed!")</script>';
+        }
+
+        if($_SESSION['totalweight'] >= 20) {
+            $_SESSION['weightfee'] += (double) 5;
+        }
+
+        $_SESSION['totalcost'] = $_SESSION['totalitemcost'] + $_SESSION['totalweight'];
+
+        costCalc($_SESSION['totalitemcost'], $_SESSION['totalweight'], $_SESSION['weightfee'], $_SESSION['totalcost']);
+
+        echo '<script>console.log("Costs displayed!")</script>';
+        echo '<script>console.log("Cart Displayed!")</script>';
+    }
+
     $conn = mysqli_connect("localhost", "root", "", "cmpe131");
 
     if(!$conn){
@@ -172,6 +272,13 @@
             echo '<script>console.log("JSON objects created!")';
         }
 
+        //Session Order Info
+        $items = $_SESSION['cart']; //Need to fix because it is only inserting 0
+        $costofitems = $_SESSION['totalitemcost'];
+        $totalweight = $_SESSION['totalweight'];
+        $weightfee = $_SESSION['weightfee'];
+        $totalcost = $_SESSTION['totalcost'];
+
         //Creating Account and Sending Order
         if($createAccount && $formSuccess) {
             echo '<script>console.log("Creating Account...")</script>';
@@ -210,24 +317,36 @@
                     }
 
                     echo '<script>console.log("Sending values into tables of database!")</script>';
-                    $queryThree = "INSERT INTO accounts (fname, lastName, email, password, phonenumber, address, aptOrSuite, state, city, zipCode, nameOnCard, cardNum, cardExp, cardCVV)
-                                                 VALUES('$firstName','$lastName', '$email', '$password', '$phone', '$address', '$aptsuiteetc', '$state', '$city', '$zip','$cardname', '$cardnum', '$cardexp', '$cardcvv');";
-                    $queryFour = "INSERT INTO orders (ordernum, email, contactinfo, deliveryinfo, paymentinfo) VALUES ('$orderNum', '$email', '$contact', '$delivery', '$payment');";
+                    $queryThree = "INSERT INTO accounts (fname, lastName, email, password, phonenumber, address, aptOrSuite, state, city, zipCode, nameOnCard, cardNum, cardExp, cardCVV, cart)
+                                                 VALUES('$firstName','$lastName', '$email', '$password', '$phone', '$address', '$aptsuiteetc', '$state', '$city', '$zip','$cardname', '$cardnum', '$cardexp', '$cardcvv', '$items');";
+                    $queryFour = "INSERT INTO orders (ordernum, items, costofitems, totalweight, weightfee, totalcost, email, contactinfo, deliveryinfo, paymentinfo) 
+                                              VALUES ('$orderNum', '$items', '$costofitems', '$totalweight', '$weightfee', '$totalcost', '$email','$contact', '$delivery', '$payment');";
 
                     $resultThree = mysqli_query($conn, $queryThree);
                     $resultFour = mysqli_query($conn, $queryFour);
 
                     if($resultThree) {
                         echo '<script>console.log("Account created!")</script>';
-                        $_SESSION['login'] = true;
+                        $_SESSION['login'] = $email;
                     }
 
                     if($resultFour) {
                         echo '<script>console.log("Order sent!")</script>';
                         $_SESSION['ordernum'] = $orderNum;
-                        $_SESSION['ordertotal'] = (double) 100.00; //Implement later
+                        $_SESSION['ordertotal'] = $totalcost;
                         $_SESSION['email'] = $email;
                         $_SESSION['orderdate'] = date('m/d/Y');
+
+                        //Order Successful, so erases kept cart
+                        $newCart = json_encode (new stdClass);
+                        $queryFive = "UPDATE accounts SET cart = '$newCart' WHERE email = '$email';";
+                        $resultFive = mysqli_query($conn, $queryFive);
+
+                        //Checks if query is successful
+                        if($resultFive) {
+                            echo '<script>console.log("Cart updated!")</script>';
+                        }
+
                         header('Location: order.php');
                     }
                 }
@@ -274,7 +393,8 @@
                }
 
                echo '<script>console.log("Sending values into table of database!")</script>';
-               $queryThree = "INSERT INTO orders (ordernum, email, contactinfo, deliveryinfo, paymentinfo) VALUES ('$orderNum', '$email', '$contact', '$delivery', '$payment');";
+               $queryThree = "INSERT INTO orders (ordernum, items, costofitems, totalweight, weightfee, totalcost, email, contactinfo, deliveryinfo, paymentinfo) 
+                                          VALUES ('$orderNum', '$items', '$costofitems', '$totalweight', '$weightfee', '$totalcost', '$email','$contact', '$delivery', '$payment');";
                $resultThree = mysqli_query($conn, $queryThree);
 
                if($resultThree) {
@@ -366,8 +486,11 @@
             </div>
 
             <div class="cartInCheckOut">
-                <div class="cart">
-                    <h2>Cart</h2>
+                <h2>Cart</h2>
+                <div class="cartCheckout">
+                    <div class="cartCheckOutItemContainer">
+                        <?php cartDis() ?>
+                    </div>
                 </div>
             </div>
         </div>

@@ -30,7 +30,7 @@
 				</button>
 			</li>
 
-			<?php if($num==true){$fname = $temp["fname"];	?>
+			<?php if($num==true && $temp != null){$fname = $temp["fname"];	?>
 				<div class="dropdown">
 					<button class="dropdownbtn"><?php echo $fname;?></button>
 						<div class="dropdownmenu">

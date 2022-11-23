@@ -52,26 +52,41 @@ $conn->close();
 	<body class="shopBody">
 		<h1 id="shopMoreTitle">Shop More</h1>
 		<div id="shopMoreContainer">
-			<div class="shopMore">
-				<img src="../aisleImages/produce.png" class="aisleImage">
-				<br>
-				<button class="aisleButton">Vegetables</button>
-			</div>
-			<div class="shopMore">
-				<img src="../aisleImages/fruit.png" class="aisleImage">
-				<br>
-				<button class="aisleButton">Fruit</button>
-			</div>
-			<div class="shopMore">
-				<img src="../aisleImages/meat.png" class="aisleImage">
-				<br>
-				<button class="aisleButton">Meat</button>
-			</div>
-			<div class="shopMore">
-				<img src="../aisleImages/dairy.png" class="aisleImage">
-				<br>
-				<button class="aisleButton">Dairy</button>
-			</div>
+			<a href="dairy.php">
+				<div class="shopMore">
+					<img src="../aisleImages/dairy.png" class="aisleImage">
+					<br>
+					<button class="aisleButton">Dairy</button>
+				</div>
+			</a>
+			<a href="fruit.php">
+				<div class="shopMore">
+					<img src="../aisleImages/fruit.png" class="aisleImage">
+					<br>
+					<button class="aisleButton">Fruit</button>
+				</div>
+			</a>
+			<a href="vegetable.php">
+				<div class="shopMore">
+					<img src="../aisleImages/produce.png" class="aisleImage">
+					<br>
+					<button class="aisleButton">Vegetables</button>
+				</div>
+			</a>
+			<a href="meat.php">
+				<div class="shopMore">
+					<img src="../aisleImages/meat.png" class="aisleImage">
+					<br>
+					<button class="aisleButton">Meat</button>
+				</div>
+			</a>
+			<a href="seafood.php">
+				<div class="shopMore">
+					<img src="../aisleImages/seafood.png" class="aisleImage">
+					<br>
+					<button class="aisleButton">Seafood</button>
+				</div>
+			</a>
 		</div>
 	</body>
 
@@ -85,6 +100,14 @@ $conn->close();
 		<div id="items">
 			<div class="cartItemContainer" id="cartItemContainer">
 			</div>
+		</div>
+
+		<div id="checkout" class="checkout">
+				<button id="checkoutbtn" class="checkoutbtn">
+					<a href="checkout.php" class="checkoutlink">
+						Checkout
+					</a>
+				</button>
 		</div>
 	</div>
 
@@ -169,6 +192,17 @@ $conn->close();
 				renderObject(item.prod, item.count);
 			})
 			document.getElementById("cartPreviewText").innerHTML = "$"+total.toFixed(2);
+
+			console.log(cart);
+
+			if(cart.length > 0) {
+				document.getElementById("checkoutbtn").style.visibility = "visible";
+				console.log("Cart is filled!");
+			}
+			else {
+				document.getElementById("checkoutbtn").style.visibility = "hidden";
+				console.log("Cart is empty!");
+			}
 		}
 
 		function renderObject(product, count) {
@@ -179,18 +213,25 @@ $conn->close();
 			var rightSide = '<div class="rightCartContainer"><p class="cartPrice" style="margin-bottom: 0">$'+productTotal+'</p><div class="addsubButton"><button class="addButton" onclick="decrement('+product.Name+')">-</button><input class="amountField" id="test" type="text" min="1" max="99" value="1"><button class="subButton" onclick="increment('+product.Name+')">+</button></div><button class="removeCart" onclick="removeFromCart('+product.Name+')">Remove</button></div>'
 			var element = '<div class="cartItemContainer" id='+product.Name+'>'+image + description + rightSide+'</div>';
 			document.getElementById("items").innerHTML = document.getElementById("items").innerHTML +  element;
-			var cart = document.getElementById("cart");
-			if (cart.style.visibility === "hidden") {
-				cart.style.visibility = "visible";
+			var cartDisplay = document.getElementById("cart");
+			if (cartDisplay.style.visibility === "hidden") {
+				cartDisplay.style.visibility = "visible";
 			}
 		}
 
 		function showCart() {
-			var cart = document.getElementById("cart");
-			if (cart.style.visibility === "hidden") {
-				cart.style.visibility = "visible";
+			var length = cart.length;
+			var cartDisplay = document.getElementById("cart");
+			var checkout = document.getElementById("checkoutbtn");
+			if (cartDisplay.style.visibility === "hidden") {
+				cartDisplay.style.visibility = "visible";
 			} else {
-				cart.style.visibility = "hidden";
+				cartDisplay.style.visibility = "hidden";
+			}
+			if (checkout.style.visibility === "hidden" && length > 0) {
+				checkout.style.visibility = "visible";
+			} else {
+				checkout.style.visibility = "hidden";
 			}
 		}
 

@@ -1,15 +1,9 @@
 <?php
     include("navbar.php");
 
-    // if(!isSet($_SESSION['login']) or !isSet($_SESSION['ordernum'])){
-    //     header('Location: index.php');
-    // }
-
-    $_SESSION['ordernum'] = "12345678901234567890";
-    $_SESSION['ordertotal'] = 100.00; //Implement later
-    $_SESSION['email'] = "test@gmail.com";
-    $_SESSION['orderdate'] = date('m/d/Y');
-    $_SESSION['expecteddelivery'] = date('m/d/Y', strtotime('+3 days'));
+    if(!isSet($_SESSION['login']) or !isSet($_SESSION['ordernum'])){
+        header('Location: index.php');
+    }
 ?>
 
 <!DOCTYPE>
