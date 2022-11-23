@@ -2,18 +2,17 @@
 
 <?php
     include("navbar.php");
+    include("handler/getCartStats.php");
 
-    if(!isset($_SESSION['cart'])) {
+    $arr = json_decode($_SESSION['cart'], true);
+    $empty = empty($arr);
+
+    if($empty) {
         header('Location: shop.php');
     }
 
-    $cart = $_SESSION['cart'];
-    $_SESSION['totalitemcost'] = (double) 0;
-    $_SESSION['totalweight'] = (double) 0;
-    $_SESSION['totalcost'] = (double) 0;
-    $_SESSION['weightfee'] =  (double) 0;
-
     function cartDis() {
+
         echo '<script>console.log("Cart Displaying...!")</script>';
 
         function itemDis($name, $price, $weight, $image, $quantity) {
@@ -95,7 +94,7 @@
             $_SESSION['weightfee'] += (double) 5;
         }
 
-        $_SESSION['totalcost'] = $_SESSION['totalitemcost'] + $_SESSION['totalweight'];
+        $_SESSION['totalcost'] = $_SESSION['totalitemcost'] + $_SESSION['weightfee'];
 
         costCalc($_SESSION['totalitemcost'], $_SESSION['totalweight'], $_SESSION['weightfee'], $_SESSION['totalcost']);
 
@@ -144,6 +143,14 @@
         $cardnum = $_POST['cardnum'];
         $cardexp = $_POST['cardexp'];
         $cardcvv = $_POST['cardcvv'];
+
+        //Cart Stat Info
+        $items = $_SESSION['cart'];
+        $costofitems = $_SESSION['totalitemcost'];
+        $totalcost = $_SESSION['totalitemcost'];
+        $totalweight = $_SESSION['totalweight'];
+        $totalcost = $_SESSION['totalcost'];
+        $weightfee = $_SESSION['weightfee'];
 
         if($firstName != null && $lastName != null && $email != null && $phone != null) {
             $passPhone = false;
@@ -272,13 +279,6 @@
             echo '<script>console.log("JSON objects created!")';
         }
 
-        //Session Order Info
-        $items = $_SESSION['cart']; //Need to fix because it is only inserting 0
-        $costofitems = $_SESSION['totalitemcost'];
-        $totalweight = $_SESSION['totalweight'];
-        $weightfee = $_SESSION['weightfee'];
-        $totalcost = $_SESSTION['totalcost'];
-
         //Creating Account and Sending Order
         if($createAccount && $formSuccess) {
             echo '<script>console.log("Creating Account...")</script>';
@@ -336,6 +336,7 @@
                         $_SESSION['ordertotal'] = $totalcost;
                         $_SESSION['email'] = $email;
                         $_SESSION['orderdate'] = date('m/d/Y');
+                        $_SESSION['expecteddelivery'] = date('m/d/Y', strtotime('+3 days'));
 
                         //Order Successful, so erases kept cart
                         $newCart = json_encode (new stdClass);
