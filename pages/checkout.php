@@ -2,7 +2,7 @@
 
 <?php
     include("navbar.php");
-    include("handler/getCartStats.php");
+    include("handler/setCartSession.php");
 
     $arr = json_decode($_SESSION['cart'], true);
     $empty = empty($arr);
@@ -11,66 +11,89 @@
         header('Location: shop.php');
     }
 
-    function cartDis() {
+    function calculateCartPrices() {
+        $totalcost = 0;
+        $totalweight = 0;
+        $weightfee = 0;
+        $subtotal = 0;
+        $cartarr = json_decode($_SESSION['cart'], true);
 
-        echo '<script>console.log("Cart Displaying...!")</script>';
-
-        function itemDis($name, $price, $weight, $image, $quantity) {
-            echo '<script>console.log("Item Displaying...!")</script>';
-
-            echo <<<HTML
-                <div class="cartCheckOutItem">
-                    <div class="cartCheckoutItemIMGContainer">
-                        <img src="../itemImages/$image" alt="" class="cartCheckOutItemIMG">
-                    </div>
-                    <div class="cartCheckOutItemDesc">
-                        <h3>$name</h3>
-                        <p>
-                            Quantity: $quantity <br>
-                            Price: $$price <br>
-                            Weight: $weight lbs<br>
-                        </p>
-                    </div>
-                </div>
-            HTML;
+        for($x = 0; $x < count($cartarr); $x ++) {
+            $subtotal += (((double) $cartarr[$x]["prod"]["Price"]) * ((double) $cartarr[$x]["count"]));
+            $totalweight += (((double) $cartarr[$x]["prod"]["Weight"]) * ((double) $cartarr[$x]["count"]));
         }
 
-        function costCalc($tic, $tw, $wf, $tc) {
-            echo '<script>console.log("Calculating costs...!")</script>';
-
-            echo <<<HTML
-                <div class="cartCheckOutCosts">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <h3>Total Weight</h3>
-                                    <p>$tw lbs</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h3>Subtotal</h3>
-                                    <p>$$tic</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h3>Weight Fee</h3>
-                                    <p>$$wf</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h3>Total</h3>
-                                    <p>$$tc</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            HTML;
+        if($totalweight >= 20) {
+            $weightfee += (double) 5;
         }
+
+        $totalcost = $subtotal + $weightfee;
+
+        $priceArray = array(
+            "subtotal" => (double) $subtotal,
+            "totalweight" => (double) $totalweight,
+            "weightfee" => (double) $weightfee,
+            "totalcost" => (double) $totalcost,
+        );
+
+        return $priceArray;
+    }
+
+    function itemDisplay($name, $price, $weight, $image, $quantity) {
+        echo <<<HTML
+            <div class="cartCheckOutItem">
+                <div class="cartCheckoutItemIMGContainer">
+                    <img src="../itemImages/$image" alt="" class="cartCheckOutItemIMG">
+                </div>
+                <div class="cartCheckOutItemDesc">
+                    <h3>$name</h3>
+                    <p>
+                        Quantity: $quantity <br>
+                        Price: $$price <br>
+                        Weight: $weight lbs<br>
+                    </p>
+                </div>
+            </div>
+        HTML;
+    }
+
+    function costStats($tic, $tw, $wf, $tc) {
+        echo <<<HTML
+            <div class="cartCheckOutCosts">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h3>Total Weight</h3>
+                                <p>$tw lbs</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3>Subtotal</h3>
+                                <p>$$tic</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3>Weight Fee</h3>
+                                <p>$$wf</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3>Total</h3>
+                                <p>$$tc</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        HTML;
+    }
+
+    function displayCartPrices() {
+        $statArray = calculateCartPrices();
 
         $cartarr = json_decode($_SESSION['cart'], true);
 
@@ -82,24 +105,10 @@
             $t = $cartarr[$x]["prod"]["Type"];
             $q = $cartarr[$x]["count"];
 
-            $_SESSION['totalitemcost'] += (((double) $p) * ((double) $q));
-            $_SESSION['totalweight'] += (((double) $w) * ((double) $q));
-
-            itemDis($n, $p, $w, $i, $q);
-
-            echo '<script>console.log("Item Displayed!")</script>';
+            itemDisplay($n, $p, $w, $i, $q);
         }
 
-        if($_SESSION['totalweight'] >= 20) {
-            $_SESSION['weightfee'] += (double) 5;
-        }
-
-        $_SESSION['totalcost'] = $_SESSION['totalitemcost'] + $_SESSION['weightfee'];
-
-        costCalc($_SESSION['totalitemcost'], $_SESSION['totalweight'], $_SESSION['weightfee'], $_SESSION['totalcost']);
-
-        echo '<script>console.log("Costs displayed!")</script>';
-        echo '<script>console.log("Cart Displayed!")</script>';
+        costStats($statArray['subtotal'], $statArray['totalweight'], $statArray['weightfee'], $statArray['totalcost']);
     }
 
     $conn = mysqli_connect("localhost", "root", "", "cmpe131");
@@ -146,11 +155,15 @@
 
         //Cart Stat Info
         $items = $_SESSION['cart'];
-        $costofitems = $_SESSION['totalitemcost'];
-        $totalcost = $_SESSION['totalitemcost'];
-        $totalweight = $_SESSION['totalweight'];
-        $totalcost = $_SESSION['totalcost'];
-        $weightfee = $_SESSION['weightfee'];
+        $cartStatArr = calculateCartPrices();
+        $subtotal = $cartStatArr['subtotal'];
+        $totalweight = $cartStatArr['totalweight'];
+        $weightfee = $cartStatArr['weightfee'];
+        $totalcost = $cartStatArr['totalcost'];
+        $_SESSION['subtotal'] = $subtotal;
+        $_SESSION['totalweight'] = $totalweight;
+        $_SESSION['totalcost'] = $totalcost;
+        $_SESSION['weightfee'] = $weightfee;
 
         if($firstName != null && $lastName != null && $email != null && $phone != null) {
             $passPhone = false;
@@ -319,8 +332,8 @@
                     echo '<script>console.log("Sending values into tables of database!")</script>';
                     $queryThree = "INSERT INTO accounts (fname, lastName, email, password, phonenumber, address, aptOrSuite, state, city, zipCode, nameOnCard, cardNum, cardExp, cardCVV, cart)
                                                  VALUES('$firstName','$lastName', '$email', '$password', '$phone', '$address', '$aptsuiteetc', '$state', '$city', '$zip','$cardname', '$cardnum', '$cardexp', '$cardcvv', '$items');";
-                    $queryFour = "INSERT INTO orders (ordernum, items, costofitems, totalweight, weightfee, totalcost, email, contactinfo, deliveryinfo, paymentinfo) 
-                                              VALUES ('$orderNum', '$items', '$costofitems', '$totalweight', '$weightfee', '$totalcost', '$email','$contact', '$delivery', '$payment');";
+                    $queryFour = "INSERT INTO orders (ordernum, items, subtotal, totalweight, weightfee, totalcost, email, contactinfo, deliveryinfo, paymentinfo) 
+                                              VALUES ('$orderNum', '$items', '$subtotal', '$totalweight', '$weightfee', '$totalcost', '$email','$contact', '$delivery', '$payment');";
 
                     $resultThree = mysqli_query($conn, $queryThree);
                     $resultFour = mysqli_query($conn, $queryFour);
@@ -394,8 +407,8 @@
                }
 
                echo '<script>console.log("Sending values into table of database!")</script>';
-               $queryThree = "INSERT INTO orders (ordernum, items, costofitems, totalweight, weightfee, totalcost, email, contactinfo, deliveryinfo, paymentinfo) 
-                                          VALUES ('$orderNum', '$items', '$costofitems', '$totalweight', '$weightfee', '$totalcost', '$email','$contact', '$delivery', '$payment');";
+               $queryThree = "INSERT INTO orders (ordernum, items, subtotal, totalweight, weightfee, totalcost, email, contactinfo, deliveryinfo, paymentinfo) 
+                                          VALUES ('$orderNum', '$items', '$subtotal', '$totalweight', '$weightfee', '$totalcost', '$email','$contact', '$delivery', '$payment');";
                $resultThree = mysqli_query($conn, $queryThree);
 
                if($resultThree) {
@@ -490,7 +503,7 @@
                 <h2>Cart</h2>
                 <div class="cartCheckout">
                     <div class="cartCheckOutItemContainer">
-                        <?php cartDis() ?>
+                        <?php displayCartPrices() ?>
                     </div>
                 </div>
             </div>

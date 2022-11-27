@@ -57,11 +57,12 @@
                     </tbody>
                 </table>
             </div>
-            <button><a href="shop.php">Shop More</a></button>
+            <button onclick="shopMore()">Shop More</button>
         </div>
     </body>
+    <script>
+        function shopMore() {
+            location.href = "shop.php";
+        }
+    </script>
 </html>
-
-<?php 
-    include("handler/resetSession.php");
-?>

@@ -129,7 +129,6 @@ CREATE TABLE `orders` (
 -- Indexes for table `accounts`
 --
 ALTER TABLE `accounts`
-  ADD UNIQUE KEY `phonenumber` (`phonenumber`),
   ADD UNIQUE KEY `email` (`email`);
 
 --

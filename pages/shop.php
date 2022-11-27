@@ -103,10 +103,8 @@ $conn->close();
 		</div>
 
 		<div id="checkout" class="checkout">
-				<button id="checkoutbtn" class="checkoutbtn">
-					<a href="checkout.php" class="checkoutlink">
-						Checkout
-					</a>
+				<button id="checkoutbtn" class="checkoutbtn" onclick="checkOut()">
+					Checkout
 				</button>
 		</div>
 	</div>
@@ -315,6 +313,10 @@ $conn->close();
 			})
 			//render
 			renderCart(cart);
+		}
+
+		function checkOut() {
+			location.href = "checkout.php";
 		}
 	</script>
 
