@@ -49,6 +49,25 @@
 			<li><a href="index.php">Home</a></li>
 		</ul>
 	</nav>
+	<!--Body for cart-->
+	<div class="cart" id="cart" style="visibility: hidden">
+		<div id="cartHeader">
+			<div id="cartHeaderProduct">Product</div>
+			<div id="cartHeaderTotal">Total</div>
+		</div>
+
+		<div id="items">
+			<div class="cartItemContainer" id="cartItemContainer">
+			</div>
+		</div>
+
+		<div id="checkout" class="checkout">
+				<button id="checkoutbtn" class="checkoutbtn" onclick="checkOut()">
+					Checkout
+				</button>
+		</div>
+	</div>
+	<script src="cart.js"></script>
 </html>
 
 <style>

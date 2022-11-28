@@ -63,7 +63,7 @@ $conn->close();
 				<div class="shopMore">
 					<img src="../aisleImages/fruit.png" class="aisleImage">
 					<br>
-					<button class="aisleButton">Fruit</button>
+					<button class="aisleButton">Fruits</button>
 				</div>
 			</a>
 			<a href="vegetable.php">

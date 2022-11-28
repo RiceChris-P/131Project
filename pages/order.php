@@ -44,20 +44,24 @@
                             <td>
                                 <h4>Email</h4>
                                 <?php 
-                                    echo $_SESSION['email'];
+                                    $email = $_SESSION['email'];
+                                    echo $email;
                                 ?>
                             </td>
                             <td>
                                 <h4>Expected delivery</h4>
                                 <?php 
                                     echo $_SESSION['expecteddelivery'];
+                                    session_destroy();
+                                    session_start();
+                                    $_SESSION['login'] = $email;
                                 ?>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <button onclick="shopMore()">Shop More</button>
+            <!-- <button onclick="shopMore()">Shop More</button> -->
         </div>
     </body>
     <script>

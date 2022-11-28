@@ -366,7 +366,7 @@
                 }
                 else {
                     echo '<script>alert("User exists! Please log in.")</script>';
-                    header('Location: login.php');
+                    header('Refresh: 0');
                 }
             }
             else {
