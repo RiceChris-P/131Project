@@ -16,7 +16,7 @@ include("navbar.php");
         //updateSqlValue(name of variable inside sql, new value from form)
         updateSqlValue("fname",$_POST['firstName']);
         updateSqlValue("lastName",$_POST['lastName']);
-        updateSqlValue("phone ",$_POST['phone']);
+        updateSqlValue("phonenumber",$_POST['phone']);
         updateSqlValue("address",$_POST['address']);
         updateSqlValue("aptOrSuite",$_POST['aptsuiteunit']);
         updateSqlValue("state",$_POST['state']);
