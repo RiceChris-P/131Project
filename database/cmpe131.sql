@@ -100,6 +100,14 @@ INSERT INTO `items` (`Name`, `Price`, `Weight`, `Image`, `Type`) VALUES
 ('Milk', 5.99, 8.34, 'milk.png', 'Dairy'),
 ('Cheese', 13.99, 2, 'cheese.png', 'Dairy'),
 ('Eggs', 15.99, 1.5, 'eggs.png', 'Dairy'),
+('12 Clams', 4.99, 3, 'clam.png', 'seafood'),
+('Dungeness Crab', 24.99, 2, 'dungenesscrab.png', 'seafood'),
+('King Crab', 99.99, 1, 'kingcrab.png', 'seafood'),
+('Lobster', 62.99, 2, 'lobster.png', 'seafood'),
+('Oyster', .75, .25, 'oyster.png', 'seafood'),
+('Pound of Shrimp', 9.99, 1, 'shrimp.png', 'seafood'),
+('seabass', 14.99, 2, 'seabass.png', 'seafood'),
+('Scallop', 1.00, .35, 'lobster.png', 'seafood'),
 ('Butter', 5.99, 1, 'butter.png', 'Dairy');
 -- --------------------------------------------------------
 
