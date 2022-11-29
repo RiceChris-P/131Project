@@ -2,14 +2,30 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: rgba(0,0,0,.1);
 }
+
+/* Nav Bar's style */
+.navBar {
+    background-color: #403BBF;
+    flex: 1 1 auto;
+    height: 15%;
+  }
+
+/* Logo's container's style */
+.logoElement {
+    margin-left: auto; /* First styling to fit the image to the center of the page */
+    margin-right: auto; /* Second styling to fit the image to the center of the page */
+    height: 100%;
+    width: fit-content;
+    padding: 2px;
+  }
 
 /* The logo's style */
 .logo {
-    display: block; /* Puts the image in a block and separated from the other elements in the body */
-    margin-left: auto; /* First styling to fit the image to the center of the page */
-    margin-right: auto; /* Second styling to fit the image to the center of the page */
-    width: 6%;
+    max-height: 100%;
+    max-width: 100%;
+    padding-left: 1%;
 }
 
 /* The first header's style */

@@ -1,63 +1,118 @@
+.navBar {
+  background-color: #403BBF;
+  flex: 1 1 auto;
+  height: 70px;
+}
+
 .navBar ul {
-    background-color: #403BBF;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    list-style-type: none;
+  background-color: #403BBF;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  list-style-type: none;
+  max-height: 100%;
+  max-width: 100%;
 }
 
-.navBar li {
-    display: block;
-    float: right;
-    padding: 1.5%;
-    margin: 0;
+.navLeft {
+  display: inline-flex;
+  float: left;
+  height: 100%;
+  width: fit-content;
 }
 
-.navBar li a {
-    display: block;
-    font-size: 20px;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-family:Arial, Helvetica, sans-serif;
+.navRight {
+  display: inline-flex;
+  float: right;
+  text-align: center;
+  height: 100%;
+  width: fit-content
+}
+
+.navElement {
+  display: inline-flex;
+  height: 70px;
+  width: fit-content;
+  padding: 2px;
+}
+
+.navElement:hover {
+  transform: scale(0.98);
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
+.navElement:active {
+  transform: scale(0.95);
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.5);
+}
+
+.navElementButton {
+  background-color: #403BBF;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: fit-content;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .navLogo {
-    height: auto;
-    width: auto;
-    max-height: 72px;
-    max-width: 250px;
-    padding-left: 1%;
+  max-height: 100%;
+  max-width: 100%;
+  padding-left: 1%;
 }
 
-.dropdown:hover .dropdownmenu {display: block;}
+.dropdown {
+	font-size: 20px;
+	text-align: center;
+  display: inline-flex;
+  margin: 0;
+}
 
 .dropdownmenu {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-  .dropdownmenu a{
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  .dropdownbtn{
-    background-color: #1704aa;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    size: 50%;
-    font-family: Arial, Helvetica, sans-serif;
-  }
+  background-color: white;
+  position: absolute;
+  top: 12.75%;
+  right: 0;
+  width: 25%;
+  height: fit-content; 
+  overflow: hidden; 
+}
 
+.dropdownmenu p {
+  margin: 0;
+}
+
+.dropdownmenu a{
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.dropdownbtn {
+  display: inline-flex;
+  overflow: hidden;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: fit-content;
+  background-color: #403BBF;
+  color: white;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+.dropdownmenu a:link {
+  color: black; 
+	font-family: Arial, Helvetica, sans-serif; 
+	text-align: center;
+}
+
+.accountIconIMG {
+  height: 100%;
+  width: 100%;
+}
 
 
 

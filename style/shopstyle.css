@@ -5,23 +5,13 @@
 .Arbostar®-4-hex { color: #04BF55; }
 .Arbostar®-5-hex { color: #F2F2F2; }
 
-
-h2{
-    text-align: center;
-    color:black;
-    font-size: 40px;
-    font-family: 'Inter';
-}
-
 p{
   text-align: center;
   color:black;
   font-size: 20px;
   font-family: 'Inter';
 }
-form{
-    text-align: center;
-}
+
 input{
     padding: 10px;
     margin: 10px auto;
@@ -34,6 +24,7 @@ input{
 .shopBody{
   background-color: rgba(0,0,0,.1);
   margin: 0px;
+  overflow: auto;
 }
 
 #suggestedItemsTitle, #shopMoreTitle{
@@ -56,9 +47,10 @@ input{
 }
 
 .suggestedItem{
+  display: block;
   background-color: white;
-  min-width: 175px;
-  height: 250px;
+  width: fit-content;
+  height: fit-content;
   text-align: center;
   border-radius: 5px;
   box-shadow: 4px 4px 2px 0 rgba(0,0,0,0.2) !important;
@@ -122,6 +114,21 @@ input{
 
 .cart {
   overflow: auto;
+}
+
+.cartButton {
+  font-size: 17px;
+  border-radius: 5px;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  background-color: #04BF55;
+  border-style: none;
+  margin-top: 2px;
+  width: 175px;
+  height: 45px;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 0;
 }
 
 .checkoutbtn {

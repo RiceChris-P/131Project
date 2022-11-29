@@ -189,7 +189,7 @@ $conn->close();
 				total += item.count * item.prod.Price;
 				renderObject(item.prod, item.count);
 			})
-			document.getElementById("cartPreviewText").innerHTML = "$"+total.toFixed(2);
+			document.getElementById("cartTotalText").innerHTML = "$"+total.toFixed(2);
 
 			console.log(cart);
 

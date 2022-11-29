@@ -41,13 +41,15 @@
     <header>
         <title>Sign In</title>
         <link rel="stylesheet" href="../style/form.css">
-        <link rel="stylesheet" href="../style/navbar.css">
+        <!-- <link rel="stylesheet" href="../style/navbar.css"> -->
     </header>
 
     <body>
       <nav class="navBar">
         <ul>
-            <img class="logo" src="../assets/logo-transparent.png" alt="">
+            <div class="logoElement">
+                <img class="logo" src="../assets/logo-transparent.png" alt="">
+            </div>
         </ul>
       </nav>
 

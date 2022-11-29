@@ -20,35 +20,60 @@
 		<link rel="stylesheet" href="../style/navbar.css">
 		<link rel="stylesheet" href="../style/cart.css">
 	</head>
-	<nav class="navBar">
+	<div class="navBar">
 		<ul>
-			<a href="index.php"><img class="navLogo" src="../assets/logo-transparent.png" alt=""></a>
-			<li class="cartPreview">	
-				<button class="cartPreviewButton" onclick="showCart()">
-					<img class="cartPreviewImage" src="../assets/cart.png" alt=""> 
-					<p class="cartPreviewText" id="cartPreviewText" >$0.00</p>
-				</button>
-			</li>
-
-			<?php if($num==true && $temp != null){$fname = $temp["fname"];	?>
-				<div class="dropdown">
-					<button class="dropdownbtn"><?php echo $fname;?></button>
-						<div class="dropdownmenu">
-							<a href="account.php">Account Information</a>
-							<a href="orders.php">Orders</a>
-							<a href="signout.php">Signout</a>
-						</div>
+			<div class="navLeft">
+				<div class="navElement">
+					<a href="index.php"><img class="navLogo" src="../assets/logo-transparent.png" alt=""></a>
 				</div>
-			<?php }else{?>
-				<li><a href="login.php">Sign In</a></li>
-				<li><a href="signup.php">Sign Up</a></li>
-			<?php }?>
+			</div>
 
-			<li><a href="shop.php">Shop</a></li>
-			<li><a href="aboutus.php">About Us</a></li>
-			<li><a href="index.php">Home</a></li>
+			<div class="navRight">
+				<div class="navElement">
+					<button class="navElementButton" onclick="location.href = 'index.php';">Home</button>
+				</div>
+
+				<div class="navElement">
+					<button class="navElementButton" onclick="location.href = 'aboutus.php';">About Us</button>
+				</div>
+
+				<div class="navElement">
+					<button class="navElementButton" onclick="location.href = 'shop.php';">Shop</button>
+				</div class="navElement">
+
+				<?php if($num==true && $temp != null){$fname = $temp["fname"];	?>
+					<div class="navElement">
+						<div class="dropdown">
+							<button class="dropdownbtn"><img src="../assets/accounticon.png" alt="" class="accountIconIMG" onclick="dropDown()"></button>
+							
+						</div>
+					</div>
+				<?php }else{?>
+					<div class="navElement">
+						<button class="navElementButton" onclick="location.href = 'login.php';">Sign In</button>
+					</div>
+
+					<div class="navElement">
+						<button class="navElementButton" onclick="location.href = 'signup.php';">Sign Up</button>
+					</div>
+				<?php }?>	
+				
+				<div class="navElement">
+					<button class="cartPreviewButton" onclick="showCart()">
+						<img class="cartPreviewImage" src="../assets/cart.png" alt=""> 
+					</button>
+				</div>
+			</div>
 		</ul>
-	</nav>
+	</div>
+
+	<div class="dropdownmenu" id="dropdownmenu" style="visibility: hidden">
+		<p><?php echo $fname ?></p>
+		<a href="account.php">Account Information</a>
+		<a href="orders.php">Orders</a>
+		<a href="signout.php">Signout</a>
+	</div>
+	
 	<!--Body for cart-->
 	<div class="cart" id="cart" style="visibility: hidden">
 		<div id="cartHeader">
@@ -60,31 +85,15 @@
 			<div class="cartItemContainer" id="cartItemContainer">
 			</div>
 		</div>
-
-		<div id="checkout" class="checkout">
-				<button id="checkoutbtn" class="checkoutbtn" onclick="checkOut()">
+	
+		<div class="cartTotal">
+			<p class="cartTotalText">Total:</p>
+			<p class="cartTotalText" id="cartTotalText" >$0.00</p>
+			<button id="checkoutbtn" class="checkoutbtn" onclick="checkOut()">
 					Checkout
-				</button>
+			</button>
 		</div>
 	</div>
 	<script src="cart.js"></script>
 </html>
 
-<style>
-	a:link{color: black; font-family: Arial, Helvetica, sans-serif; text-align: center;}
-	.dropdown{
-		padding: 14px 16px;
-		font-size: 20px;
-		display: block;
-		float: right;
-		text-align: center;
-	}
-	.dropdownbtn{
-		font-family: Arial, Helvetica, sans-serif;
-		font-size: 20px;
-		text-align: center;
-	}
-	.dropdownmenu a{
-		font-size: 18px;
-	}
-</style>

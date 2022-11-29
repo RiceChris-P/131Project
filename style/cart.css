@@ -8,33 +8,61 @@
     margin-top: 2px;
     width: 175px;
     height: 40px;
-}
-
-.cartPreview {
-    text-align: right;
-    margin-top: -55px;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .cartPreviewButton {
-    width: 125px;
-    height: 40px;
+    background-color: #403BBF;
+    display: inline-flex;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: fit-content;
     margin-right: 10px;
-    display: inline-flex !important;
+    margin-left: 10px;
 }
 
 .cartPreviewImage {
-    margin-top: 5px;
-    margin-left: 10px;
-    width: 30px;
-    height: 30px;
+    display: inline-flex;
+    height: 100%;
+    width: 100%;
 }
 
-.cartPreviewText {
-    color: black;
+.cartTotal {
+    display: inline-flex;
+    background-color: #04BF55;
+    width: 100%;
+    height: 50px;
+}
+
+.cartTotalText {
+    margin-left: 5%;
+    margin-top: auto;
+    margin-bottom: auto;
     font-size: 20px;
-    text-align: center;
-    line-height: 2px;
-    margin-left: 12px;
+    color: white;
+    padding: 0;
+}
+
+.checkoutbtn {
+    border-radius: 0;
+    height: 100%;
+    margin-left: 5%;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 0;
+}
+  
+.checkoutbtn:hover {
+    background-color: #2EE59D;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+}
+
+.checkoutbtn:active {
+    background-color: green;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
 }
 
 .cart {
@@ -43,7 +71,8 @@
     top: 12.75%;
     right: 0;
     width: 25%;
-    height: 100%; 
+    height: fit-content; 
+    overflow: hidden;
 }
 
 #cartHeader {
@@ -51,20 +80,24 @@
     margin-top: 5%;
     background-color: #04BF55;
     width: 100%;
-    height: 5%;
+    height: 50px;
     margin-top: 0;
 }
 
 #cartHeaderProduct {
     margin-left: 5%;
-    margin-top: 2.5%;
+    margin-top: auto;
+    margin-bottom: auto;
     font-size: 20px;
+    color: white;
 }
 
 #cartHeaderTotal {
-    margin-top: 2.5%;
+    margin-top: auto;
+    margin-bottom: auto;
     margin-left: 50%;
     font-size: 20px;
+    color: white;
 }
 
 .cartItemContainer {

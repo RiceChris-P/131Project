@@ -77,7 +77,7 @@ function renderCart(cart) {
         total += item.count * item.prod.Price;
         renderObject(item.prod, item.count);
     })
-    document.getElementById("cartPreviewText").innerHTML = "$"+total.toFixed(2);
+    document.getElementById("cartTotalText").innerHTML = "$"+total.toFixed(2);
 
     console.log(cart);
 
@@ -109,12 +109,19 @@ function showCart() {
     var length = cart.length;
     var cartDisplay = document.getElementById("cart");
     var checkout = document.getElementById("checkoutbtn");
+    var dropdownmenu = document.getElementById("dropdownmenu");
     if (cartDisplay.style.visibility === "hidden") {
+        if(dropdownmenu.style.visibility === "visible") {
+            dropdownmenu.style.visibility = "hidden";
+        }
         cartDisplay.style.visibility = "visible";
     } else {
         cartDisplay.style.visibility = "hidden";
     }
     if (checkout.style.visibility === "hidden" && length > 0) {
+        if(dropdownmenu.style.visibility === "visible") {
+            dropdownmenu.style.visibility = "hidden";
+        }
         checkout.style.visibility = "visible";
     } else {
         checkout.style.visibility = "hidden";
@@ -205,4 +212,21 @@ function decrement(name){
 
 function checkOut() {
     location.href = "checkout.php";
+}
+
+function dropDown() {
+    var dropdownmenu = document.getElementById('dropdownmenu');
+    var cartDisplay = document.getElementById('cart');
+    var checkout = document.getElementById("checkoutbtn");
+    if (dropdownmenu.style.visibility === "hidden") {
+        if(cartDisplay.style.visibility === "visible") {
+            cartDisplay.style.visibility = "hidden";
+        }
+        if(checkout.style.visibility === "visible") {
+            checkout.style.visibility = "hidden";
+        }
+        dropdownmenu.style.visibility = "visible";
+    } else {
+        dropdownmenu.style.visibility = "hidden";
+    }
 }
