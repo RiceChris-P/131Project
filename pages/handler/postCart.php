@@ -18,6 +18,8 @@ if(isSet($_SESSION['login'])){
 	$stmt = $conn->prepare($query);
 	$stmt->bind_param("ss", $cart, $ID);
 	$stmt->execute();
+	$_SESSION["cart"] = $cart;
+	echo $_SESSION["cart"];
 } else {
 	$_SESSION["cart"] = $cart;
 	echo $_SESSION["cart"];

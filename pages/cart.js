@@ -32,6 +32,7 @@ function addToCart(name) {
     })
     //if not in cart, create new obj and add to cart
     if(!exists) {
+        //product.Name = product.Name.replace(/\s/g, "");
         let temp = {prod: product, count: 1};
         cart.push(temp);
     }
@@ -96,8 +97,8 @@ function renderObject(product, count) {
     productTotal = productTotal.toFixed(2)
     var image = '<img src="../itemImages/'+product.Image+'" class="cartImage">'
     var description = '<div class="cartProduct"> <p style="margin-bottom:0; margin-top: 40%;">'+product.Name+'</p> <p style="margin-top:0; font-size:14px;">$'+product.Price+' / ea</p></div>'
-    var rightSide = '<div class="rightCartContainer"><p class="cartPrice" style="margin-bottom: 0">$'+productTotal+'</p><div class="addsubButton"><button class="addButton" onclick="decrement('+product.Name+')">-</button><input class="amountField" id="test" type="text" min="1" max="99" value="1"><button class="subButton" onclick="increment('+product.Name+')">+</button></div><button class="removeCart" onclick="removeFromCart('+product.Name+')">Remove</button></div>'
-    var element = '<div class="cartItemContainer" id='+product.Name+'>'+image + description + rightSide+'</div>';
+    var rightSide = '<div class="rightCartContainer"><p class="cartPrice" style="margin-bottom: 0">$'+productTotal+'</p><div class="addsubButton"><button class="addButton" onclick="decrement('+product.Name.replace(/\s/g, "_")+')">-</button><input class="amountField" id="test" type="text" min="1" max="99" value="1"><button class="subButton" onclick="increment('+product.Name.replace(/\s/g, "_")+')">+</button></div><button class="removeCart" onclick="removeFromCart('+product.Name.replace(/\s/g, "_")+')">Remove</button></div>'
+    var element = '<div class="cartItemContainer" id='+product.Name.replace(/\s/g, "_")+'>'+image + description + rightSide+'</div>';
     document.getElementById("items").innerHTML = document.getElementById("items").innerHTML +  element;
     var cartDisplay = document.getElementById("cart");
     if (cartDisplay.style.visibility === "hidden") {
@@ -135,6 +136,8 @@ function removeFromCart(name){
     } catch {
         name = name.id;
     }
+    //for products with whitespace
+    name = name.replace(/_/g, " ");
     //init product
     var product;
     //find product by name
@@ -148,7 +151,9 @@ function removeFromCart(name){
     cart.forEach(item => {
         if(item.prod.Name == product.Name) {
             //remove
-            cart.pop(item);
+            var index = cart.indexOf(item);
+            cart.splice(index, 1);
+            console.log('removed: ' + item.prod.Name);
         }
     })
     //render
@@ -162,6 +167,8 @@ function increment(name){
     } catch {
         name = name.id;
     }
+    //for products with whitespace
+    name = name.replace(/_/g, " ");
     //init product
     var product;
     myArr.forEach(item => {
@@ -187,6 +194,8 @@ function decrement(name){
     } catch {
         nameID = name.id;
     }
+    //for products with whitespace
+    nameID = nameID.replace(/_/g, " ");
     //init product
     var product;
     myArr.forEach(item => {
@@ -202,7 +211,8 @@ function decrement(name){
             item.count--;
             //if count is now 0, remove
             if(item.count == 0) {
-                cart.pop(item);
+                var index = cart.indexOf(item);
+                cart.splice(index, 1);
             }
         }
     })

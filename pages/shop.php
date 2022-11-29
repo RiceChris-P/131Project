@@ -31,7 +31,7 @@ $conn->close();
 				//Loop through sql data to display
 				while($rows=$results->fetch_assoc())
 				{
-					$name = $rows['Name']
+					$name = $rows['Name'];
 			?>
 
 			<div class="suggestedItem">
@@ -39,8 +39,8 @@ $conn->close();
 				<img src="../itemImages/<?php echo $rows['Image'];?>" class="productImage">
 				<p class="itemName"><?php echo $rows['Name'];?></p>
 				<p class="itemPrice">Price: $<?php echo number_format($rows['Price'], 2, ".", ",");?> / ea</p>
-				<button class="cartButton" onclick='addToCart("<?php echo $name;?>")'>Add to cart</button>
-			</div>
+				<button class="cartButton" onclick='addToCart(<?php echo json_encode($name);?>)'>Add to cart</button>
+				</div>
 
 			<?php
 				}
@@ -187,7 +187,8 @@ $conn->close();
 			document.getElementById("items").innerHTML = null;
 			cart.forEach(item => {
 				total += item.count * item.prod.Price;
-				renderObject(item.prod, item.count);
+				console.log(item.prod);
+				//renderObject(item.prod, item.count);
 			})
 			document.getElementById("cartTotalText").innerHTML = "$"+total.toFixed(2);
 
@@ -235,6 +236,7 @@ $conn->close();
 
 		function removeFromCart(name){
 			//get item name from html
+			console.log(name);
 			try{
 				name = name.item(0).id;
 			} catch {
