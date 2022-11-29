@@ -23,7 +23,7 @@
             $totalweight += (((double) $cartarr[$x]["prod"]["Weight"]) * ((double) $cartarr[$x]["count"]));
         }
 
-        if($totalweight >= 20) {
+        if($totalweight <= 20) {
             $weightfee += (double) 5;
         }
 
