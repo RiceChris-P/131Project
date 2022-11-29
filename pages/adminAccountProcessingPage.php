@@ -33,7 +33,9 @@
     }
 ?>
 <html>
+    <body onload="document.forms[0].submit()">
     <form method="post" id="sendEmail" action="adminAccount.php">
-        <input type="text" name="emails" id=0 value="<?php echo $_POST['emails']?>"></input>
+        <input type="text" name="emails" id=0 value="<?php echo $_POST['email']?>"></input>
     </form>
+</body>
 </html>
