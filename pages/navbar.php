@@ -69,7 +69,7 @@
 
 	<div class="dropdownmenu" id="dropdownmenu" style="visibility: hidden">
 		<p><?php echo $fname ?></p>
-		<a href="account.php">Account Information</a>
+		<a href="account.php">Account</a>
 		<a href="orders.php">Orders</a>
 		<a href="signout.php">Signout</a>
 	</div>

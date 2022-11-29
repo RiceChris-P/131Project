@@ -71,23 +71,32 @@
 .dropdownmenu {
   background-color: white;
   position: absolute;
-  top: 12.75%;
-  right: 0;
+  margin-top: 1%;
+  right: 1%;
   width: 25%;
   height: fit-content; 
-  overflow: hidden; 
+  overflow: hidden;
+  box-shadow: 5px 5px 5px 1px rgba(0,0,0,0.2) !important;
 }
 
 .dropdownmenu p {
+  color: black;
+  padding: 3%;
   margin: 0;
+  text-decoration: none;
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
 }
 
 .dropdownmenu a{
   color: black;
-  padding: 12px 16px;
+  padding: 3%;
+  margin: 0;
   text-decoration: none;
   display: block;
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
 }
 
 .dropdownbtn {
