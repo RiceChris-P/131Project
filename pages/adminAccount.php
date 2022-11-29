@@ -8,29 +8,9 @@
     $results= mysqli_query($conn,$sql);
     $values=mysqli_fetch_row($results);
     $conn->close();
-    // if($_SERVER["REQUEST_METHOD"] == "POST") {
-    //     if($_POST['email']!=$inputtedEmail&&$_POST['email']!=null){
-    //         $oldEmail=$inputtedEmail;
-    //         $inputtedEmail=$_POST['email'];
-    //         $sql="UPDATE accounts SET email='$inputtedEmail' WHERE email='$oldEmail'";
-    //         $results=mysqli_query($conn,$sql);
-    //     }
-    //     updateSqlValue("fname",$_POST['firstName'],$inputtedEmail);
-    //     updateSqlValue("lastName",$_POST['lastName'],$inputtedEmail);
-    //     updateSqlValue("phone ",$_POST['phone'],$inputtedEmail);
-    //     updateSqlValue("address",$_POST['address'],$inputtedEmail);
-    //     updateSqlValue("aptOrSuite",$_POST['aptsuiteunit'],$inputtedEmail);
-    //     updateSqlValue("state",$_POST['state'],$inputtedEmail);
-    //     updateSqlValue("city",$_POST['city'],$inputtedEmail);
-    //     updateSqlValue("zipCode",$_POST['zip'],$inputtedEmail);
-    //     updateSqlValue("nameOnCard",$_POST['cardname'],$inputtedEmail);
-    //     updateSqlValue("cardNum",$_POST['cardnumber'],$inputtedEmail);
-    //     updateSqlValue("cardExp",$_POST['cardexpiration'],$inputtedEmail);
-    //     updateSqlValue("cardCVV",$_POST['cardcvv'],$inputtedEmail);
-    // }
 ?>
 <html>
-    <form method="post">
+    <form method="post" action="adminAccountProcessingPage.php">
         <label for="0">First Name</label><br>
         <input type="text" name="firstName" class="" id="0" placeholder="First Name">
         <input type="text" name="lastName" class="" id="1" placeholder="Last Name">
@@ -46,6 +26,7 @@
         <input type="text" name="cardnumber" id="11" placeholder="Card Number">
         <input type="text" name="cardexpiration" id="12" placeholder="Exp MM/YY">
         <input type="text" name="cardcvv" id="13"placeholder="Enter CVV"><br>
+        <input type="hidden" name="origSelectedEmail" value="<?php echo $inputtedEmail?>">
         <button type="submit" name="updateAccount">Update Information</button>
     </form>
 </html>
@@ -57,14 +38,3 @@
         }
     }
 </script>
-<?php
-    function updateSqlValue($variable,$newValue,$userEmail){
-        $conn = mysqli_connect("localhost", "root", "", "cmpe131");
-        if(!$conn){
-            die("Connection failed: " . mysqli_connect_error());
-        }
-        $sql="UPDATE accounts SET $variable='$newValue' WHERE email='$userEmail'";
-        mysqli_query($conn,$sql);
-        $conn->close();
-    }
-?>
