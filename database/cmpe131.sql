@@ -107,7 +107,7 @@ INSERT INTO `items` (`Name`, `Price`, `Weight`, `Image`, `Type`) VALUES
 ('Oyster', .75, .25, 'oyster.png', 'seafood'),
 ('Pound of Shrimp', 9.99, 1, 'shrimp.png', 'seafood'),
 ('seabass', 14.99, 2, 'seabass.png', 'seafood'),
-('Scallop', 1.00, .35, 'lobster.png', 'seafood'),
+('Scallop', 1.00, .35, 'scallop.png', 'seafood'),
 ('Butter', 5.99, 1, 'butter.png', 'Dairy');
 -- --------------------------------------------------------
 
