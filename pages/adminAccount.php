@@ -8,26 +8,26 @@
     $results= mysqli_query($conn,$sql);
     $values=mysqli_fetch_row($results);
     $conn->close();
-    if($_SERVER["REQUEST_METHOD"] == "POST") {
-        if($_POST['email']!=$inputtedEmail&&$_POST['email']!=null){
-            $oldEmail=$inputtedEmail;
-            $inputtedEmail=$_POST['email'];
-            $sql="UPDATE accounts SET email='$inputtedEmail' WHERE email='$oldEmail'";
-            $results=mysqli_query($conn,$sql);
-        }
-        updateSqlValue("fname",$_POST['firstName'],$inputtedEmail);
-        updateSqlValue("lastName",$_POST['lastName'],$inputtedEmail);
-        updateSqlValue("phone ",$_POST['phone'],$inputtedEmail);
-        updateSqlValue("address",$_POST['address'],$inputtedEmail);
-        updateSqlValue("aptOrSuite",$_POST['aptsuiteunit'],$inputtedEmail);
-        updateSqlValue("state",$_POST['state'],$inputtedEmail);
-        updateSqlValue("city",$_POST['city'],$inputtedEmail);
-        updateSqlValue("zipCode",$_POST['zip'],$inputtedEmail);
-        updateSqlValue("nameOnCard",$_POST['cardname'],$inputtedEmail);
-        updateSqlValue("cardNum",$_POST['cardnumber'],$inputtedEmail);
-        updateSqlValue("cardExp",$_POST['cardexpiration'],$inputtedEmail);
-        updateSqlValue("cardCVV",$_POST['cardcvv'],$inputtedEmail);
-    }
+    // if($_SERVER["REQUEST_METHOD"] == "POST") {
+    //     if($_POST['email']!=$inputtedEmail&&$_POST['email']!=null){
+    //         $oldEmail=$inputtedEmail;
+    //         $inputtedEmail=$_POST['email'];
+    //         $sql="UPDATE accounts SET email='$inputtedEmail' WHERE email='$oldEmail'";
+    //         $results=mysqli_query($conn,$sql);
+    //     }
+    //     updateSqlValue("fname",$_POST['firstName'],$inputtedEmail);
+    //     updateSqlValue("lastName",$_POST['lastName'],$inputtedEmail);
+    //     updateSqlValue("phone ",$_POST['phone'],$inputtedEmail);
+    //     updateSqlValue("address",$_POST['address'],$inputtedEmail);
+    //     updateSqlValue("aptOrSuite",$_POST['aptsuiteunit'],$inputtedEmail);
+    //     updateSqlValue("state",$_POST['state'],$inputtedEmail);
+    //     updateSqlValue("city",$_POST['city'],$inputtedEmail);
+    //     updateSqlValue("zipCode",$_POST['zip'],$inputtedEmail);
+    //     updateSqlValue("nameOnCard",$_POST['cardname'],$inputtedEmail);
+    //     updateSqlValue("cardNum",$_POST['cardnumber'],$inputtedEmail);
+    //     updateSqlValue("cardExp",$_POST['cardexpiration'],$inputtedEmail);
+    //     updateSqlValue("cardCVV",$_POST['cardcvv'],$inputtedEmail);
+    // }
 ?>
 <html>
     <form method="post">
