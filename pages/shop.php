@@ -31,7 +31,8 @@ $conn->close();
 				//Loop through sql data to display
 				while($rows=$results->fetch_assoc())
 				{
-					$name = $rows['Name'];
+					if(!$rows['Stock'] == 0) {
+						$name = $rows['Name'];
 			?>
 
 			<div class="suggestedItem">
@@ -43,6 +44,7 @@ $conn->close();
 				</div>
 
 			<?php
+					}
 				}
 			?>
 		</div>
