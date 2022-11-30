@@ -27,7 +27,9 @@ function addToCart(name) {
     cart.forEach(item => {
         //if in cart, increment
         if(item.prod.Name == product.Name) {
-            item.count++;
+            if(item.count < item.prod.Stock) {
+                item.count++;
+            }
             exists = true;
         }
     })
@@ -202,7 +204,9 @@ function increment(name){
     cart.forEach(item => {
         if(item.prod.Name == product.Name) {
             //increment
-            item.count++;
+            if(item.count < item.prod.Stock) {
+                item.count++;
+            }
         }
     })
     //render
