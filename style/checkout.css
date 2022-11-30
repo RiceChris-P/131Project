@@ -65,7 +65,7 @@ body {
     overflow: hidden;
 }
 
-.payment button {
+.contact button, .delivery button, .payment button {
     float: right;
     background-color: #403BBF;
     width: fit-content;
