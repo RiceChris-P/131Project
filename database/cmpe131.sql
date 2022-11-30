@@ -83,27 +83,35 @@ INSERT INTO `items` (`Name`, `Price`, `Weight`, `Image`, `Type`, `Stock`) VALUES
 ('Zucchini', 1, 0.5, 'zucchini.png', 'vegetable', 20),
 ('Banana', 0.89, 1, 'banana.png', 'fruit', 20),
 ('Watermelon', 5.79, 20, 'watermelon.png', 'fruit', 20),
-('Apple', 1.5, 1, 'apple.png', 'fruit', 20),
+('Apple', 1.50, 1, 'apple.png', 'fruit', 20),
 ('Strawberries', 4.99, 1, 'strawberry.png', 'fruit', 20),
 ('Grapes', 3.99, 1, 'grapes.png', 'fruit', 20),
 ('Pineapple', 2.99, 1, 'pineapple.png', 'fruit', 20),
 ('Broccoli', 2.99, 1, 'broccoli.png', 'vegetable', 20),
 ('Asparagus', 2.99, 1, 'asparagus.png', 'vegetable', 20),
 ('Cucumber', 1, 1, 'cucumber.png', 'vegetable', 20),
-('Potatoes', 1.2, 1, 'potato.png', 'vegetable', 20),
+('Potatoes', 1.20, 1, 'potato.png', 'vegetable', 20),
 ('Onions', 1.33, 1, 'onion.png', 'vegetable', 20),
 ('Lettuce', 2.69, 1, 'lettuce.png', 'vegetable', 20),
 ('Tomato', 3.49, 1, 'tomato.png', 'vegetable', 20),
-('Bell Pepper', 2, 0.5, 'bellpepper.png', 'vegetable', 20),
+('Bell Pepper', 2.00, .5, 'bellpepper.png', 'vegetable', 20),
 ('Carrots', 1.29, 1, 'carrots.png', 'vegetable', 20),
 ('Whole Turkey', 39.38, 23, 'turkey.png', 'Meat', 20),
-('Hot Dog', 0.34, 0.0625, 'hotdog.png', 'Meat', 20),
+('Hot Dog', .34, .0625, 'hotdog.png', 'Meat', 20),
 ('New York Steak', 45.47, 3.5, 'steak.png', 'Meat', 20),
 ('Ground Beef', 20.97, 3.5, 'groundbeef.png', 'Meat', 20),
 ('Chicken Breast', 17.97, 3, 'chicken.png', 'Meat', 20),
 ('Milk', 5.99, 8.34, 'milk.png', 'Dairy', 20),
 ('Cheese', 13.99, 2, 'cheese.png', 'Dairy', 20),
 ('Eggs', 15.99, 1.5, 'eggs.png', 'Dairy', 20),
+('12 Clams', 4.99, 3, 'clam.png', 'seafood', 20),
+('Dungeness Crab', 24.99, 2, 'dungenesscrab.png', 'seafood', 20),
+('King Crab', 99.99, 1, 'kingcrab.png', 'seafood', 20),
+('Lobster', 62.99, 2, 'lobster.png', 'seafood', 20),
+('Oyster', .75, .25, 'oyster.png', 'seafood', 20),
+('Pound of Shrimp', 9.99, 1, 'shrimp.png', 'seafood', 20),
+('Seabass', 14.99, 2, 'seabass.png', 'seafood', 20),
+('Scallop', 1.00, .35, 'scallop.png', 'seafood', 20),
 ('Butter', 5.99, 1, 'butter.png', 'Dairy', 20);
 
 -- --------------------------------------------------------
@@ -142,6 +150,13 @@ INSERT INTO `orders` (`ordernum`, `items`, `subtotal`, `totalweight`, `weightfee
 --
 ALTER TABLE `accounts`
   ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `items`
+--
+ALTER TABLE `items`
+  ADD UNIQUE KEY `Name` (`Name`);
+COMMIT;
 
 --
 -- Indexes for table `orders`
