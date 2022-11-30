@@ -2,8 +2,8 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 22, 2022 at 03:18 AM
+-- Host: 127.0.0.1
+-- Generation Time: Nov 30, 2022 at 01:46 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -51,7 +51,10 @@ CREATE TABLE `accounts` (
 
 INSERT INTO `accounts` (`fname`, `lastName`, `email`, `password`, `phonenumber`, `address`, `aptOrSuite`, `state`, `city`, `zipCode`, `nameOnCard`, `cardNum`, `cardExp`, `cardCVV`, `cart`) VALUES
 ('John', 'Doe', 'JohnDoe@gmail.com', 'Doe123', 1111111111, '200 California St.', 0, 'CA', 'San Francisco', 94134, 'John Doe', 1234567891234567, '11/22', 1111, '[]'),
-('Jane', 'Doe', 'JaneDoe@gmail.com', 'JaneDoe123', 9999999999, '10 7th St.', 2, 'CA', 'San Jose', 99999, 'Jane Doe', 9999999999999999, '99/99', 9999, '[]');
+('Jane', 'Doe', 'JaneDoe@gmail.com', 'JaneDoe123', 9999999999, '10 7th St.', 2, 'CA', 'San Jose', 99999, 'Jane Doe', 9999999999999999, '99/99', 9999, '[]'),
+('Test', 'Test', 'Test@Test.com', 'Test', 4151230987, 'Test', 0, 'CA', 'Test', 12345, 'Test', 123456789012345, '01/23', 123, '[{\"prod\":{\"Name\":\"Zucchini\",\"Price\":\"1\",\"Weight\":\"0.5\",\"Image\":\"zucchini.png\",\"Type\":\"vegetable\"},\"count\":1}]'),
+('Test2', 'Test2', 'Test2@Test2.com', 'Test2', 4151230987, 'Test2', NULL, 'CA', 'Test2', 12345, NULL, NULL, NULL, NULL, '[]'),
+('Test3', 'Test3', 'Test3@Test3.com', 'Test3', 4151230987, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '[]');
 
 -- --------------------------------------------------------
 
@@ -109,6 +112,7 @@ INSERT INTO `items` (`Name`, `Price`, `Weight`, `Image`, `Type`) VALUES
 ('Seabass', 14.99, 2, 'seabass.png', 'seafood'),
 ('Scallop', 1.00, .35, 'scallop.png', 'seafood'),
 ('Butter', 5.99, 1, 'butter.png', 'Dairy');
+
 -- --------------------------------------------------------
 
 --
@@ -118,16 +122,22 @@ INSERT INTO `items` (`Name`, `Price`, `Weight`, `Image`, `Type`) VALUES
 CREATE TABLE `orders` (
   `ordernum` varchar(20) DEFAULT NULL,
   `items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`items`)),
-  `costofitems` int(11) DEFAULT NULL,
-  `totalweight` int(11) DEFAULT NULL,
-  `weightfee` int(11) DEFAULT NULL,
-  `totalcost` int(11) DEFAULT NULL,
+  `subtotal` double DEFAULT NULL,
+  `totalweight` double DEFAULT NULL,
+  `weightfee` double DEFAULT NULL,
+  `totalcost` double DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `contactinfo` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`contactinfo`)),
   `deliveryinfo` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`deliveryinfo`)),
   `paymentinfo` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`paymentinfo`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`ordernum`, `items`, `subtotal`, `totalweight`, `weightfee`, `totalcost`, `email`, `contactinfo`, `deliveryinfo`, `paymentinfo`) VALUES
+('90230224795437092165', '[{\"prod\":{\"Name\":\"Corn\",\"Price\":\"0.89\",\"Weight\":\"0.375\",\"Image\":\"corn.png\",\"Type\":\"vegetable\"},\"count\":1}]', 0.89, 0.375, 0, 0.89, 'Test@Test@gmail.com', '{\"firstName\":\"Test\",\"lastName\":\"Test\",\"email\":\"Test@Test@gmail.com\",\"phone\":\"4151230987\"}', '{\"address\":\"Test\",\"aptsuiteetc\":\"\",\"state\":\"CA\",\"city\":\"Test\",\"zip\":\"12345\"}', '{\"cardname\":\"Test\",\"cardnumber\":\"123456789012345\",\"cardexpdate\":\"01/23\",\"cardcvv\":\"123\"}');
 
 --
 -- Indexes for dumped tables

@@ -1,5 +1,6 @@
 <?php
     session_start();
+
 	$conn = mysqli_connect("localhost","root", "","cmpe131");
 	if(!$conn){
 		die("Connection failed: " . mysqli_connect_error());

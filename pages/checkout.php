@@ -4,12 +4,12 @@
     include("navbar.php");
     include("handler/setCartSession.php");
 
-    $arr = json_decode($_SESSION['cart'], true);
-    $empty = empty($arr);
+    // $arr = json_decode($_SESSION['cart'], true);
+    // $empty = empty($arr);
 
-    if($empty) {
-        header('Location: shop.php');
-    }
+    // if($empty) {
+    //     header('Location: shop.php');
+    // }
 
     function calculateCartPrices() {
         $totalcost = 0;
@@ -111,6 +111,55 @@
         costStats($statArray['subtotal'], $statArray['totalweight'], $statArray['weightfee'], $statArray['totalcost']);
     }
 
+    function getFill() {
+        $conn = mysqli_connect("localhost", "root", "", "cmpe131");
+
+        if(!$conn){
+            die("Connection failed: " . mysqli_connect_error());
+        }
+        else {
+            echo '<script>console.log("Connection Successful!")</script>';
+        }
+
+        $id = $_SESSION['login'];
+        $getValues = "SELECT * FROM accounts WHERE email='$id'";
+        $valSQL = mysqli_query($conn, $getValues); 
+        $valArray = mysqli_fetch_row($valSQL);
+
+        //Contact
+        $contactFilled = true;
+
+        //Delivery
+        $deliveryFilled = false;
+
+        $address = $valArray[5]; 
+        $state = $valArray[7]; 
+        $city = $valArray[8]; 
+        $zip = $valArray[9];
+
+        if($address != null and $state != null and $city != null and $zip != null) {
+            $deliveryFilled = true;
+        }
+
+        //Payment
+        $paymentFilled = false;
+
+        $cardname = $valArray[10];
+        $cardnum = $valArray[11];
+        $cardexp = $valArray[12];
+        $cardcvv = $valArray[13];
+
+        if($cardname != null and $cardnum != null and $cardexp != null and $cardcvv != null) {
+            $paymentFilled = true;
+        }
+
+        return array(
+            "contact" => $contactFilled,
+            "delivery" => $deliveryFilled,
+            "payment" => $paymentFilled,
+        );
+    }
+
     $conn = mysqli_connect("localhost", "root", "", "cmpe131");
 
     if(!$conn){
@@ -123,35 +172,108 @@
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo '<script>console.log("POST Request Found!")</script>';
 
+        //MySQL Work
+        $id;
+        $valArray;
+
+        //Contact
+        $contactFilled = false;
+        $contactInfo = false;
+        $firstName;
+        $lastName;
+        $email;
+        $phone;
+
+        //Create Account
+        $createAccount = false;
+
+        //Delivery
+        $deliveryFilled = false;
+        $deliveryInfo = false;
+        $address;
+        $aptsuiteetc; 
+        $state; 
+        $city; 
+        $zip;
+
+        //Payment
+        $paymentFilled = false;
+        $paymentInfo = false;
+        $cardname;
+        $cardnum;
+        $cardexp;
+        $cardcvv;
+
+        if(isset($_SESSION['login'])) {
+            $id = $_SESSION['login'];
+            $getValues = "SELECT * FROM accounts WHERE email='$id'";
+            $valSQL = mysqli_query($conn, $getValues); 
+            $valArray = mysqli_fetch_row($valSQL);
+
+            //Contact
+            $contactFilled = true;
+            $contactInfo = true;
+
+            $firstName = $valArray[0];
+            $lastName = $valArray[1]; 
+            $email = $valArray[2];
+            $phone = $valArray[4];
+
+            //Delivery
+            $address = $valArray[5]; 
+            $aptsuiteetc = $valArray[6]; 
+            $state = $valArray[7]; 
+            $city = $valArray[8]; 
+            $zip = $valArray[9];
+
+            if($address != null and $state != null and $city != null and $zip != null) {
+                $deliveryFilled = true;
+                $deliveryInfo = true;
+            }
+
+            //Payment
+            $cardname = $valArray[10];
+            $cardnum = $valArray[11];
+            $cardexp = $valArray[12];
+            $cardcvv = $valArray[13];
+
+            if($cardname != null and $cardnum != null and $cardexp != null and $cardcvv != null) {
+                $paymentFilled = true;
+                $paymentInfo = true;
+            }
+        }
+
         $formSuccess = false;
         $orderSuccess = false;
 
-        //Contact Info
-        $contactInfo = false;
-        $firstName = $_POST['firstName'];
-        $lastName = $_POST['lastName'];
-        $email = $_POST['email'];
-        $phone = $_POST['phone'];
+        if(!$contactFilled) {
+             //Contact Info
+            $firstName = $_POST['firstName'];
+            $lastName = $_POST['lastName'];
+            $email = $_POST['email'];
+            $phone = $_POST['phone'];
 
-        //Create Accounts
-        $createAccount = false;
-        $password = $_POST['password'];
-        $retypepass = $_POST['retypepass'];
+            //Create Accounts
+            $password = $_POST['password'];
+            $retypepass = $_POST['retypepass'];
+        }
 
         //Delivery Info
-        $deliveryInfo = false;
-        $address = $_POST['address'];
-        $aptsuiteetc = $_POST['aptsuiteunit'];
-        $state = $_POST['state'];
-        $city = $_POST['city'];
-        $zip = $_POST['zip'];
+        if(!$deliveryFilled) {
+            $address = $_POST['address'];
+            $aptsuiteetc = $_POST['aptsuiteunit'];
+            $state = $_POST['state'];
+            $city = $_POST['city'];
+            $zip = $_POST['zip'];
+        }
 
         //Payment Info
-        $paymentInfo = false;
-        $cardname = $_POST['cardname'];
-        $cardnum = $_POST['cardnum'];
-        $cardexp = $_POST['cardexp'];
-        $cardcvv = $_POST['cardcvv'];
+        if(!$paymentFilled) {
+            $cardname = $_POST['cardname'];
+            $cardnum = $_POST['cardnum'];
+            $cardexp = $_POST['cardexp'];
+            $cardcvv = $_POST['cardcvv'];
+        }
 
         //Cart Stat Info
         $items = $_SESSION['cart'];
@@ -165,93 +287,99 @@
         $_SESSION['totalcost'] = $totalcost;
         $_SESSION['weightfee'] = $weightfee;
 
-        if($firstName != null && $lastName != null && $email != null && $phone != null) {
-            $passPhone = false;
-            $passEmail = false;
-
-            if(strlen($phone) != 10) {
-                echo '<script>alert("Invalid phone number! Must be 10 digits long, e.g., \"4159321576\".")</script>';
+        if(!$contactFilled) {
+            if($firstName != null && $lastName != null && $email != null && $phone != null) {
+                $passPhone = false;
+                $passEmail = false;
+    
+                if(strlen($phone) != 10) {
+                    echo '<script>alert("Invalid phone number! Must be 10 digits long, e.g., \"4159321576\".")</script>';
+                }
+                else {
+                    $passPhone = true;
+                }
+    
+                if(!str_contains($email, '@') or !str_contains($email, '.')) {
+                    echo '<script>alert("Invalid email address! Must be in the correct format, e.g., \"name@domain.com\".")</script>';
+                }
+                else {
+                    $passEmail = true;
+                }
+    
+                if($passPhone && $passEmail) {
+                    $contactInfo = true;
+                }
             }
             else {
-                $passPhone = true;
+                echo '<script>alert("Missing field input in contact info!")</script>';
             }
-
-            if(!str_contains($email, '@') or !str_contains($email, '.')) {
-                echo '<script>alert("Invalid email address! Must be in the correct format, e.g., \"name@domain.com\".")</script>';
-            }
-            else {
-                $passEmail = true;
-            }
-
-            if($passPhone && $passEmail) {
-                $contactInfo = true;
+    
+            if($password != null && $retypepass != null) {
+                $createAccount = true;
             }
         }
-        else {
-            echo '<script>alert("Missing field input in contact info!")</script>';
-        }
 
-        if($password != null && $retypepass != null) {
-            $createAccount = true;
-        }
-
-        if($address != null && $state != null && $city != null && $zip != null) {
-            $passState = false;
-            $passZip = false;
-
-            if(strlen($state) == 2) {
-                $passState = true;
+        if(!$deliveryFilled) {
+            if($address != null && $state != null && $city != null && $zip != null) {
+                $passState = false;
+                $passZip = false;
+    
+                if(strlen($state) == 2) {
+                    $passState = true;
+                }
+                else {
+                    echo '<script>alert("Invalid state! Must be the two lettered-long abbreviation, e.g., CA for California.")</script>';
+                }
+    
+                if(strlen($zip) == 5) {
+                    $passZip = true;
+                }
+                else {
+                    echo '<script>alert("Invalid zip code! Must be the five digits long, e.g., 94134.")</script>';
+                }
+    
+                if($passState && $passZip) {
+                    $deliveryInfo = true;
+                }
             }
             else {
-                echo '<script>alert("Invalid state! Must be the two lettered-long abbreviation, e.g., CA for California.")</script>';
-            }
-
-            if(strlen($zip) == 5) {
-                $passZip = true;
-            }
-            else {
-                echo '<script>alert("Invalid zip code! Must be the five digits long, e.g., 94134.")</script>';
-            }
-
-            if($passState && $passZip) {
-                $deliveryInfo = true;
+                echo '<script>alert("Missing field input in delivery info!")</script>';
             }
         }
-        else {
-            echo '<script>alert("Missing field input in delivery info!")</script>';
-        }
 
-        if($cardname != null && $cardnum != null && $cardexp != null && $cardcvv != null) {
-            $passNum = false;
-            $passExp = false;
-            $passCVV = false;
-            if(strlen($cardnum) == 15 or strlen($cardnum) == 16) {
-                $passNum = true;
+        if(!$paymentFilled) {
+            if($cardname != null && $cardnum != null && $cardexp != null && $cardcvv != null) {
+                $passNum = false;
+                $passExp = false;
+                $passCVV = false;
+                if(strlen($cardnum) == 15 or strlen($cardnum) == 16) {
+                    $passNum = true;
+                }
+                else {
+                    echo '<script>alert("Invalid card number!")</script>';
+                }
+    
+                if(strlen($cardcvv) == 3 or strlen($cardcvv) == 4) {
+                    $passCVV = true;
+                }
+                else {
+                    echo '<script>alert("Invalid card cvv!")</script>';
+                }
+    
+                if(strlen($cardexp) == 5) {
+                    $passExp = true;
+                }
+                else {
+                    echo '<script>alert("Invalid card expiration date! Must be MM/YY, e.g., 01/23")</script>';
+                }
+    
+                if($passCVV && $passNum && $passExp) {
+                    $paymentInfo = true;
+                }
             }
             else {
-                echo '<script>alert("Invalid card number!")</script>';
+                echo '<script>alert("Missing field input!")</script>';
             }
-
-            if(strlen($cardcvv) == 3 or strlen($cardcvv) == 4) {
-                $passCVV = true;
-            }
-            else {
-                echo '<script>alert("Invalid card cvv!")</script>';
-            }
-
-            if(strlen($cardexp) == 5) {
-                $passExp = true;
-            }
-            else {
-                echo '<script>alert("Invalid card expiration date! Must be MM/YY, e.g., 01/23")</script>';
-            }
-
-            if($passCVV && $passNum && $passExp) {
-                $paymentInfo = true;
-            }
-        }
-        else {
-            echo '<script>alert("Missing field input!")</script>';
         }
 
         if($contactInfo && $deliveryInfo && $paymentInfo) {
@@ -411,6 +539,39 @@
                                           VALUES ('$orderNum', '$items', '$subtotal', '$totalweight', '$weightfee', '$totalcost', '$email','$contact', '$delivery', '$payment');";
                $resultThree = mysqli_query($conn, $queryThree);
 
+               $id = $_SESSION['login'];
+
+               $updateDeliveryQuery = "UPDATE accounts
+                               SET
+                                    address = '$address',
+                                    aptOrSuite = '$aptsuiteetc',
+                                    state = '$state',
+                                    city = '$city',
+                                    zipCode = '$zip'
+                                WHERE email = '$id';";
+
+                $updatePaymentQuery = "UPDATE accounts
+                                SET
+                                    nameOnCard = '$cardname',
+                                    cardNum = '$cardnum',
+                                    cardExp = '$cardexp',
+                                    cardCVV = '$cardcvv',
+                                WHERE email = '$id';";
+
+               if(!$deliveryFilled) {
+                    $deliveryResult = mysqli_query($conn, $updateDeliveryQuery);
+                    if($deliveryResult) {
+                        echo '<script>console.log("Delivery Updated!")</script>';
+                    }
+                }
+
+               if(!$paymentFilled) {
+                    $paymentResult = mysqli_query($conn, $updatePaymentQuery);
+                    if($paymentResult) {
+                        echo '<script>console.log("Payment Updated!")</script>';
+                    }
+                }
+
                if($resultThree) {
                    echo '<script>console.log("Order sent!")</script>';
                    header('Location: order.php');
@@ -420,6 +581,9 @@
                echo '<script>alert("User exists! Please log in.")</script>';
                header('Location: login.php');
            }
+        }
+        else {
+            header('Location: aboutus.php');
         }
     }
 
@@ -436,16 +600,61 @@
     <body>
         <div class="checkoutContainer">
             <div class="checkOutInfo">
-                <?php if(isset($_SESSION['login'])) { ?>
-                    <script>"User is logged in."</script>
-                    <h1>Contact Information</h1>
-                    <form action="">
+                <?php 
+                if(isset($_SESSION['login'])) { 
+                    $arr = getFill();
+                    $deliveryFilled = $arr['delivery'];
+                    $paymentFilled = $arr['payment'];
+                ?>
+                    <form action="checkout.php" method="post" class="guestForm">
                         
-                        <input type="text" name="address" class="" placeholder="Street Address"><br>
-                        <input type="text" name="aptsuiteunit" class="" placeholder="Apt, suite, rtc. (optional)"><br>
-                        <input type="text" name="city" class="" placeholder="City"><br>
-                        <input type="text" name="state" class="" placeholder="State"><br>
-                        <input type="text" name="zip" class="" placeholder="ZIP"><br>
+                        <?php 
+                        if(!$deliveryFilled) {
+                        ?>
+
+                            <div class="delivery">
+                                <h2>Delivery Information</h2>
+                                <input type="text" name="address" class="" placeholder="Street Address"><br>
+                                <input type="text" name="aptsuiteunit" class="" placeholder="Apt, suite, etc. (optional)"><br>
+                                <input type="text" name="state" class="" placeholder="State">
+                                <input type="text" name="city" class="" placeholder="City">
+                                <input type="text" name="zip" class="" placeholder="ZIP"><br>
+
+                                <?php 
+                                if($paymentFilled) {
+                                ?>
+
+                                    <button type="submit" name="checkoutsubmit">Submit Payment</button>
+
+                                <?php } ?>
+                            </div>
+
+                        <?php } ?>
+
+                        <?php 
+                        if(!$paymentFilled) {
+                        ?>
+
+                            <div class="payment">
+                                <h2>Payment Information</h2>
+                                <input type="text" name="cardname" placeholder="Name On Card"><br>
+                                <input type="text" name="cardnum" placeholder="Card Number">
+                                <input type="text" name="cardexp" placeholder="Exp MM/YY">
+                                <input type="text" name="cardcvv" placeholder="Enter CVV"><br>
+                                <button type="submit" name="checkoutsubmit">Submit Payment</button>
+                            </div>
+
+                        <?php } ?>
+
+                        <?php 
+                        if($deliveryFilled && $paymentFilled) {
+                        ?>
+
+                            <div class="payment">
+                                <button type="submit" name="checkoutsubmit">Submit Payment</button>
+                            </div>
+
+                        <?php } ?>
 
                     </form>
                 <?php } else { ?>
