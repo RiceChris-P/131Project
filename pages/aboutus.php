@@ -1,6 +1,7 @@
 <?php
 	include("navbar.php");
 ?>
+<!DOCTYPE html>
 <html>
   
 	<head>
@@ -10,57 +11,6 @@
 		<link rel="stylesheet" type="text/css" href="../style/cart.css">
 	</head>
 
-	<div class="cart" id="cart" style="visibility: hidden">
-		<div id="cartHeader">
-			<div id="cartHeaderProduct">Product</div>
-			<div id="cartHeaderTotal">Total</div>
-		</div>
-		<div class="cartItemContainer">
-			<img src="../itemImages/avocado.png" class="cartImage">
-			<div class="cartProduct">
-				<p style="margin-bottom:0; margin-top: 40%;">Avocado</p> 
-				<p style="margin-top:0; font-size:14px;">$2.50 / ea</p>
-			</div>
-			<div class="rightCartContainer">
-				<p class="cartPrice" style="margin-bottom: 0">$2.50</p>
-				<div class="addsubButton">
-					<button class="addButton">-</button>
-					<input class="amountField" id="test" type="text" min="1" max="99" value="1">
-					<button class="subButton" onclick="increment()">+</button>
-				</div>
-				<button class="removeCart" onclick="removeFromCart()">Remove</button>
-			</div>			
-		</div>
-	</div>
-
-  <script>
-		let total = 0.00;
-		function addToCart(price) {
-			total += price;
-			document.getElementById("cartPreviewText").innerHTML = "$"+total.toFixed(2);
-			if (cart.style.visibility === "hidden") {
-				cart.style.visibility = "visible";
-			} 
-		}
-		function showCart() {
-			var cart = document.getElementById("cart");
-			if (cart.style.visibility === "hidden") {
-				cart.style.visibility = "visible";
-			} else {
-				cart.style.visibility = "hidden";
-			}
-		}
-		function removeFromCart(){
-			
-		}
-		function increment(){
-			
-		}
-		function decrement(){
-
-		}
-
-	</script> 
 	<style>
 		.abth{
 			font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -82,7 +32,7 @@
 		a:link {color: black; text-align: center; font-family: Arial, Helvetica, sans-serif;}
 	</style>
      <body>
-	 	<h1 class="abth"><b>Developers</b></h1>
+	 	<h1 class="abth">Developers</h1>
 		<br>
 		<h1 class="abtDevs">Kevin Boc</b1>
 		<br>

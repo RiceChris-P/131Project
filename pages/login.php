@@ -6,7 +6,7 @@
     }
     //if user is already logged in it redirects user to home page
     if(isSet($_SESSION['login'])){
-        header('Location: index.php');
+        header('Location: ../index.php');
     }
 ?>
 <?php
@@ -35,13 +35,12 @@
     }
     $conn->close();
 ?>
-
+<!DOCTYPE html>
 <html>
 
     <header>
         <title>Sign In</title>
         <link rel="stylesheet" href="../style/form.css">
-        <!-- <link rel="stylesheet" href="../style/navbar.css"> -->
     </header>
 
     <body>

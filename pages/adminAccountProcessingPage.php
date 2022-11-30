@@ -32,6 +32,7 @@
         $conn->close();
     }
 ?>
+<!DOCTYPE html>
 <html>
     <body onload="document.forms[0].submit()">
     <form method="post" id="sendEmail" action="adminAccount.php">

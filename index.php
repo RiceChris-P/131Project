@@ -14,17 +14,18 @@
 		$temp= mysqli_fetch_assoc($results);
 	}
 ?>
-
+<!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href="../style/navbar.css">
-		<link rel="stylesheet" href="../style/cart.css">
+		<link rel="stylesheet" href="style/index.css">
+		<link rel="stylesheet" href="style/navbar.css">
+		<link rel="stylesheet" href="style/cart.css">
 	</head>
 	<div class="navBar">
 		<ul>
 			<div class="navLeft">
 				<div class="navElement">
-					<a href="index.php"><img class="navLogo" src="../assets/logo-transparent.png" alt=""></a>
+					<a href="index.php"><img class="navLogo" src="assets/logo-transparent.png" alt=""></a>
 				</div>
 			</div>
 
@@ -44,7 +45,7 @@
 				<?php if($num==true && $temp != null){$fname = $temp["fname"];	?>
 					<div class="navElement">
 						<div class="dropdown">
-							<button class="dropdownbtn"><img src="../assets/accounticon.png" alt="" class="accountIconIMG" onclick="dropDown()"></button>
+							<button class="dropdownbtn"><img src="assets/accounticon.png" alt="" class="accountIconIMG" onclick="dropDown()"></button>
 							
 						</div>
 					</div>
@@ -60,7 +61,7 @@
 				
 				<div class="navElement">
 					<button class="cartPreviewButton" onclick="showCart()">
-						<img class="cartPreviewImage" src="../assets/cart.png" alt=""> 
+						<img class="cartPreviewImage" src="assets/cart.png" alt=""> 
 					</button>
 				</div>
 			</div>
@@ -94,34 +95,8 @@
 			</button>
 		</div>
 	</div>
-	<script src="pages/cart.js"></script>
-	<script>		
-		function dropDown() {
-			var dropdownmenu = document.getElementById('dropdownmenu');
-			var cartDisplay = document.getElementById('cart');
-			var checkout = document.getElementById("checkoutbtn");
-			if (dropdownmenu.style.visibility === "hidden") {
-				if(cartDisplay.style.visibility === "visible") {
-					cartDisplay.style.visibility = "hidden";
-				}
-				if(checkout.style.visibility === "visible") {
-					checkout.style.visibility = "hidden";
-				}
-				dropdownmenu.style.visibility = "visible";
-			} else {
-				dropdownmenu.style.visibility = "hidden";
-			}
-		}
-	</script>
-</html>
 
-
-<html>
-    <head>
-        <title>Home Page</title>
-        <link rel="stylesheet" href="../style/index.css">
-    </head>
-    <body class="homeBody">
+	<body class="homeBody">
 		<h1 class="landingHeader">OFS</h1>
 		
 		<br>
@@ -136,4 +111,7 @@
 
 		<button class="landingShopButton"><a href="pages/shop.php">SHOP NOW</button>
     </body>
+
+	<script src="pages/cart.js"></script>
 </html>
+

@@ -7,6 +7,7 @@
     $results= mysqli_query($conn,$sql);
     $conn->close();
 ?>
+<!DOCTYPE html>
 <html>
     <form method="post" action="adminAccount.php">
     <select name="emails">

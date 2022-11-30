@@ -15,6 +15,7 @@
     $results= mysqli_query($conn,$sql);
     $conn->close();
 ?>
+<!DOCTYPE html>
 <html>
     <head>
         <title>Dairy</title>

@@ -15,7 +15,7 @@ $stmt->bind_param("s", $ID);
 $stmt->execute();
 $result = $stmt->get_result();
 ?>
-
+<!DOCTYPE html>
 <html>
     <h1>Orders</h1>
     <?php

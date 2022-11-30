@@ -12,6 +12,7 @@ let total = 0.00;
 let cart = [];
 
 function addToCart(name) {
+    console.log("Add to Cart Called!");
     //init product
     var product;
     //find product by name
@@ -52,17 +53,34 @@ window.onload = function() {
 
 //set cart to saved cart
 function setCart(obj) {
+    console.log("Set Cart Called!");
     cart = JSON.parse(obj);
-    renderCart(cart);
+    total = 0;
+
+    document.getElementById("items").innerHTML = null;
+
+    cart.forEach(item => {
+        total += item.count * item.prod.Price;
+        renderObject(item.prod, item.count);
+    })
+    document.getElementById("cartTotalText").innerHTML = "$"+total.toFixed(2);
+
+    console.log(cart);
+
+    document.getElementById("checkoutbtn").style.visibility = "hidden";
+    document.getElementById("cart").style.visibility = "hidden";
+    document.getElementById("dropdownmenu").style.visibility = "hidden";
 }
 
 function postCart(cart) {
+    console.log("Post Cart Called!");
     var req = new XMLHttpRequest(); //new request
     req.open("POST", "handler/postCart.php", true); //sending as POST
     req.send(JSON.stringify(cart)); //send cart
 }
 
 function getCart() {
+    console.log("Get Cart Called!");
     var req = new XMLHttpRequest(); //new request
     req.onload = function() {
         setCart(this.responseText); //set cart to saved cart
@@ -84,15 +102,15 @@ function renderCart(cart) {
 
     if(cart.length > 0) {
         document.getElementById("checkoutbtn").style.visibility = "visible";
-        console.log("Cart is filled!");
     }
     else {
         document.getElementById("checkoutbtn").style.visibility = "hidden";
-        console.log("Cart is empty!");
+        document.getElementById("cart").style.visibility = "hidden";
     }
 }
 
 function renderObject(product, count) {
+    console.log("Render Object Called!")
     var productTotal = product.Price * count;
     productTotal = productTotal.toFixed(2)
     var image = '<img src="../itemImages/'+product.Image+'" class="cartImage">'
@@ -111,6 +129,7 @@ function showCart() {
     var cartDisplay = document.getElementById("cart");
     var checkout = document.getElementById("checkoutbtn");
     var dropdownmenu = document.getElementById("dropdownmenu");
+
     if (cartDisplay.style.visibility === "hidden") {
         if(dropdownmenu.style.visibility === "visible") {
             dropdownmenu.style.visibility = "hidden";
@@ -130,6 +149,7 @@ function showCart() {
 }
 
 function removeFromCart(name){
+    console.log("Remove Called!");
     //get item name from html
     try{
         name = name.item(0).id;
@@ -161,6 +181,7 @@ function removeFromCart(name){
 }
 
 function increment(name){
+    console.log("Increment Called!");
     //get name from html
     try{
         name = name.item(0).id;
@@ -189,6 +210,7 @@ function increment(name){
 }
 
 function decrement(name){
+    console.log("Decrement Cart Called!");
     try{
         nameID = name.item(0).id;
     } catch {
@@ -216,7 +238,6 @@ function decrement(name){
             }
         }
     })
-    //render
     renderCart(cart);
 }
 

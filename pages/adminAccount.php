@@ -9,6 +9,7 @@
     $values=mysqli_fetch_row($results);
     $conn->close();
 ?>
+<!DOCTYPE html>
 <html>
     <form method="post" action="adminAccountProcessingPage.php">
         <label for="0">First Name</label><br>

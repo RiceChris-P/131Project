@@ -6,7 +6,7 @@
     }
 ?>
 
-<!DOCTYPE>
+<!DOCTYPE html>
 <html>
     <head>
         <title>Order Confirmation</title>

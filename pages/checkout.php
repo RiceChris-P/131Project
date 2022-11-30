@@ -425,7 +425,7 @@
 
 
 ?>
-
+<!DOCTYPE html>
 <html>
     
     <head>

@@ -8,9 +8,8 @@
     }
     //if user is already logged in it redirects user to home page
     if(isSet($_SESSION['login'])){
-        header('Location: index.php');
+        header('Location: ../index.php');
     }
-    //$conn->close();
 ?>
 <?php
     //form action
@@ -45,7 +44,7 @@
                     if($result){
                         $_SESSION['login'] = $email;
                         $success=true;
-                        header('Location: index.php');
+                        header('Location: shop.php');
                     }
                 }
                 else{
@@ -64,7 +63,7 @@
     }
     $conn->close();
 ?>
-
+<!DOCTYPE html>
 <html>
 
     <?php

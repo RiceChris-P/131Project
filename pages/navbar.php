@@ -14,7 +14,7 @@
 		$temp= mysqli_fetch_assoc($results);
 	}
 ?>
-
+<!DOCTYPE html>
 <html>
 	<head>
 		<link rel="stylesheet" href="../style/navbar.css">
