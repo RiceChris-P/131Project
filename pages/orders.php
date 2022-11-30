@@ -37,6 +37,7 @@ $result = $stmt->get_result();
                 <p>Contact: <?php print_r($order['contactinfo']);?></p>
                 <p>Delivery: <?php print_r($order['deliveryinfo']);?></p>
                 <p>Payment: <?php print_r($order['paymentinfo']);?></p>
+                <p>Date: <?php print_r($order['orderdate']);?></p>
             </div>
         <?php
             }
