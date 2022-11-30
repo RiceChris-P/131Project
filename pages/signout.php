@@ -5,5 +5,5 @@
 ?>
 <html>
     <p>Signed Out</p>
-    <a href="index.php">Back to home page</a>
+    <a href="../index.php">Back to home page</a>
 </html>
