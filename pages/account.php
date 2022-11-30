@@ -71,20 +71,20 @@ include("navbar.php");
                         <input type="text" name="firstName" class="" id="firstName" placeholder="First Name">
                         <input type="text" name="lastName" class="" id="lastName" placeholder="Last Name"><br>
                         <input type="text" name="email" class="" id="email"placeholder="Email Address"><br>
-                        <input type="text" name="phone" class="" id="phone" placeholder="Phone Number">
+                        <input type="text" name="phone" class="" id="phone" placeholder="Phone Number" onkeypress="return isNumberKey(event)">
 
                         <h2>Delivery Information</h2>
                         <input type="text" name="address" class="" id="stAddress" placeholder="Street Address"><br>
                         <input type="text" name="aptsuiteunit" id="apt" class="" placeholder="Apt, suite, etc. (optional)"><br>
                         <input type="text" name="state" id="state" class="" placeholder="State">
                         <input type="text" name="city" id="city" class="" placeholder="City">
-                        <input type="text" name="zip" id="zipCode" class="" placeholder="ZIP"><br>
+                        <input type="text" name="zip" id="zipCode" class="" placeholder="ZIP" onkeypress="return isNumberKey(event)"><br>
                         
                         <h2>Payment Information</h2>
                         <input type="text" name="cardname" id="cardName" placeholder="Name On Card"><br>
-                        <input type="text" name="cardnumber" id="cardNum" placeholder="Card Number">
+                        <input type="text" name="cardnumber" id="cardNum" placeholder="Card Number" onkeypress="return isNumberKey(event)">
                         <input type="text" name="cardexpiration" id="cardExp" placeholder="Exp MM/YY">
-                        <input type="text" name="cardcvv" id="cardCVV"placeholder="Enter CVV"><br>
+                        <input type="text" name="cardcvv" id="cardCVV"placeholder="Enter CVV" onkeypress="return isNumberKey(event)"><br>
                         <button type="submit" name="checkoutsubmit">Update Information</button>
                     </form>
             </div>
@@ -117,3 +117,11 @@ include("navbar.php");
         a:link {color: black; text-align: center; font-family: Arial, Helvetica, sans-serif;}
     </style>
 </html>
+<script>
+    function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : evt.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
+</script>

@@ -106,7 +106,7 @@
             <input type="text" name="email" class="loginFill" id="0"placeholder="Email" required><br>
             <input type="password" name="password" class="loginFill"id="2" placeholder="Password" required><br>
             <input type="password" name="retypepass" class="loginFill" id="3"placeholder="Confirm Password" required><br>
-            <input type="text" name="phonenumber" class="loginFill" id="1"placeholder="Phone Number" required><br>
+            <input type="text" name="phonenumber" class="loginFill" id="1"placeholder="Phone Number" onkeypress="return isNumberKey(event)" required><br>
             <button type="submit" class="submitButton">Create Account</button>
         </form>
     </body>
@@ -129,5 +129,11 @@
             return false;
         }
         return true; 
+    }
+    function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : evt.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
     }
 </script>
