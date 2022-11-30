@@ -69,7 +69,7 @@
 
     <?php
         if($usernameTaken){
-            echo '<script>alert("You already have an account, please log in")</script>';
+            echo '<script>alert("Account already exists, please log in")</script>';
         }
         if($success){
             echo '<script>alert("Account created, please log in")</script>';
@@ -100,15 +100,34 @@
       </nav>
       
         <h1 class="headerOne">Create your HomeBuy account</h1>
-        <form action="signup.php" method="post" class="formBox">
-            <input type="text" name="fname" class="loginFill" placeholder="First Name"><br>
-            <input type="text" name="lname" class="loginFill" placeholder="Last Name"><br>
-            <input type="text" name="email" class="loginFill" placeholder="Email"><br>
-            <input type="password" name="password" class="loginFill" placeholder="Password"><br>
-            <input type="password" name="retypepass" class="loginFill" placeholder="Confirm Password"><br>
-            <input type="text" name="phonenumber" class="loginFill" placeholder="Phone Number"><br>
+        <form action="signup.php" onsubmit="return validateForm()" method="post" class="formBox" >
+            <input type="text" name="fname" class="loginFill" placeholder="First Name" required><br>
+            <input type="text" name="lname" class="loginFill" placeholder="Last Name" required><br>
+            <input type="text" name="email" class="loginFill" id="0"placeholder="Email" required><br>
+            <input type="password" name="password" class="loginFill"id="2" placeholder="Password" required><br>
+            <input type="password" name="retypepass" class="loginFill" id="3"placeholder="Confirm Password" required><br>
+            <input type="text" name="phonenumber" class="loginFill" id="1"placeholder="Phone Number" required><br>
             <button type="submit" class="submitButton">Create Account</button>
         </form>
     </body>
 
 </html>
+<script>
+    function validateForm(){
+        let email = document.getElementById(0).value;
+        let phone = document.getElementById(1).value;
+        if(!email.includes("@")){
+            alert("please enter a valid email");
+            return false;
+        }
+        else if(phone.length!=10){
+            alert("please enter a valid phone number");
+            return false;
+        }
+        else if(document.getElementById(2).value!=document.getElementById(3).value){
+            alert("passwords do not match");
+            return false;
+        }
+        return true; 
+    }
+</script>
