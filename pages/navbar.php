@@ -24,13 +24,13 @@
 		<ul>
 			<div class="navLeft">
 				<div class="navElement">
-					<a href="index.php"><img class="navLogo" src="../assets/logo-transparent.png" alt=""></a>
+					<a href="../index.php"><img class="navLogo" src="../assets/logo-transparent.png" alt=""></a>
 				</div>
 			</div>
 
 			<div class="navRight">
 				<div class="navElement">
-					<button class="navElementButton" onclick="location.href = 'index.php';">Home</button>
+					<button class="navElementButton" onclick="location.href = '../index.php';">Home</button>
 				</div>
 
 				<div class="navElement">
