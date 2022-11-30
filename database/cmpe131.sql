@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2022 at 09:29 PM
+-- Generation Time: Nov 30, 2022 at 10:29 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -122,15 +122,16 @@ CREATE TABLE `orders` (
   `email` varchar(255) DEFAULT NULL,
   `contactinfo` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`contactinfo`)),
   `deliveryinfo` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`deliveryinfo`)),
-  `paymentinfo` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`paymentinfo`))
+  `paymentinfo` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`paymentinfo`)),
+  `orderdate` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`ordernum`, `items`, `subtotal`, `totalweight`, `weightfee`, `totalcost`, `email`, `contactinfo`, `deliveryinfo`, `paymentinfo`) VALUES
-('90230224795437092165', '[{\"prod\":{\"Name\":\"Corn\",\"Price\":\"0.89\",\"Weight\":\"0.375\",\"Image\":\"corn.png\",\"Type\":\"vegetable\"},\"count\":1}]', 0.89, 0.375, 0, 0.89, 'Test@Test.com', '{\"firstName\":\"Test\",\"lastName\":\"Test\",\"email\":\"Test@Test@gmail.com\",\"phone\":\"4151230987\"}', '{\"address\":\"Test\",\"aptsuiteetc\":\"\",\"state\":\"CA\",\"city\":\"Test\",\"zip\":\"12345\"}', '{\"cardname\":\"Test\",\"cardnumber\":\"123456789012345\",\"cardexpdate\":\"01/23\",\"cardcvv\":\"123\"}');
+INSERT INTO `orders` (`ordernum`, `items`, `subtotal`, `totalweight`, `weightfee`, `totalcost`, `email`, `contactinfo`, `deliveryinfo`, `paymentinfo`, `orderdate`) VALUES
+('90230224795437092165', '[{\"prod\":{\"Name\":\"Corn\",\"Price\":\"0.89\",\"Weight\":\"0.375\",\"Image\":\"corn.png\",\"Type\":\"vegetable\"},\"count\":1}]', 0.89, 0.375, 0, 0.89, 'Test@Test.com', '{\"firstName\":\"Test\",\"lastName\":\"Test\",\"email\":\"Test@Test@gmail.com\",\"phone\":\"4151230987\"}', '{\"address\":\"Test\",\"aptsuiteetc\":\"\",\"state\":\"CA\",\"city\":\"Test\",\"zip\":\"12345\"}', '{\"cardname\":\"Test\",\"cardnumber\":\"123456789012345\",\"cardexpdate\":\"01/23\",\"cardcvv\":\"123\"}', '');
 
 --
 -- Indexes for dumped tables

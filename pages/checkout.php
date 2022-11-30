@@ -4,12 +4,12 @@
     include("navbar.php");
     include("handler/setCartSession.php");
 
-    // $arr = json_decode($_SESSION['cart'], true);
-    // $empty = empty($arr);
+    $arr = json_decode($_SESSION['cart'], true);
+    $empty = empty($arr);
 
-    // if($empty) {
-    //     header('Location: shop.php');
-    // }
+    if($empty) {
+        header('Location: shop.php');
+    }
 
     function calculateCartPrices() {
         $totalcost = 0;
@@ -458,10 +458,14 @@
                     }
 
                     echo '<script>console.log("Sending values into tables of database!")</script>';
+
+                    $_SESSION['orderdate'] = date('m/d/Y');
+                    $date = $_SESSION['orderdate'];
+
                     $queryThree = "INSERT INTO accounts (fname, lastName, email, password, phonenumber, address, aptOrSuite, state, city, zipCode, nameOnCard, cardNum, cardExp, cardCVV, cart)
                                                  VALUES('$firstName','$lastName', '$email', '$password', '$phone', '$address', '$aptsuiteetc', '$state', '$city', '$zip','$cardname', '$cardnum', '$cardexp', '$cardcvv', '$items');";
-                    $queryFour = "INSERT INTO orders (ordernum, items, subtotal, totalweight, weightfee, totalcost, email, contactinfo, deliveryinfo, paymentinfo) 
-                                              VALUES ('$orderNum', '$items', '$subtotal', '$totalweight', '$weightfee', '$totalcost', '$email','$contact', '$delivery', '$payment');";
+                    $queryFour = "INSERT INTO orders (ordernum, items, subtotal, totalweight, weightfee, totalcost, email, contactinfo, deliveryinfo, paymentinfo, orderdate) 
+                                              VALUES ('$orderNum', '$items', '$subtotal', '$totalweight', '$weightfee', '$totalcost', '$email','$contact', '$delivery', '$payment', '$date');";
 
                     $resultThree = mysqli_query($conn, $queryThree);
                     $resultFour = mysqli_query($conn, $queryFour);
@@ -508,86 +512,132 @@
            $result = mysqli_query($conn, $query);
            $rows = mysqli_num_rows($result);
 
-           if($rows == 0) {
-               echo '<script>console.log("Unique user check passed!")</script>';
-               //Generating random order number
-               $orderNumTaken = true;
-               $orderNum = "";
+           //Generating random order number
+           $orderNumTaken = true;
+           $orderNum = "";
 
-               while($orderNumTaken) {
+           while($orderNumTaken) {
 
-                   for($x= 0; $x <= 20; $x ++) {
-                       $orderNum .= rand(0, 9);
-                   }
-
-                   $queryTwo = "SELECT * FROM orders WHERE ordernum='$orderNum'";
-                   $resultTwo = mysqli_query($conn, $queryTwo);
-                   $rowsTwo = mysqli_num_rows($resultTwo);
-
-                   if($rowsTwo == 0) {
-                       $orderNumTaken = false;
-                       $_SESSION['ordernum'] = $orderNum;
-                       echo '<script>console.log("Order number generated")</script>';
-                   }
-                   else {
-                       $orderNum = "";
-                   }
+               for($x= 0; $x <= 20; $x ++) {
+                   $orderNum .= rand(0, 9);
                }
 
+               $queryTwo = "SELECT * FROM orders WHERE ordernum='$orderNum'";
+               $resultTwo = mysqli_query($conn, $queryTwo);
+               $rowsTwo = mysqli_num_rows($resultTwo);
+
+               if($rowsTwo == 0) {
+                   $orderNumTaken = false;
+                   $_SESSION['ordernum'] = $orderNum;
+                   echo '<script>console.log("Order number generated")</script>';
+               }
+               else {
+                   $orderNum = "";
+               }
+           }
+
+           if($rows == 0) {
+               echo '<script>console.log("Unique user check passed!")</script>';
+
                echo '<script>console.log("Sending values into table of database!")</script>';
-               $queryThree = "INSERT INTO orders (ordernum, items, subtotal, totalweight, weightfee, totalcost, email, contactinfo, deliveryinfo, paymentinfo) 
-                                          VALUES ('$orderNum', '$items', '$subtotal', '$totalweight', '$weightfee', '$totalcost', '$email','$contact', '$delivery', '$payment');";
+
+               $_SESSION['orderdate'] = date('m/d/Y');
+               $date = $_SESSION['orderdate'];
+
+               $queryThree = "INSERT INTO orders (ordernum, items, subtotal, totalweight, weightfee, totalcost, email, contactinfo, deliveryinfo, paymentinfo, orderdate) 
+                                          VALUES ('$orderNum', '$items', '$subtotal', '$totalweight', '$weightfee', '$totalcost', '$email','$contact', '$delivery', '$payment', '$date');";
                $resultThree = mysqli_query($conn, $queryThree);
 
-               $id = $_SESSION['login'];
-
-               $updateDeliveryQuery = "UPDATE accounts
-                               SET
-                                    address = '$address',
-                                    aptOrSuite = '$aptsuiteetc',
-                                    state = '$state',
-                                    city = '$city',
-                                    zipCode = '$zip'
-                                WHERE email = '$id';";
-
-                $updatePaymentQuery = "UPDATE accounts
-                                SET
-                                    nameOnCard = '$cardname',
-                                    cardNum = '$cardnum',
-                                    cardExp = '$cardexp',
-                                    cardCVV = '$cardcvv',
-                                WHERE email = '$id';";
-
-               if(!$deliveryFilled) {
-                    $deliveryResult = mysqli_query($conn, $updateDeliveryQuery);
-                    if($deliveryResult) {
-                        echo '<script>console.log("Delivery Updated!")</script>';
-                    }
-                }
-
-               if(!$paymentFilled) {
-                    $paymentResult = mysqli_query($conn, $updatePaymentQuery);
-                    if($paymentResult) {
-                        echo '<script>console.log("Payment Updated!")</script>';
-                    }
-                }
-
                if($resultThree) {
-                   echo '<script>console.log("Order sent!")</script>';
-                   header('Location: order.php');
+                    echo '<script>console.log("Order sent!")</script>';
+                    $_SESSION['ordernum'] = $orderNum;
+                    $_SESSION['ordertotal'] = $totalcost;
+                    $_SESSION['email'] = $email;
+                    $_SESSION['orderdate'] = date('m/d/Y');
+                    $_SESSION['expecteddelivery'] = date('m/d/Y', strtotime('+3 days'));
+
+                    //Order Successful, so erases kept cart
+                    $newCart = json_encode (new stdClass);
+                    $queryFive = "UPDATE accounts SET cart = '$newCart' WHERE email = '$email';";
+                    $resultFive = mysqli_query($conn, $queryFive);
+
+                    //Checks if query is successful
+                    if($resultFive) {
+                        echo '<script>console.log("Cart updated!")</script>';
+                    }
+                        
+                    header('Location: order.php');
                }
            }
            else {
-               echo '<script>alert("User exists! Please log in.")</script>';
-               header('Location: login.php');
-           }
-        }
-        else {
-            header('Location: aboutus.php');
+               if(!isset($_SESSION['login'])) {
+                    echo '<script>alert("User exists! Please log in.")</script>';
+                    header('Location: login.php');
+               }
+               else {
+                    echo '<script>console.log("Sending values into table of database!")</script>';
+                    $_SESSION['orderdate'] = date('m/d/Y');
+                    $date = $_SESSION['orderdate'];
+                    $queryThree = "INSERT INTO orders (ordernum, items, subtotal, totalweight, weightfee, totalcost, email, contactinfo, deliveryinfo, paymentinfo, orderdate) 
+                                                VALUES ('$orderNum', '$items', '$subtotal', '$totalweight', '$weightfee', '$totalcost', '$email','$contact', '$delivery', '$payment', '$date');";
+                    $resultThree = mysqli_query($conn, $queryThree);
+
+                    $id = $_SESSION['login'];
+
+                    $updateDeliveryQuery = "UPDATE accounts
+                                    SET
+                                        address = '$address',
+                                        aptOrSuite = '$aptsuiteetc',
+                                        state = '$state',
+                                        city = '$city',
+                                        zipCode = '$zip'
+                                    WHERE email = '$id';";
+    
+                    $updatePaymentQuery = "UPDATE accounts
+                                    SET
+                                        nameOnCard = '$cardname',
+                                        cardNum = '$cardnum',
+                                        cardExp = '$cardexp',
+                                        cardCVV = '$cardcvv'
+                                    WHERE email = '$id';";
+    
+                    if(!$deliveryFilled) {
+                        $deliveryResult = mysqli_query($conn, $updateDeliveryQuery);
+                        if($deliveryResult) {
+                            echo '<script>console.log("Delivery Updated!")</script>';
+                        }
+                    }
+    
+                    if(!$paymentFilled) {
+                        $paymentResult = mysqli_query($conn, $updatePaymentQuery);
+                        if($paymentResult) {
+                            echo '<script>console.log("Payment Updated!")</script>';
+                        }
+                    }
+
+                    if($resultThree) {
+                        echo '<script>console.log("Order sent!")</script>';
+                        $_SESSION['ordernum'] = $orderNum;
+                        $_SESSION['ordertotal'] = $totalcost;
+                        $_SESSION['email'] = $email;
+                        $_SESSION['expecteddelivery'] = date('m/d/Y', strtotime('+3 days'));
+
+                        //Order Successful, so erases kept cart
+                        $newCart = json_encode (new stdClass);
+                        $queryFive = "UPDATE accounts SET cart = '$newCart' WHERE email = '$email';";
+                        $resultFive = mysqli_query($conn, $queryFive);
+
+                        //Checks if query is successful
+                        if($resultFive) {
+                            echo '<script>console.log("Cart updated!")</script>';
+                        }
+                            
+                        header('Location: order.php');
+                    }
+                }
+            }
         }
     }
-
-
 ?>
 <!DOCTYPE html>
 <html>

@@ -2,7 +2,7 @@
     include("navbar.php");
 
     if(!isSet($_SESSION['login']) or !isSet($_SESSION['ordernum'])){
-        header('Location: index.php');
+        header('Location: ../index.php');
     }
 ?>
 
@@ -51,9 +51,10 @@
                             <td>
                                 <h4>Expected delivery</h4>
                                 <?php 
+                                    $email = $_SESSION['login'];
                                     echo $_SESSION['expecteddelivery'];
                                     session_destroy();
-                                    session_start();
+                                    // session_start();
                                     $_SESSION['login'] = $email;
                                 ?>
                             </td>
@@ -61,12 +62,6 @@
                     </tbody>
                 </table>
             </div>
-            <!-- <button onclick="shopMore()">Shop More</button> -->
         </div>
     </body>
-    <script>
-        function shopMore() {
-            location.href = "shop.php";
-        }
-    </script>
 </html>

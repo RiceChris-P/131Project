@@ -6,7 +6,7 @@
     }
     //if user is already logged in it redirects user to home page
     if(isSet($_SESSION['login'])){
-        header('Location: ../index.php');
+        header('Location: shop.php');
     }
 ?>
 <?php
