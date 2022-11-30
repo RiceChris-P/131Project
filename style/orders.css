@@ -1,0 +1,17 @@
+body {
+    background-color: rgba(0,0,0,.1);
+    margin: 0px;
+    overflow: auto;
+}
+
+h1 {
+    text-align: center;
+}
+
+.order {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;
+    width: 80%;
+}
