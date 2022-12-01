@@ -45,7 +45,7 @@
 ?>
 <html>
     <body onload="document.forms[0].submit()">
-    <form method="post" action="modifyItemInDatabase.php">
+    <form method="post" action="admin.php">
         <input type="text" name="status" id=0 value="<?php echo $success?>"></input>
     </form>
 </body>

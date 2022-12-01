@@ -3,6 +3,9 @@
     if(isset($_POST["username"]) && $_POST["username"] =="FrankButt" && $_POST["password"] == "fb123"){
         $show = True;
     }
+    if($_POST['status']==1){
+        echo '<script>alert("success");</script>';
+    }
 ?>
 <html>
 <link rel="stylesheet" href="../style/admin.css">
