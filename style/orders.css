@@ -15,3 +15,17 @@ h1 {
     border: 1px solid black;
     width: 80%;
 }
+
+.items{
+    text-align: center;
+    min-width: 75%;
+}
+
+ .cartCheckOutItem {
+    display: flex;
+}
+
+.itemContainer {
+    display: inline-flex;
+
+}
