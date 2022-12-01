@@ -9,9 +9,14 @@
 ?>
 <!DOCTYPE html>
 <html>
+
+<link rel="stylesheet" href="../style/admin.css">
+<link rel="stylesheet" href="../style/form.css">
+<h1 class="adminHeader">Modify Items </h1>
+<h3 class="bio"> Select a grocery item from the dropdown to change</h3>
     <form method="post" action="modifyItemInDatabase.php">
-    <select name="chosenItem">
-        <option value="">Select</option>
+    <select class= "mainbox" name="chosenItem">
+        <option value="">Select Item</option>
         <?php
 				while($rows=$results->fetch_assoc())
 				{
@@ -23,6 +28,6 @@
                 }  
                 ?>  
         </select>  
-        <input type="submit" name="Submit" value="Select" />  
+        <input class="selectButton" type="submit" name="Submit" value="Select" />  
     </form>
 </html>

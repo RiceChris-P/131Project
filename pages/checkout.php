@@ -418,7 +418,7 @@
 
         //Creating Account and Sending Order
         if($createAccount && $formSuccess) {
-            echo '<script>console.log("Creating Account...")</script>';
+            echo '<script>console.log("Creating Account")</script>';
 
             if($password == $retypepass) {
                 echo '<script>console.log("Passwords check passed!")</script>';

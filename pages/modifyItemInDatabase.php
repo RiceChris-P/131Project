@@ -11,10 +11,23 @@
 
 ?>
 <html>
-    <form action="modifyItemProcessing.php" method="post" enctype="multipart/form-data">
-    <input type="text" id="0"name="itemName"required>
-    <input type="text" id="1" name="price" onkeypress="return isNumberKey(event,this)" required>
-    <input type="text" id="2" name="weight" onkeypress="return isNumberKey(event,this)" required>
+    <link rel="stylesheet" href="../style/admin.css">
+    <link rel="stylesheet" href="../style/form.css">
+
+
+    <h1 class="adminHeader"> Modifying Item...</h1>
+    <form action="modifyItemProcessing.php" method="post" enctype="multipart/form-data"><br>
+
+    <label class= "userLabel" for="0">Item Name</label><br>
+    <input class="userField" type="text" id="0"name="itemName"required><br>
+    <label class= "userLabel" for="0">Price (in dollars)</label>
+    <br>
+    <input class="userField" type="text" id="1" name="price" onkeypress="return isNumberKey(event,this)" required>
+    <br>
+    <label class= "userLabel" for="0">Weight</label>
+    <br>
+    <input class="userField" type="text" id="2" name="weight" onkeypress="return isNumberKey(event,this)" required>
+    <br>
     <!-- <select name="itemType" >
     <option value="dairy">Dairy</option>
     <option value="seafood">Seafood</option>
@@ -22,13 +35,21 @@
     <option value="vegetable">Vegetable</option>
     <option value="fruit">Fruit</option>
     </select> -->
-    <input tpye="text" id="4"name="itemType" required>
-    <input type="text" id="5" name="numOfItems" onkeypress="return isWholeNumberKey(event,this)" required >
-    Upload New Picture:
-    <input type="file" name="file">
+    <label class= "userLabel" for="0">Item Type</label><br>
+    <input class="userField" type="text" id="4"name="itemType" required>
+    <br>
+    <label class= "userLabel" for="0">Number of Items</label><br>
+    <input class="userField" type="text" id="5" name="numOfItems" onkeypress="return isWholeNumberKey(event,this)" required >
+    <br>
+    <label class= "userLabel" for="0">Upload New Picture</label><br>
+    <input class="userField"  type="file" name="file">
+    <br>
+
     <input type="hidden" name="oldItemName" value="<?php echo $chosenItem?>">
-    <input type="submit" name="submit" value="Submit">
-    <input type="submit" name="delete" value="Delete Item">
+    <br><br>
+    <input class="updateInfoButton"  type="submit" name="submit" value="Submit">
+    <br><br><br>
+    <input class="updateInfoButton"  type="submit" name="delete" value="Delete Item">
 
 
     </form>

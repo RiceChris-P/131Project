@@ -90,13 +90,54 @@
 
 
 .successTitle{
-    font-size: 50px;
-    font-weight: 300;
+    font-size: 80px;
+    font-weight: 350;
     background-image: linear-gradient(to left, #04BF55, #403BBF);
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text;
     margin-top: 0%;
     margin-bottom: 0%;
+    text-align: center;
+}
+
+
+
+.mainbox{
+    text-align: center;
+    margin-left: 43%;
+    margin-top: 3%;
+    background-color: #403BBF;
+    color: aliceblue;
+    font: normal 20px/42px; 
+}
+
+.selectButton{
+    width: 70px;
+    height: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 100;
+    color: #000;
+    background-color: #04BF55;
+    border: none;
+    border-radius: 46px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    /* margin-top: 0%;
+    margin-left: 35%;
+    text-align: center; */
+}
+
+.mainboxselectUser{
+    text-align: center;
+    background-color: #403BBF;
+    color: aliceblue; 
+    width: 60%;
+    /* margin-left: 45%; */
     text-align: center;
 }

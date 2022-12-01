@@ -16,10 +16,11 @@
     <h1 class="adminHeader">Select User</h1>
 
     <h3 class="bio"> Click the drowpdown to reveal current users shopping at OFS</h3>
-    <form class="dropdown" method="post" action="adminAccount.php">
-    <select name="emails">
-        <option value="">Select</option>
-        <?php
+    
+    <form class="dropdown" method="post" action="adminAccount.php" style="margin: auto">
+        <select class="mainboxselectUser" name="emails">
+            <option value="">Select Item</option>
+            <?php
 				//Loop through sql data to display
 				while($rows=$results->fetch_assoc())
 				{
@@ -31,6 +32,6 @@
                 }  
                 ?>  
         </select>  
-        <input type="submit" name="Submit" value="Select" />  
+        <input class="selectButton" type="submit" name="Submit" value="Select" />  
     </form>
 </html>
