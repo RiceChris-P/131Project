@@ -8,7 +8,7 @@
             }
             $newEmail=$_POST['email'];
             $inputtedEmail=$_POST['origSelectedEmail'];
-            $sql="UPDATE accounts SET email=$newEmail WHERE email='$inputtedEmail'";
+            $sql="UPDATE accounts SET email='$newEmail' WHERE email='$inputtedEmail'";
             mysqli_query($conn,$sql);
         }
         updateSqlValue("fname",$_POST['firstName'],$inputtedEmail);
