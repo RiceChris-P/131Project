@@ -2,10 +2,14 @@
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         $inputtedEmail=$_POST['origSelectedEmail'];
         if($_POST['email']!=$_POST['origSelectedEmail']&&$_POST['email']!=null){
+            $conn = mysqli_connect("localhost", "root", "", "cmpe131");
+            if(!$conn){
+            die("Connection failed: " . mysqli_connect_error());
+            }
             $newEmail=$_POST['email'];
-            $inputtedEmail=$_POST['email'];
+            $inputtedEmail=$_POST['origSelectedEmail'];
             $sql="UPDATE accounts SET email=$newEmail WHERE email='$inputtedEmail'";
-            $results=mysqli_query($conn,$sql);
+            mysqli_query($conn,$sql);
         }
         updateSqlValue("fname",$_POST['firstName'],$inputtedEmail);
         updateSqlValue("lastName",$_POST['lastName'],$inputtedEmail);
