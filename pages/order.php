@@ -4,7 +4,7 @@
     if(!isSet($_SESSION['login']) or !isSet($_SESSION['ordernum'])){
         header('Location: ../index.php');
     }
-
+    
     function resetSession() {
         $_SESSION['ordernum'] = NULL;
         $_SESSION['ordertotal'] = NULL;
@@ -38,7 +38,7 @@
                             <td>
                                 <h4>Order total</h4>
                                 <?php 
-                                    echo "$" . number_format($_SESSION['totalcost'], 2, '.');
+                                    echo "$" . number_format($_SESSION['ordertotal'], 2, '.');
                                 ?>
                             </td>
                             <td>

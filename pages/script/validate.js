@@ -170,6 +170,18 @@ submitButton.addEventListener('click', e => {
     }
 });
 
+function validate() {
+    let check = document.getElementById("check");
+    if(check.checked) {
+        document.getElementById("password").style.visibility = "visible";
+        document.getElementById("retypepass").style.visibility = "visible";
+    }
+    else {
+        document.getElementById("password").style.visibility = "hidden";
+        document.getElementById("retypepass").style.visibility = "hidden";
+    }
+}
+
 function isNumberKey(evt){
 var charCode = (evt.which) ? evt.which : evt.keyCode
 if (charCode > 31 && (charCode < 48 || charCode > 57))
