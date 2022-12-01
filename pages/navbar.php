@@ -95,6 +95,6 @@
 			</button>
 		</div>
 	</div>
-	<script src="cart.js"></script>
+	<script src="script/cart.js"></script>
 </html>
 
