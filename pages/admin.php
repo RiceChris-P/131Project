@@ -7,7 +7,7 @@
     if(isset($_SESSION['admin'])&&$_SESSION['admin']){
         $show=true;
     }
-    if($_POST['status']==1){
+    if(isset($_POST['status'])&&$_POST['status']==1){
         echo '<script>alert("success");</script>';
     }
 ?>
@@ -31,7 +31,7 @@
         <br>
         <button class="adminOptions" onclick="location.href = 'adminHome.php';">View Accounts</button>
         <br>
-        <button class="adminOptions" onclick="location.href = 'signout.php';">View Accounts</button>
+        <button class="adminOptions" onclick="location.href = 'signout.php';">Signout</button>
         <br>
     <?php } else { ?>
       <form action="admin.php" method="post" class="formBox">

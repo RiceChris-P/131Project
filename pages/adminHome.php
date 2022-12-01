@@ -22,8 +22,8 @@
     <h3 class="bio"> Click the drowpdown to reveal current users shopping at OFS</h3>
     
     <form class="dropdown" method="post" action="adminAccount.php" style="margin: auto">
-        <select class="mainboxselectUser" name="emails">
-            <option value="">Select Item</option>
+        <select class="mainboxselectUser" name="emails" required>
+            <option value="">Select User</option>
             <?php
 				//Loop through sql data to display
 				while($rows=$results->fetch_assoc())

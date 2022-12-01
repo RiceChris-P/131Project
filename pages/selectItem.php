@@ -15,7 +15,7 @@
 <h1 class="adminHeader">Modify Items </h1>
 <h3 class="bio"> Select a grocery item from the dropdown to change</h3>
     <form method="post" action="modifyItemInDatabase.php">
-    <select class= "mainbox" name="chosenItem">
+    <select class= "mainbox" name="chosenItem" required>
         <option value="">Select Item</option>
         <?php
 				while($rows=$results->fetch_assoc())
