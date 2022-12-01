@@ -185,3 +185,26 @@ body {
     margin: 0;
     text-align: center;
   }
+
+#contactContainer{
+    display: inline-grid;
+    grid-template-columns: repeat(2,1fr);
+}
+
+#deliveryContainer{
+    display: inline-grid;
+    grid-template-columns: repeat(2,1fr);
+}
+
+#paymentContainer{
+    display: inline-grid;
+    grid-template-columns: repeat(2,1fr);
+}
+
+.form {
+    margin: 5%;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: black;
+}
