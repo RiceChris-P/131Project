@@ -120,7 +120,7 @@
 
         $paycardname = $paymentArr['cardname'];
         $paycardnum = $paymentArr['cardnumber'];
-        $paycardexp = $paymentArr['cardexp'];
+        $paycardexp = $paymentArr['cardexpdate'];
         $paycardcvv = $paymentArr['cardcvv'];
 
         mysqli_query(
