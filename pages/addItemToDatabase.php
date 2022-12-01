@@ -1,6 +1,10 @@
 <?php
-//1 is true
-//0 is false
+    session_start();
+    if(!$_SESSION['admin']){
+        header('Location: admin.php');
+    }
+    //1 is true
+    //0 is false
     $success=0;
     if (isset($_POST['submit'])) {
         $targetDir = "../itemImages";

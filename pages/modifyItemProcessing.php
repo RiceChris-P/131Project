@@ -1,6 +1,10 @@
 <?php
-//0 is false
-//1 is true
+    session_start();
+    if(!$_SESSION['admin']){
+        header('Location: admin.php');
+    }
+    //0 is false
+    //1 is true
     $success=0;
     if (isset($_POST['submit'])) {
         $conn = mysqli_connect("localhost", "root", "", "cmpe131");
