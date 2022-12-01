@@ -12,6 +12,8 @@
         if(!$conn){
             die("Connection failed: " . mysqli_connect_error());
         }
+        // var_dump($_FILES);
+        // echo($targetFilePath);
         if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
             $sql="INSERT INTO items VALUES ('$itemName','$price','$weight','".$fileName."','$type','$inventory')";
             mysqli_query($conn, $sql);

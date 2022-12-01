@@ -9,7 +9,14 @@
 ?>
 <!DOCTYPE html>
 <html>
-    <form method="post" action="adminAccount.php">
+
+    <link rel="stylesheet" href="../style/admin.css">
+    <link rel="stylesheet" href="../style/form.css">
+
+    <h1 class="adminHeader">Select User</h1>
+
+    <h3 class="bio"> Click the drowpdown to reveal current users shopping at OFS</h3>
+    <form class="dropdown" method="post" action="adminAccount.php">
     <select name="emails">
         <option value="">Select</option>
         <?php

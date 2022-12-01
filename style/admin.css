@@ -3,7 +3,7 @@
     color: #04BF55;
     font-size: 5rem;
     margin-top: 0%;
-    margin-left: 25%;
+    text-align: center;
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: #1704aa;	
     text-shadow: 0 0 15px #000;		
@@ -44,6 +44,59 @@
     outline: none;
     margin-top: 0%;
     margin-left: 35%;
+    text-align: center;
 }
 
 
+.adminOptions{
+
+    width: 400px;
+    height: 40px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #04BF55;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    margin-top: 0%;
+    margin-left: 37%;
+    text-align: center;
+    margin-bottom: 2%;
+    margin-top: 2%;
+
+}
+
+.adminsubmitsignin{
+    background-color: #403BBF;
+    display: block;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 56px;
+    width: 90%;
+    font-family: Helvetica, sans-serif;
+    font-size: 23px;
+    font-weight: bold;
+    color: white;
+    border-radius: 15px;
+}
+
+
+.successTitle{
+    font-size: 50px;
+    font-weight: 300;
+    background-image: linear-gradient(to left, #04BF55, #403BBF);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    text-align: center;
+}

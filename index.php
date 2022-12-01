@@ -16,10 +16,17 @@
 ?>
 <!DOCTYPE html>
 <html>
+	<style>
+		body {
+			background-image: url("assets/background.jpg");
+		}
+	</style>
 	<head>
 		<link rel="stylesheet" href="style/index.css">
 		<link rel="stylesheet" href="style/navbar.css">
 		<link rel="stylesheet" href="style/cart.css">
+
+		
 	</head>
 	<div class="navBar">
 		<ul>

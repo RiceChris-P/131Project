@@ -47,17 +47,22 @@
       <nav class="navBar">
         <ul>
             <div class="logoElement">
-                <img class="logo" src="../assets/logo-transparent.png" alt="">
+            <a href="../index.php">  <img class="logo" src="../assets/logo-transparent.png" alt=""> </a>
             </div>
         </ul>
       </nav>
 
-        <h1 class="headerOne">Sign into your HomeBuy account</h1>
+        <h1 class="headerOne">Sign into your OFS account</h1>
         <form action="login.php" method="post" class="formBox">
             <input type="text" name="email" class="loginFill" placeholder="Email"><br>
             <input type="password" name="password" class="loginFill" placeholder="Password"><br>
             <button type="submit" class="submitButton">Sign In</button>
         </form>
+
+
+        <br>
+
+        <a class="linktoEmployeeLogin" href="admin.php">Employee? Login Here </a>
     </body>
 
 </html>

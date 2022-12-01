@@ -3,6 +3,11 @@
 ?>
 <!DOCTYPE html>
 <html>
+	<style>
+		body {
+			background-image: url("assets/background.jpg");
+		}
+	</style>
   
 	<head>
     <title>About Us</title>

@@ -93,7 +93,7 @@
       <nav class="navBar">
         <ul>
             <div class="logoElement">
-                <img class="logo" src="../assets/logo-transparent.png" alt="">
+                <a href="../index.php"> <img class="logo" src="../assets/logo-transparent.png" alt=""> </a>
             </div>
         </ul>
       </nav>
@@ -108,6 +108,9 @@
             <input type="text" name="phonenumber" class="loginFill" id="1"placeholder="Phone Number" onkeypress="return isNumberKey(event)" required><br>
             <button type="submit" class="submitButton">Create Account</button>
         </form>
+
+        <br>
+        <a class="linktoEmployeeLogin" href="admin.php">Employee? Login Here </a>
     </body>
 
 </html>
