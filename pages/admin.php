@@ -1,7 +1,11 @@
 <?php
-    $show = False;
-    if(isset($_POST["username"]) && $_POST["username"] =="FrankButt" && $_POST["password"] == "fb123"){
-        $show = True;
+    $show=false;
+    session_start();
+    if(isset($_POST["username"])&&isset($_POST['password']) && $_POST["username"] =="FrankButt" && $_POST["password"] == "fb123"){
+        $_SESSION['admin']=true;
+    }
+    if(isset($_SESSION['admin'])&&$_SESSION['admin']){
+        $show=true;
     }
     if($_POST['status']==1){
         echo '<script>alert("success");</script>';
@@ -26,6 +30,8 @@
         <button class="adminOptions" onclick="location.href = 'adminImageUpload.php';">Add Items</button>
         <br>
         <button class="adminOptions" onclick="location.href = 'adminHome.php';">View Accounts</button>
+        <br>
+        <button class="adminOptions" onclick="location.href = 'signout.php';">View Accounts</button>
         <br>
     <?php } else { ?>
       <form action="admin.php" method="post" class="formBox">

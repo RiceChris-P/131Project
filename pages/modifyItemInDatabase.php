@@ -1,4 +1,8 @@
 <?php
+    session_start();
+    if(!$_SESSION['admin']){
+        header('Location: admin.php');
+    }
     $chosenItem=$_POST['chosenItem'];
     $conn=mysqli_connect("localhost","root", "","cmpe131");
     if (!$conn) {
