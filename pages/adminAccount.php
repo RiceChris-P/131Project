@@ -11,24 +11,72 @@
 ?>
 <!DOCTYPE html>
 <html>
+
+        <link rel="stylesheet" type="text/css" href="../style/admin.css">
+		<!-- <link rel="stylesheet" type="text/css" href="../style/navbar.css">
+		<link rel="stylesheet" type="text/css" href="../style/cart.css"> -->
+    <h1 class="adminHeader">User Information </h1>
     <form method="post" action="adminAccountProcessingPage.php">
-        <label for="0">First Name</label><br>
-        <input type="text" name="firstName" class="" id="0" placeholder="First Name">
-        <input type="text" name="lastName" class="" id="1" placeholder="Last Name">
-        <input type="text" name="email" class="" id="2"placeholder="Email Address">
-        <input type="text" name="password" id="3">
-        <input type="text" name="phone" class="" id="4" placeholder="Phone Number" onkeypress="return isNumberKey(event)">
-        <input type="text" name="address" class="" id="5" placeholder="Street Address">
-        <input type="text" name="aptsuiteunit" id="6" class="" placeholder="Apt, suite, etc. (optional)">
-        <input type="text" name="state" id="7" class="" placeholder="State">
-        <input type="text" name="city" id="8" class="" placeholder="City">
-        <input type="text" name="zip" id="9" class="" placeholder="ZIP" onkeypress="return isNumberKey(event)">
-        <input type="text" name="cardname" id="10" placeholder="Name On Card"><br>
-        <input type="text" name="cardnumber" id="11" placeholder="Card Number" onkeypress="return isNumberKey(event)">
-        <input type="text" name="cardexpiration" id="12" placeholder="Exp MM/YY">
-        <input type="text" name="cardcvv" id="13" placeholder="Enter CVV" onkeypress="return isNumberKey(event)"><br>
+        
+        <label class= "userLabel" for="0">First Name</label><br>
+        <input class="userField" type="text" name="firstName" class="" id="0" placeholder="First Name"><br>
+        
+        <br>
+        <label class= "userLabel"for="1">Last Name</label><br>
+        <input  class="userField" type="text" name="lastName" class="" id="1" placeholder="Last Name"><br>
+        
+        <br>
+        <label class= "userLabel"for="2">Email</label><br>
+        <input  class="userField" type="text" name="email" class="" id="2"placeholder="Email Address"><br>
+        <br>
+
+        <label class= "userLabel"for="3">Password</label><br>
+        <input class="userField"  type="text" name="password" id="3"><br>
+        <br>
+
+        <label class= "userLabel"for="4">Phone</label><br>
+        <input  class="userField" type="text" name="phone" class="" id="4" placeholder="Phone Number" onkeypress="return isNumberKey(event)"><br>
+        <br>
+
+        <label class= "userLabel"for="5">Address</label><br>
+        <input  class="userField" type="text" name="address" class="" id="5" placeholder="Street Address"><br>
+        <br>
+
+        <label class= "userLabel"for="6">Apt Suit Unit</label><br>
+        <input  class="userField" type="text" name="aptsuiteunit" id="6" class="" placeholder="Apt, suite, etc. (optional)"><br>
+        <br>
+
+        <label class= "userLabel"for="7">State</label><br>
+        <input  class="userField" type="text" name="state" id="7" class="" placeholder="State"><br>
+        <br>
+
+        <label class= "userLabel"for="8">City</label><br>
+        <input  class="userField" type="text" name="city" id="8" class="" placeholder="City"><br>
+        <br>
+
+        <label class= "userLabel"for="9">Zip</label><br>
+        <input  class="userField" type="text" name="zip" id="9" class="" placeholder="ZIP" onkeypress="return isNumberKey(event)"><br>
+        <br>
+
+        <label class= "userLabel"for="10">Card Name</label><br>
+        <input  class="userField" type="text" name="cardname" id="10" placeholder="Name On Card"><br>
+        <br>
+
+        <label class= "userLabel"for="11">Card Number</label><br>
+        <input  class="userField" type="text" name="cardnumber" id="11" placeholder="Card Number" onkeypress="return isNumberKey(event)"><br>
+        <br>
+
+        <label class= "userLabel"for="12">Expiration Date</label><br>
+        <input  class="userField" type="text" name="cardexpiration" id="12" placeholder="Exp MM/YY"><br>
+        <br>
+
+        <label class= "userLabel"for="13">CVV</label><br>
+        <input  class="userField" type="text" name="cardcvv" id="13" placeholder="Enter CVV" onkeypress="return isNumberKey(event)"><br>
+        <br>
+
         <input type="hidden" name="origSelectedEmail" value="<?php echo $inputtedEmail?>">
-        <button type="submit" name="updateAccount">Update Information</button>
+        <br>
+        <button class = "updateInfoButton" type="submit" name="updateAccount">Update Information</button>
     </form>
 </html>
 <script>
