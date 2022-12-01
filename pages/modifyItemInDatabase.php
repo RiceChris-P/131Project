@@ -5,14 +5,13 @@
         die("Connection failed: " . mysqli_connect_error());
     }
     $sql="SELECT * FROM items WHERE Name='$chosenItem'";
-    echo $sql;
     $results=mysqli_query($conn,$sql);
     $values=mysqli_fetch_row($results);
     $conn->close();
 
 ?>
 <html>
-    <form action="modifyItem.php" method="post" enctype="multipart/form-data">
+    <form action="modifyItemProcessing.php" method="post" enctype="multipart/form-data">
     <input type="text" id="0"name="itemName"required>
     <input type="text" id="1" name="price" required>
     <input type="text" id="2" name="weight" required>
@@ -35,7 +34,7 @@
 <script>
     var itemDetails=<?php echo json_encode($values);?>;
     for(let i=0;i<itemDetails.length;i++){
-        if(accountValues[i]!=null){
+        if(itemDetails[i]!=null){
             document.getElementById(i).value=itemDetails[i];
         }
         if(i==2){
