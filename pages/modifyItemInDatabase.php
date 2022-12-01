@@ -28,6 +28,9 @@
     <input type="file" name="file">
     <input type="hidden" name="oldItemName" value="<?php echo $chosenItem?>">
     <input type="submit" name="submit" value="Submit">
+    <input type="submit" name="delete" value="Delete Item">
+
+
     </form>
 </html>
 

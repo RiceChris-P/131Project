@@ -27,5 +27,14 @@
             mysqli_query($conn,$sql);
         }
     }
+    else if(isset($_POST['delete'])){
+        $oName=$_POST['oldItemName'];
+        $conn = mysqli_connect("localhost", "root", "", "cmpe131");
+        if(!$conn){
+            die("Connection failed: " . mysqli_connect_error());
+        }
+        $sql="DELETE FROM items where Name='$oName'";
+        mysqli_query($conn,$sql);
+    }
 ?>
 
