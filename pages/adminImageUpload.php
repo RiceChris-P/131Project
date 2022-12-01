@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    if(!$_SESSION['admin']){
+        header('Location: admin.php');
+    }
+?>
 <html>
 
 <link rel="stylesheet" href="../style/admin.css">

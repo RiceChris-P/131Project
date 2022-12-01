@@ -1,4 +1,8 @@
 <?php
+    session_start();
+    if(!$_SESSION['admin']){
+        header('Location: admin.php');
+    }
     $conn=mysqli_connect("localhost","root", "","cmpe131");
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());

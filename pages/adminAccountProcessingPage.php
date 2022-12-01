@@ -1,4 +1,9 @@
 <?php
+    $success=0;
+    session_start();
+    if(!$_SESSION['admin']){
+        header('Location: admin.php');
+    }
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         $inputtedEmail=$_POST['origSelectedEmail'];
         if($_POST['email']!=$_POST['origSelectedEmail']&&$_POST['email']!=null){
@@ -24,6 +29,7 @@
         updateSqlValue("cardNum",$_POST['cardnumber'],$inputtedEmail);
         updateSqlValue("cardExp",$_POST['cardexpiration'],$inputtedEmail);
         updateSqlValue("cardCVV",$_POST['cardcvv'],$inputtedEmail);
+        $success=1;
     }
 
     function updateSqlValue($variable,$newValue,$userEmail){
@@ -39,8 +45,8 @@
 <!DOCTYPE html>
 <html>
     <body onload="document.forms[0].submit()">
-    <form method="post" id="sendEmail" action="adminAccount.php">
-        <input type="text" name="emails" id=0 value="<?php echo $_POST['email']?>"></input>
+    <form method="post" action="admin.php">
+        <input type="text" name="status" id=0 value="<?php echo $success?>"></input>
     </form>
 </body>
 </html>
