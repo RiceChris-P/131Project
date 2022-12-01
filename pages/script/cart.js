@@ -9,7 +9,11 @@ req.send();
 
 //global vars
 let total = 0.00;
+let realtotal = 0.00;
+let weight = 0;
+let weightfee = 0;
 let cart = [];
+let inCO = false;
 
 function addToCart(name) {
     console.log("Add to Cart Called!");
@@ -58,14 +62,31 @@ function setCart(obj) {
     console.log("Set Cart Called!");
     cart = JSON.parse(obj);
     total = 0;
+    realtotal = 0;
+    weight = 0;
+    weightfee = 0;
+    inCO = window.location.href.includes("checkout");
 
     document.getElementById("items").innerHTML = null;
 
     cart.forEach(item => {
         total += item.count * item.prod.Price;
+        weight += item.count * item.prod.Price;
         renderObject(item.prod, item.count);
     })
+
+    if(weight >= 20) {
+        weightfee = 5;
+    }
+
+    realtotal = total + weightfee;
+
     document.getElementById("cartTotalText").innerHTML = "$"+total.toFixed(2);
+    if(inCO) {
+        document.getElementById("cartTotalWeightText").innerHTML = weight.toFixed(2) + " lbs";
+        document.getElementById("cartRealTotalText").innerHTML = "$"+realtotal.toFixed(2);
+        document.getElementById("cartWeightFeeText").innerHTML = "$"+weightfee.toFixed(2);
+    }
 
     console.log(cart);
 
@@ -93,12 +114,34 @@ function getCart() {
 
 function renderCart(cart) {
     total = 0;
+    realtotal = 0;
+    weight = 0;
+    weightfee = 0;
+    inCO = window.location.href.includes("checkout");
+
     document.getElementById("items").innerHTML = null;
     cart.forEach(item => {
         total += item.count * item.prod.Price;
+        weight += item.count * item.prod.Price;
         renderObject(item.prod, item.count);
     })
+
+    if(weight >= 20) {
+        weightfee = 5;
+    }
+
+    realtotal = total + weightfee;
+
     document.getElementById("cartTotalText").innerHTML = "$"+total.toFixed(2);
+
+    if(inCO) {
+        document.getElementById("cartTotalWeightText").innerHTML = weight.toFixed(2) + " lbs";
+        document.getElementById("cartRealTotalText").innerHTML = "$"+realtotal.toFixed(2);
+        document.getElementById("cartWeightFeeText").innerHTML = "$"+weightfee.toFixed(2);
+        if(cart.length === 0) {
+            location.href = "shop.php";
+        }
+    }
 
     console.log(cart);
 
@@ -115,7 +158,7 @@ function renderObject(product, count) {
     console.log("Render Object Called!")
     var productTotal = product.Price * count;
     productTotal = productTotal.toFixed(2)
-    var image = '<img src="../itemImages/'+product.Image+'" class="cartImage">'
+    var image = '<div class="cartIMGContainer"><img src="../itemImages/'+product.Image+'" class="cartImage"></div>'
     var description = '<div class="cartProduct"> <p style="margin-bottom:0; margin-top: 0;">'+product.Name+'</p> <p style="margin-top:0; font-size:14px;">$'+product.Price+' / ea</p></div>'
     var rightSide = '<div class="rightCartContainer"><p class="cartPrice" style="margin-bottom: 0">$'+productTotal+'</p><div class="addsubButton"><button class="addButton" onclick="decrement('+product.Name.replace(/\s/g, "_")+')">-</button><input disabled class="amountField" id="test" type="text" min="1" max="99" value="'+count+'"><button class="subButton" onclick="increment('+product.Name.replace(/\s/g, "_")+')">+</button></div><button class="removeCart" onclick="removeFromCart('+product.Name.replace(/\s/g, "_")+')">Remove</button></div>'
     var element = '<div class="cartItemContainer" id='+product.Name.replace(/\s/g, "_")+'>'+image + description + rightSide+'</div>';

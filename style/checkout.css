@@ -35,7 +35,7 @@ body {
 .contact {
     border-style: solid;
     border-color: black;
-    border-width: 1px;
+    border-width: 2px;
     margin-bottom: 3%;
     padding-bottom: 3%;
     overflow: hidden;
@@ -48,7 +48,7 @@ body {
 .delivery{
     border-style: solid;
     border-color: black;
-    border-width: 1px;
+    border-width: 2px;
     margin-bottom: 3%;
     padding-bottom: 3%;
     overflow: hidden;
@@ -57,7 +57,7 @@ body {
 .payment {
     border-style: solid;
     border-color: black;
-    border-width: 1px;
+    border-width: 2px;
     margin-bottom: 3%;
     padding-bottom: 3%;
     overflow: hidden;
