@@ -1,5 +1,5 @@
 <html>
-    <form action="fileUpload.php" method="post" enctype="multipart/form-data">
+    <form action="addItemToDatabase.php" method="post" enctype="multipart/form-data">
     <input type="text" name="itemName"required>
     <input type="text" name="price" required>
     <input type="text" name="weight" required>
@@ -10,7 +10,7 @@
     <option value="vegetable">Vegetable</option>
     <option value="fruit">Fruit</option>
     </select>
-    <input tpye="text" name="itemType" required>
+    <!-- <input tpye="text" name="itemType" required> -->
     <input type="text" name="numOfItems" required>
     Select Image File to Upload:
     <input type="file" name="file">
