@@ -71,7 +71,7 @@ function setCart(obj) {
 
     cart.forEach(item => {
         total += item.count * item.prod.Price;
-        weight += item.count * item.prod.Price;
+        weight += item.count * item.prod.Weight;
         renderObject(item.prod, item.count);
     })
 
@@ -122,7 +122,7 @@ function renderCart(cart) {
     document.getElementById("items").innerHTML = null;
     cart.forEach(item => {
         total += item.count * item.prod.Price;
-        weight += item.count * item.prod.Price;
+        weight += item.count * item.prod.Weight;
         renderObject(item.prod, item.count);
     })
 
