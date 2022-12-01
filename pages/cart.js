@@ -117,7 +117,7 @@ function renderObject(product, count) {
     productTotal = productTotal.toFixed(2)
     var image = '<img src="../itemImages/'+product.Image+'" class="cartImage">'
     var description = '<div class="cartProduct"> <p style="margin-bottom:0; margin-top: 0;">'+product.Name+'</p> <p style="margin-top:0; font-size:14px;">$'+product.Price+' / ea</p></div>'
-    var rightSide = '<div class="rightCartContainer"><p class="cartPrice" style="margin-bottom: 0">$'+productTotal+'</p><div class="addsubButton"><button class="addButton" onclick="decrement('+product.Name.replace(/\s/g, "_")+')">-</button><input class="amountField" id="test" type="text" min="1" max="99" value="1"><button class="subButton" onclick="increment('+product.Name.replace(/\s/g, "_")+')">+</button></div><button class="removeCart" onclick="removeFromCart('+product.Name.replace(/\s/g, "_")+')">Remove</button></div>'
+    var rightSide = '<div class="rightCartContainer"><p class="cartPrice" style="margin-bottom: 0">$'+productTotal+'</p><div class="addsubButton"><button class="addButton" onclick="decrement('+product.Name.replace(/\s/g, "_")+')">-</button><input disabled class="amountField" id="test" type="text" min="1" max="99" value="'+count+'"><button class="subButton" onclick="increment('+product.Name.replace(/\s/g, "_")+')">+</button></div><button class="removeCart" onclick="removeFromCart('+product.Name.replace(/\s/g, "_")+')">Remove</button></div>'
     var element = '<div class="cartItemContainer" id='+product.Name.replace(/\s/g, "_")+'>'+image + description + rightSide+'</div>';
     document.getElementById("items").innerHTML = document.getElementById("items").innerHTML +  element;
     var cartDisplay = document.getElementById("cart");

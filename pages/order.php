@@ -4,6 +4,14 @@
     if(!isSet($_SESSION['login']) or !isSet($_SESSION['ordernum'])){
         header('Location: ../index.php');
     }
+
+    function resetSession() {
+        $_SESSION['ordernum'] = NULL;
+        $_SESSION['ordertotal'] = NULL;
+        $_SESSION['email'] = NULL;
+        $_SESSION['orderdate'] = NULL;
+        $_SESSION['expecteddelivery'] = NULL;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -51,11 +59,8 @@
                             <td>
                                 <h4>Expected delivery</h4>
                                 <?php 
-                                    $email = $_SESSION['login'];
                                     echo $_SESSION['expecteddelivery'];
-                                    session_destroy();
-                                    // session_start();
-                                    $_SESSION['login'] = $email;
+                                    resetSession();
                                 ?>
                             </td>
                         </tr>
