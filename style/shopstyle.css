@@ -121,10 +121,6 @@ input{
   height: 50px;
 }
 
-.cart {
-  overflow: auto;
-}
-
 .cartButton {
   font-size: 17px;
   border-radius: 5px;

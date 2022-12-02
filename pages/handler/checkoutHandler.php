@@ -1,10 +1,10 @@
 <?php
-use PHPMailer\PHPmailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+    use PHPMailer\PHPmailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
 
-require 'phpmailer/src/Exception.php';
-require 'phpmailer/src/PHPMailer.php';
-require 'phpmailer/src/SMTP.php';
+    require 'phpmailer/src/Exception.php';
+    require 'phpmailer/src/PHPMailer.php';
+    require 'phpmailer/src/SMTP.php';
     //Session
     $_SESSION['ordernum'] = NULL;
     $_SESSION['ordertotal'] = NULL;
@@ -153,9 +153,7 @@ require 'phpmailer/src/SMTP.php';
         $weightfee = $cartStatArr['weightfee'];
         $totalcost = $cartStatArr['totalcost'];
         
-        if($isLogin) {
-            updateAccountLoggedIn();
-        }
+        updateAccountLoggedIn();
 
         //Order email
         $_SESSION['email'] = $email;
@@ -200,29 +198,29 @@ require 'phpmailer/src/SMTP.php';
         $mail->Subject = "Order number #".$ordernum." ";
         $delivery= date('m/d/Y', strtotime('+3 days'));
        $mail->Body = "<h1>Thank You for ordering from OFS!</h1>
-<table>
-    <thead>
-    <tr>
-        <th>ORDER NUMBER: $ordernum</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>
-            <h3>Order total:</h3>
-            <h3>Order date:</h3>
-            <h3>Delivery date:</h3>
-        </td>
-        <td>
-            <h3> $".number_format($_SESSION['ordertotal'], 2, '.')."</h3>
-            <h3> $date</h3>
-            <h3> $delivery</h3>
-        </td>
-    </tr>
+        <table>
+            <thead>
+            <tr>
+                <th>ORDER NUMBER: $ordernum</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <h3>Order total:</h3>
+                    <h3>Order date:</h3>
+                    <h3>Delivery date:</h3>
+                </td>
+                <td>
+                    <h3> $".number_format($_SESSION['ordertotal'], 2, '.')."</h3>
+                    <h3> $date</h3>
+                    <h3> $delivery</h3>
+                </td>
+            </tr>
 
-    </tbody>
-</table>
-";
+            </tbody>
+        </table>
+        ";
         $mail->send();
 
         //Resetting Cart
@@ -232,6 +230,8 @@ require 'phpmailer/src/SMTP.php';
     }
 
     function updateAccountLoggedIn() {
+        if($_SERVER['REQUEST_METHOD'] != 'POST') {throw new Exception("Error Processing Request", 1);
+        }
         if($_POST['firstName']) {
             updateSqlValue("fname",$_POST['firstName']);
         }
@@ -259,11 +259,11 @@ require 'phpmailer/src/SMTP.php';
         if($_POST['cardname']) {
             updateSqlValue("nameOnCard",$_POST['cardname']);
         }
-        if($_POST['cardnumber']) {
-            updateSqlValue("cardNum",$_POST['cardnumber']);
+        if($_POST['cardnum']) {
+            updateSqlValue("cardNum",$_POST['cardnum']);
         }
-        if($_POST['cardexpiration']) {
-            updateSqlValue("cardExp",$_POST['cardexpiration']);
+        if($_POST['cardexp']) {
+            updateSqlValue("cardExp",$_POST['cardexp']);
         }
         if($_POST['cardcvv']) {
             updateSqlValue("cardCVV",$_POST['cardcvv']);
