@@ -53,7 +53,7 @@
         <br>
 
         <label class= "userLabel"for="4">Phone</label><br>
-        <input  class="userField" type="text" name="phone" class="" id="4" placeholder="Phone Number" onkeypress="return isNumberKey(event)"><br>
+        <input  class="userField" type="text" minlength="10" maxlength="10" name="phone" class="" id="4" placeholder="Phone Number" onkeypress="return isNumberKey(event)"><br>
         <br>
 
         <label class= "userLabel"for="5">Address</label><br>
@@ -73,7 +73,7 @@
         <br>
 
         <label class= "userLabel"for="9">Zip</label><br>
-        <input  class="userField" type="text" name="zip" id="9" class="" placeholder="ZIP" onkeypress="return isNumberKey(event)"><br>
+        <input  class="userField" type="text" name="zip" minlength="5" maxlength="5" id="9" class="" placeholder="ZIP" onkeypress="return isNumberKey(event)"><br>
         <br>
 
         <label class= "userLabel"for="10">Card Name</label><br>
@@ -81,7 +81,7 @@
         <br>
 
         <label class= "userLabel"for="11">Card Number</label><br>
-        <input  class="userField" type="text" name="cardnumber" id="11" placeholder="Card Number" onkeypress="return isNumberKey(event)"><br>
+        <input  class="userField" type="text" minlength="15" maxlength="16" name="cardnumber" id="11" placeholder="Card Number" onkeypress="return isNumberKey(event)"><br>
         <br>
 
         <label class= "userLabel"for="12">Expiration Date</label><br>
@@ -89,7 +89,7 @@
         <br>
 
         <label class= "userLabel"for="13">CVV</label><br>
-        <input  class="userField" type="text" name="cardcvv" id="13" placeholder="Enter CVV" onkeypress="return isNumberKey(event)"><br>
+        <input  class="userField" minlength="3" maxlength="4" type="text" name="cardcvv" id="13" placeholder="Enter CVV" onkeypress="return isNumberKey(event)"><br>
         <br>
 
         <input type="hidden" name="origSelectedEmail" value="<?php echo $inputtedEmail?>">
