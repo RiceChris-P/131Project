@@ -199,7 +199,30 @@ require 'phpmailer/src/SMTP.php';
         $mail->isHTML(true);
         $mail->Subject = "Order number #".$ordernum." ";
         $delivery= date('m/d/Y', strtotime('+3 days'));
-        $mail->Body = 'Greetings! Thank you for ordering from OFS! Your order total is $'.$totalcost.'. Your order was received on '.$date.' and it should be delivered on '.$delivery.'.';
+       $mail->Body = "<h1>Thank You for ordering from OFS!</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ORDER NUMBER: $ordernum</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <h3>Order total:</h3>
+            <h3>Order date:</h3>
+            <h3>Delivery date:</h3>
+        </td>
+        <td>
+            <h3> $".number_format($_SESSION['ordertotal'], 2, '.')."</h3>
+            <h3> $date</h3>
+            <h3> $delivery</h3>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+";
         $mail->send();
 
         //Resetting Cart
