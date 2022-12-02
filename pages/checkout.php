@@ -14,7 +14,9 @@
         header('Location: shop.php');
     }
 
-    $ID = $_SESSION['login'];
+    if(isset($_SESSION['login'])) {
+        $ID = $_SESSION['login'];
+    }
     $query = "SELECT * FROM accounts WHERE email=?";
 	$stmt = $conn->prepare($query);
 	$stmt->bind_param("s", $ID);
@@ -84,8 +86,8 @@
             'cardcvv' => $cardcvv
         ), JSON_FORCE_OBJECT);
         
-        if($createPass) {
-            sendOrder($conn, $isLogin, $email, $password, $createPass, $items, $contact, $delivery, $payment);
+        if($createPass && !$isLogin) {
+            sendOrder($conn, $email, $password, $createPass, $items, $contact, $delivery, $payment);
         } 
         else {
             sendOrder2($conn, $isLogin, $email, $items, $contact, $delivery, $payment);

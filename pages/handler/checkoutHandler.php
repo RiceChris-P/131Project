@@ -54,7 +54,7 @@ require 'phpmailer/src/SMTP.php';
         return $priceArray;
     }
 
-    function sendOrder($conn, $isLogin, $email, $password, $createPass, $items, $contact, $delivery, $payment) {
+    function sendOrder($conn, $email, $password, $createPass, $items, $contact, $delivery, $payment) {
         //Get Price Calculations
         $cartStatArr = calculateCartPrices($items);
 
@@ -67,10 +67,6 @@ require 'phpmailer/src/SMTP.php';
         //Create Account
         if($createPass) {
             createAccount($conn, $items, $email, $password, $contact, $payment, $delivery);
-        }
-        
-        if($isLogin) {
-            updateAccountLoggedIn();
         }
 
         //Order email
@@ -97,8 +93,10 @@ require 'phpmailer/src/SMTP.php';
             VALUES ('$ordernum', '$items', '$subtotal', '$totalweight', '$weightfee', '$totalcost', '$email','$contact', '$delivery', '$payment', '$date');"
         );
 
+        //Update Stock
         updateStock($conn, $items);
         
+        //Sending Email
         $mail = new PHPMailer(true);
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
@@ -113,7 +111,7 @@ require 'phpmailer/src/SMTP.php';
         $mail->isHTML(true);
         $mail->Subject = "Order number #".$ordernum." ";
         $delivery= date('m/d/Y', strtotime('+3 days'));
-        $mail->Body ="<h1>Thank You for ordering from OFS!</h1>
+         $mail->Body ="<h1>Thank You for ordering from OFS!</h1>
                 <table>
                     <thead>
                     <tr>
@@ -183,7 +181,26 @@ require 'phpmailer/src/SMTP.php';
             VALUES ('$ordernum', '$items', '$subtotal', '$totalweight', '$weightfee', '$totalcost', '$email','$contact', '$delivery', '$payment', '$date');"
         );
 
+        //Update Stock
         updateStock($conn, $items);
+
+        //Sending Email
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'ofsapp23@gmail.com';
+        $mail->Password = 'uuqwlnckgwvixzup';
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;
+
+        $mail->setFrom('ofsapp23@gmail.com');
+        $mail->addAddress($email);
+        $mail->isHTML(true);
+        $mail->Subject = "Order number #".$ordernum." ";
+        $delivery= date('m/d/Y', strtotime('+3 days'));
+        $mail->Body = 'Greetings! Thank you for ordering from OFS! Your order total is $'.$totalcost.'. Your order was received on '.$date.' and it should be delivered on '.$delivery.'.';
+        $mail->send();
 
         //Resetting Cart
         $newCart = json_encode (new stdClass);
