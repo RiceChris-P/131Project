@@ -54,15 +54,17 @@
 
         <h1 class="headerOne">Sign into your OFS account</h1>
         <form action="login.php" method="post" class="formBox">
-            <input type="text" name="email" class="loginFill" placeholder="Email"><br>
-            <input type="password" name="password" class="loginFill" placeholder="Password"><br>
+            <input type="text" name="email" class="loginFill" placeholder="Email" required><br>
+            <input type="password" name="password" class="loginFill" placeholder="Password" required><br>
             <button type="submit" class="submitButton">Sign In</button>
         </form>
 
 
         <br>
 
-        <a class="linktoEmployeeLogin" href="admin.php">Employee? Login Here </a>
+        <a class="linktoEmployeeLogin" href="admin.php">Employee? Login Here </a><br>
+        <a class="linktoEmployeeLogin" href="signup.php">No Account? Sign up Here </a>
+
     </body>
 
 </html>

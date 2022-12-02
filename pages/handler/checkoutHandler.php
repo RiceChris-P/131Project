@@ -1,4 +1,10 @@
 <?php
+use PHPMailer\PHPmailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'phpmailer/src/Exception.php';
+require 'phpmailer/src/PHPMailer.php';
+require 'phpmailer/src/SMTP.php';
     //Session
     $_SESSION['ordernum'] = NULL;
     $_SESSION['ordertotal'] = NULL;
@@ -49,8 +55,6 @@
     }
 
     function sendOrder($conn, $isLogin, $email, $password, $createPass, $items, $contact, $delivery, $payment) {
-        // session_start();
-
         //Get Price Calculations
         $cartStatArr = calculateCartPrices($items);
 
@@ -66,7 +70,70 @@
         }
         
         if($isLogin) {
-            updateAccount($conn, $email, $contact, $payment, $delivery);
+            updateAccountLoggedIn();
+        }
+
+        //Order email
+        $_SESSION['email'] = $email;
+
+        //Order Number
+        $ordernum = getOrderNum($conn);
+        $_SESSION['ordernum'] = $ordernum;
+
+        //Order Date
+        $date = date('m/d/Y');
+        $_SESSION['orderdate'] = $date;
+
+        //Order Expected Delivery Date
+        $_SESSION['expecteddelivery'] = date('m/d/Y', strtotime('+3 days'));
+
+        //Order total cost
+        $_SESSION['ordertotal'] = $totalcost;
+
+        //Sending Order
+        mysqli_query(
+            $conn,
+            "INSERT INTO orders (ordernum, items, subtotal, totalweight, weightfee, totalcost, email, contactinfo, deliveryinfo, paymentinfo, orderdate) 
+            VALUES ('$ordernum', '$items', '$subtotal', '$totalweight', '$weightfee', '$totalcost', '$email','$contact', '$delivery', '$payment', '$date');"
+        );
+
+        updateStock($conn, $items);
+        
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'ofsapp23@gmail.com';
+        $mail->Password = 'uuqwlnckgwvixzup';
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;
+
+        $mail->setFrom('ofsapp23@gmail.com');
+        $mail->addAddress($email);
+        $mail->isHTML(true);
+        $mail->Subject = "Order number #".$ordernum." ";
+        $delivery= date('m/d/Y', strtotime('+3 days'));
+        $mail->Body = 'Greetings! Thank you for ordering from OFS! Your order total is $'.$totalcost.'. Your order was received on '.$date.' and it should be delivered on '.$delivery.'.';
+        $mail->send();
+
+        //Resetting Cart
+        $newCart = json_encode (new stdClass);
+        mysqli_query($conn, "UPDATE accounts SET cart = '$newCart' WHERE email = '$email';");
+        return $totalcost;
+    }
+
+    function sendOrder2($conn, $isLogin, $email, $items, $contact, $delivery, $payment) {
+        //Get Price Calculations
+        $cartStatArr = calculateCartPrices($items);
+
+        //Set Price Calculation Variables
+        $subtotal = $cartStatArr['subtotal'];
+        $totalweight = $cartStatArr['totalweight'];
+        $weightfee = $cartStatArr['weightfee'];
+        $totalcost = $cartStatArr['totalcost'];
+        
+        if($isLogin) {
+            updateAccountLoggedIn();
         }
 
         //Order email
@@ -99,6 +166,45 @@
         $newCart = json_encode (new stdClass);
         mysqli_query($conn, "UPDATE accounts SET cart = '$newCart' WHERE email = '$email';");
         return $totalcost;
+    }
+
+    function updateAccountLoggedIn() {
+        if($_POST['firstName']) {
+            updateSqlValue("fname",$_POST['firstName']);
+        }
+        if($_POST['lastName']) {
+            updateSqlValue("lastName",$_POST['lastName']);
+        } 
+        if($_POST['phone']) {
+            updateSqlValue("phonenumber",$_POST['phone']);
+        }
+        if($_POST['address']) {
+            updateSqlValue("address",$_POST['address']);
+        }
+        if($_POST['aptsuiteunit']) {
+            updateSqlValue("aptOrSuite",$_POST['aptsuiteunit']);
+        } 
+        if($_POST['state']) {
+            updateSqlValue("state",$_POST['state']);
+        }
+        if($_POST['city']) {
+            updateSqlValue("city",$_POST['city']);
+        }
+        if($_POST['zip']) {
+            updateSqlValue("zipCode",$_POST['zip']);
+        }
+        if($_POST['cardname']) {
+            updateSqlValue("nameOnCard",$_POST['cardname']);
+        }
+        if($_POST['cardnumber']) {
+            updateSqlValue("cardNum",$_POST['cardnumber']);
+        }
+        if($_POST['cardexpiration']) {
+            updateSqlValue("cardExp",$_POST['cardexpiration']);
+        }
+        if($_POST['cardcvv']) {
+            updateSqlValue("cardCVV",$_POST['cardcvv']);
+        }
     }
 
     function updateAccount($conn, $email, $contact, $payment, $delivery) {
@@ -160,5 +266,16 @@
                    $orderNum = "";
             }
         }
+    }
+
+    function updateSqlValue($variable,$newValue){
+        $userEmail=$_SESSION['login'];
+        $conn = mysqli_connect("localhost", "root", "", "cmpe131");
+        if(!$conn){
+            die("Connection failed: " . mysqli_connect_error());
+        }
+        $sql="UPDATE accounts SET $variable='$newValue' WHERE email='$userEmail'";
+        mysqli_query($conn,$sql);
+        $conn->close();
     }
 ?>

@@ -35,7 +35,6 @@
     <?php 
     if($show) { 
     ?>
-        <h3 class="successTitle">Success</h3>
         <button class= "adminOptions" onclick="location.href = 'selectItem.php';">Modify Items</button>
         <br>
         <button class="adminOptions" onclick="location.href = 'adminImageUpload.php';">Add Items</button>
