@@ -134,7 +134,7 @@ include("navbar.php");
                             <div class="form">
                                 <label for="zipCode" class="label">Zip:  </label>
                                 <br>
-                                <input type="text" name="zip" id="zipCode" class="" placeholder="<?php $temp = $_SESSION['account']; if($temp['zipCode']){echo $temp['zipCode'];} else{echo "ZIP";}?>" onkeypress="return isNumberKey(event)"><br>
+                                <input type="text" minlength="5" maxlength="5" name="zip" id="zipCode" class="" placeholder="<?php $temp = $_SESSION['account']; if($temp['zipCode']){echo $temp['zipCode'];} else{echo "ZIP";}?>" onkeypress="return isNumberKey(event)"><br>
                             </div>
                         </div>
                         
@@ -158,7 +158,7 @@ include("navbar.php");
                             <div class="form">
                                 <label for="cardCVV" class="label">Enter CVV:  </label>
                                 <br>
-                                <input type="text" name="cardcvv" id="cardCVV"placeholder="<?php $temp = $_SESSION['account']; if($temp['cardCVV']){echo $temp['cardCVV'];} else{echo "Enter CVV";}?>" onkeypress="return isNumberKey(event)"><br>
+                                <input type="text" minlength="3" maxlength="4" name="cardcvv" id="cardCVV"placeholder="<?php $temp = $_SESSION['account']; if($temp['cardCVV']){echo $temp['cardCVV'];} else{echo "Enter CVV";}?>" onkeypress="return isNumberKey(event)"><br>
                             </div>
                         </div>
                         <br>
