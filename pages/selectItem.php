@@ -9,9 +9,21 @@
 ?>
 <!DOCTYPE html>
 <html>
+<header>
+        <title>Admin Modify Items</title>
+        <link rel="stylesheet" href="../style/admin.css">
+        <link rel="stylesheet" href="../style/form.css">
+        <link rel="stylesheet" href="../style/form.css">
+    </header>
+    <body>
+      <nav class="navBar">
+        <ul>
+            <div class="logoElement">
+                <a href="../index.php"> <img class="logo" src="../assets/logo-transparent.png" alt=""> </a>
+            </div>
+        </ul>
+      </nav>
 
-<link rel="stylesheet" href="../style/admin.css">
-<link rel="stylesheet" href="../style/form.css">
 <h1 class="adminHeader">Modify Items </h1>
 <h3 class="bio"> Select a grocery item from the dropdown to change</h3>
     <form method="post" action="modifyItemInDatabase.php">

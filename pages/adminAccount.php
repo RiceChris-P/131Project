@@ -16,7 +16,21 @@
 <!DOCTYPE html>
 <html>
 
-        <link rel="stylesheet" type="text/css" href="../style/admin.css">
+<header>
+        <title>Admin User Information</title>
+        <link rel="stylesheet" href="../style/admin.css">
+        <link rel="stylesheet" href="../style/form.css">
+        <link rel="stylesheet" href="../style/form.css">
+    </header>
+    <body>
+      <nav class="navBar">
+        <ul>
+            <div class="logoElement">
+                <a href="../index.php"> <img class="logo" src="../assets/logo-transparent.png" alt=""> </a>
+            </div>
+        </ul>
+      </nav>
+
 		<!-- <link rel="stylesheet" type="text/css" href="../style/navbar.css">
 		<link rel="stylesheet" type="text/css" href="../style/cart.css"> -->
     <h1 class="adminHeader">User Information </h1>

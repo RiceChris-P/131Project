@@ -13,9 +13,20 @@
 ?>
 <!DOCTYPE html>
 <html>
-
-    <link rel="stylesheet" href="../style/admin.css">
-    <link rel="stylesheet" href="../style/form.css">
+<header>
+        <title>Admin Select Users</title>
+        <link rel="stylesheet" href="../style/admin.css">
+        <link rel="stylesheet" href="../style/form.css">
+        <link rel="stylesheet" href="../style/form.css">
+    </header>
+    <body>
+      <nav class="navBar">
+        <ul>
+            <div class="logoElement">
+                <a href="../index.php"> <img class="logo" src="../assets/logo-transparent.png" alt=""> </a>
+            </div>
+        </ul>
+      </nav>
 
     <h1 class="adminHeader">Select User</h1>
 
