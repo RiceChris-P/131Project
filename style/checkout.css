@@ -206,5 +206,9 @@ body {
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: grey;
+}
+
+::-webkit-input-value {
     color: black;
 }

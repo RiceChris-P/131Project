@@ -119,6 +119,6 @@
 		<button class="landingShopButton"><a href="pages/shop.php">SHOP NOW</button>
     </body>
 
-	<script src="pages/cart.js"></script>
+	<script src="pages/script/cart.js"></script>
 </html>
 

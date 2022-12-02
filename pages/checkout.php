@@ -14,6 +14,15 @@
         header('Location: shop.php');
     }
 
+    $ID = $_SESSION['login'];
+    $query = "SELECT * FROM accounts WHERE email=?";
+	$stmt = $conn->prepare($query);
+	$stmt->bind_param("s", $ID);
+	$stmt->execute();
+    $result = $stmt->get_result();
+    $account = $result->fetch_assoc();
+    $_SESSION['account'] = $account;
+
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $isLogin = isset($_SESSION['login']);
 
@@ -29,6 +38,7 @@
         $phone = $_POST['phone'];
 
         //Create Account
+        $createPass = false;
         if(!$isLogin) {
             $password = $_POST['password'];
             $retypepass = $_POST['retypepass'];
@@ -74,7 +84,12 @@
             'cardcvv' => $cardcvv
         ), JSON_FORCE_OBJECT);
         
-        sendOrder($conn, $isLogin, $email, $password, $createPass, $items, $contact, $delivery, $payment);
+        if($createPass) {
+            sendOrder($conn, $isLogin, $email, $password, $createPass, $items, $contact, $delivery, $payment);
+        } 
+        else {
+            sendOrder2($conn, $isLogin, $email, $items, $contact, $delivery, $payment);
+        }
 
         header("Location: order.php");
     }
@@ -110,37 +125,28 @@
                         <div class="contact">
                             <h2>Contact Information</h2>
 
-                            <input type="text" name="firstName" id="firstName" class="" placeholder="First Name">
-                            <input type="text" name="lastName" id="lastName" class="" placeholder="Last Name"><br>
-                            <input type="text" name="email" id="email" class="" placeholder="Email Address"><br>
-                            <input type="text" name="phone" id="phone" class="" placeholder="Phone Number" onkeypress="return isNumberKey(event)"><br>
-                            <label class=""><input type="checkbox" id="check" name="createaccount" class="" onclick="validate()">Create Account?</label><br>
-
-                            <?php 
-                            if($loggedIn) {
-                            ?>
-                                <input type="password" id="password" name="password" class="passCreation" placeholder="Password"><br>
-                                <input type="password" id="retypepass" name="retypepass" class="passCreation" placeholder="Confirm Password"><br>
-                            <?php } ?>
+                            <input type="text" name="firstName" id="firstName" class="" value="<?php $temp = $_SESSION['account']; if($temp['fname']){echo $temp['fname'];}?>" placeholder="First Name">
+                            <input type="text" name="lastName" id="lastName" class="" value="<?php $temp = $_SESSION['account']; if($temp['lastName']){echo $temp['lastName'];}?>" placeholder="Last Name"><br>
+                            <input type="text" name="phone" id="phone" class="" value="<?php $temp = $_SESSION['account']; if($temp['phonenumber']){echo $temp['phonenumber'];}?>" onkeypress="return isNumberKey(event)" placeholder="Phone Number"><br>
 
                         </div>
                        
 
                         <div class="delivery">
                             <h2>Delivery Information</h2>
-                                <input type="text" name="address" id="address" class="" placeholder="Street Address"><br>
-                                <input type="text" name="aptsuiteunit" id="aptsuiteunit" class="" placeholder="Apt, suite, etc. (optional)"><br>
-                                <input type="text" name="state" id="state" class="" placeholder="State">
-                                <input type="text" name="city" id="city" class="" placeholder="City">
-                                <input type="text" name="zip" id="zip" class="" placeholder="ZIP"><br>              
+                                <input type="text" name="address" id="address" class="" value="<?php $temp = $_SESSION['account']; echo $temp['address'];?>" placeholder="Street Address"><br>
+                                <input type="text" name="aptsuiteunit" id="aptsuiteunit" class="" value="<?php $temp = $_SESSION['account']; if($temp['aptOrSuite']){echo $temp['aptOrSuite'];}?>" placeholder="Apt, suite, etc. (optional)"><br>
+                                <input type="text" name="state" id="state" class="" value="<?php $temp = $_SESSION['account']; if($temp['state']){echo $temp['state'];}?>" onkeypress="return isNumberKey(event)" placeholder="State">
+                                <input type="text" name="city" id="city" class="" value="<?php $temp = $_SESSION['account']; if($temp['city']){echo $temp['city'];}?>" placeholder="City">
+                                <input type="text" name="zip" id="zip" class="" value="<?php $temp = $_SESSION['account']; if($temp['zipCode']){echo $temp['zipCode'];}?>" onkeypress="return isNumberKey(event)" placeholder="ZIP"><br>              
                         </div>
 
                         <div class="payment">
                             <h2>Payment Information</h2>
-                            <input type="text" name="cardname" placeholder="Name On Card" id="cardname"><br>
-                            <input type="text" name="cardnum" placeholder="Card Number" id="cardnum">
-                            <input type="text" name="cardexp" placeholder="Exp MM/YY" id="cardexp">
-                            <input type="text" name="cardcvv" placeholder="Enter CVV" id="cardcvv"><br>
+                            <input type="text" name="cardname" id="cardname" value="<?php $temp = $_SESSION['account']; if($temp['nameOnCard']){echo $temp['nameOnCard'];}?>" placeholder="Name On Card"><br>
+                            <input type="text" name="cardnum" id="cardnum" value="<?php $temp = $_SESSION['account']; if($temp['cardNum']){echo $temp['cardNum'];}?>" onkeypress="return isNumberKey(event)" placeholder="Card Number">
+                            <input type="text" name="cardexp" id="cardexp" value="<?php $temp = $_SESSION['account']; if($temp['cardExp']){echo $temp['cardExp'];}?>" placeholder="Exp. MM/YY">
+                            <input type="text" name="cardcvv" id="cardcvv" value="<?php $temp = $_SESSION['account']; if($temp['cardCVV']){echo $temp['cardCVV'];}?>" onkeypress="return isNumberKey(event)" placeholder="CVV"><br>
                             <button type="submit" name="checkoutsubmit" id="checkoutsubmit">Submit Payment</button>
                         </div>
 
