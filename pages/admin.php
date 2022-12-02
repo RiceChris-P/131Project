@@ -22,7 +22,7 @@
       <nav class="navBar">
         <ul>
             <div class="logoElement">
-                <a href="../signout.php"> <img class="logo" src="../assets/logo-transparent.png" alt=""> </a>
+                <a href="../index.php"> <img class="logo" src="../assets/logo-transparent.png" alt=""> </a>
             </div>
         </ul>
       </nav>
