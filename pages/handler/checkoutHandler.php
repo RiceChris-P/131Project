@@ -1,4 +1,10 @@
 <?php
+use PHPMailer\PHPmailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'phpmailer/src/Exception.php';
+require 'phpmailer/src/PHPMailer.php';
+require 'phpmailer/src/SMTP.php';
     //Session
     $_SESSION['ordernum'] = NULL;
     $_SESSION['ordertotal'] = NULL;
@@ -94,6 +100,23 @@
         );
 
         updateStock($conn, $items);
+        
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'ofsapp23@gmail.com';
+        $mail->Password = 'uuqwlnckgwvixzup';
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;
+
+        $mail->setFrom('ofsapp23@gmail.com');
+        $mail->addAddress($email);
+        $mail->isHTML(true);
+        $mail->Subject = "Order number #".$ordernum." ";
+        $delivery= date('m/d/Y', strtotime('+3 days'));
+        $mail->Body = 'Greetings! Thank you for ordering from OFS! Your order total is $'.$totalcost.'. Your order was received on '.$date.' and it should be delivered on '.$delivery.'.';
+        $mail->send();
 
         //Resetting Cart
         $newCart = json_encode (new stdClass);
