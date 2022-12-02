@@ -137,8 +137,8 @@
                         <div class="delivery">
                             <h2>Delivery Information</h2>
                                 <input type="text" name="address" required id="address" class="" value="<?php $temp = $_SESSION['account']; echo $temp['address'];?>" placeholder="Street Address"><br>
-                                <input type="text" name="aptsuiteunit" required id="aptsuiteunit" class="" value="<?php $temp = $_SESSION['account']; if($temp['aptOrSuite']){echo $temp['aptOrSuite'];}?>" placeholder="Apt, suite, etc. (optional)"><br>
-                                <input type="text" name="state" id="state" required class="" value="<?php $temp = $_SESSION['account']; if($temp['state']){echo $temp['state'];}?>" onkeypress="return isNumberKey(event)" placeholder="State">
+                                <input type="text" name="aptsuiteunit" id="aptsuiteunit" class="" value="<?php $temp = $_SESSION['account']; if($temp['aptOrSuite']){echo $temp['aptOrSuite'];}?>" placeholder="Apt, suite, etc. (optional)"><br>
+                                <input type="text" name="state" id="state" required minlength="2" maxlength="2" class="" value="<?php $temp = $_SESSION['account']; if($temp['state']){echo $temp['state'];}?>" placeholder="State">
                                 <input type="text" name="city" id="city" required class="" value="<?php $temp = $_SESSION['account']; if($temp['city']){echo $temp['city'];}?>" placeholder="City">
                                 <input type="text" name="zip" id="zip" required minlength="5" maxlength="5"class="" value="<?php $temp = $_SESSION['account']; if($temp['zipCode']){echo $temp['zipCode'];}?>" onkeypress="return isNumberKey(event)" placeholder="ZIP"><br>              
                         </div>
@@ -147,7 +147,7 @@
                             <h2>Payment Information</h2>
                             <input type="text" name="cardname" id="cardname" required value="<?php $temp = $_SESSION['account']; if($temp['nameOnCard']){echo $temp['nameOnCard'];}?>" placeholder="Name On Card"><br>
                             <input type="text" name="cardnum" id="cardnum" required minlength="15" maxlength="16"value="<?php $temp = $_SESSION['account']; if($temp['cardNum']){echo $temp['cardNum'];}?>" onkeypress="return isNumberKey(event)" placeholder="Card Number">
-                            <input type="text" name="cardexp" id="cardexp" required value="<?php $temp = $_SESSION['account']; if($temp['cardExp']){echo $temp['cardExp'];}?>" placeholder="Exp. MM/YY">
+                            <input type="text" name="cardexp" id="cardexp" required minLength="5" maxlength="5"value="<?php $temp = $_SESSION['account']; if($temp['cardExp']){echo $temp['cardExp'];}?>" placeholder="Exp. MM/YY">
                             <input type="text" name="cardcvv" id="cardcvv" required minlength="3" maxlength="4"value="<?php $temp = $_SESSION['account']; if($temp['cardCVV']){echo $temp['cardCVV'];}?>" onkeypress="return isNumberKey(event)" placeholder="CVV"><br>
                             <button type="submit" name="checkoutsubmit" id="checkoutsubmit">Submit Payment</button>
                         </div>
@@ -173,7 +173,7 @@
                             <h2>Delivery Information</h2>
                             <input type="text" name="address" id="address" class="" placeholder="Street Address"><br>
                             <input type="text" name="aptsuiteunit" id="aptsuiteunit"class="" placeholder="Apt, suite, etc. (optional)"><br>
-                            <input type="text" name="state" id="state" class="" placeholder="State">
+                            <input type="text" name="state" id="state" minlength="2" maxlength="2" class="" placeholder="State">
                             <input type="text" name="city" id ="city" class="" placeholder="City">
                             <input type="text" name="zip" id="zip"required minlength="5" maxlength="5" class="" placeholder="ZIP" onkeypress="return isNumberKey(event)"><br>
                         </div>
@@ -182,7 +182,7 @@
                             <h2>Payment Information</h2>
                             <input type="text" name="cardname" id="cardname" required placeholder="Name On Card"><br>
                             <input type="text" name="cardnum" id="cardnum" required minlength="15" maxlength="16" placeholder="Card Number" onkeypress="return isNumberKey(event)">
-                            <input type="text" name="cardexp" id="cardexp" placeholder="Exp MM/YY">
+                            <input type="text" name="cardexp" id="cardexp" required minLength="5" maxlength="5" placeholder="Exp MM/YY">
                             <input type="text" name="cardcvv" id="cardcvv" required minlength="3" maxlength="4" placeholder="Enter CVV" onkeypress="return isNumberKey(event)"><br>
                             <button type="submit" name="checkoutsubmit" id="checkoutsubmit">Submit Payment</button>
                         </div>

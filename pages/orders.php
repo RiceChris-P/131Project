@@ -116,7 +116,7 @@ function paymentDisplay($cardname, $cardnumber, $cardexpdate, $cardcvv) {
                 <p><h3>Delivery:</h3>
                     <?php 
                         $temp = json_decode($order['deliveryinfo'], true);
-                        deliveryDisplay($temp['address'], $temp['aptsuiteect'], $temp['state'], $temp['city'], $temp['zip'])
+                        deliveryDisplay($temp['address'], $temp['aptsuiteetc'], $temp['state'], $temp['city'], $temp['zip']);
                     ?>
                 </p>
                 <p><h3>Payment:</h3>
