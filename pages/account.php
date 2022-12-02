@@ -106,7 +106,7 @@ include("navbar.php");
                             <div class="form">
                                 <label for="phone" class="label">Phone Number: </label>
                                 <br>
-                                <input type="text" name="phone" class="input" id="phone" placeholder="<?php $temp = $_SESSION['account']; if($temp['phonenumber']){echo $temp['phonenumber'];} else{echo "Phone Number";};?>" onkeypress="return isNumberKey(event)">
+                                <input type="text" minlength="10" maxlength="10" name="phone" class="input" id="phone" placeholder="<?php $temp = $_SESSION['account']; if($temp['phonenumber']){echo $temp['phonenumber'];} else{echo "Phone Number";};?>" onkeypress="return isNumberKey(event)">
                             </div>
                         </div>
                         <h2>Delivery Information</h2>
@@ -148,7 +148,7 @@ include("navbar.php");
                             <div class="form">
                                 <label for="cardNum" class="label">Card Number:  </label>
                                 <br>
-                                <input type="text" name="cardnumber" id="cardNum" placeholder="<?php $temp = $_SESSION['account']; if($temp['cardNum']){echo $temp['cardNum'];} else{echo "Card Number";}?>" onkeypress="return isNumberKey(event)">
+                                <input type="text" minlength="15" maxlength="16" name="cardnumber" id="cardNum" placeholder="<?php $temp = $_SESSION['account']; if($temp['cardNum']){echo $temp['cardNum'];} else{echo "Card Number";}?>" onkeypress="return isNumberKey(event)">
                             </div>
                             <div class="form">
                                 <label for="cardExp" class="label">Exp MM/YY:  </label>
